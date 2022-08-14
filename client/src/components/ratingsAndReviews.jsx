@@ -1,7 +1,6 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
-// const ratingsAndReviews = require('./ratingsAndReviews.jsx');
 const axios = require('axios');
+import ReviewsList from './reviewsList.jsx';
 
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -24,9 +23,16 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   render() {
+    //conditional logic for more reviews button
+    if (this.state.reviews.length > 2) {
+      var moreReviewsButton = <button>MORE REVIEWS</button>
+    }
+
     return (
-      <div>
-        value={this.state.reviews}
+      <div id='reviewsList'>
+        <ReviewsList reviewsList={this.state.reviews} />
+        {moreReviewsButton}
+        <button>ADD A REVIEW +</button>
       </div>
     )
   }
