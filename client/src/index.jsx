@@ -1,5 +1,6 @@
 const React = require('react')
 const {createRoot} = require('react-dom/client')
+import '../dist/styles.css';
 import RatingsAndReviews from './components/ratingsAndReviews.jsx';
 
 class App extends React.Component {
