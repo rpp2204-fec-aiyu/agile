@@ -2,6 +2,8 @@ const React = require('react')
 const axios = require('axios');
 import ReviewsList from './reviewsList.jsx';
 import Modal from './modal.jsx';
+import NewReview from './newReview.jsx';
+
 
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -49,7 +51,9 @@ export default class RatingsAndReviews extends React.Component {
         <ReviewsList reviewsList={this.state.reviews} />
         {moreReviewsButton}
         <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
-        <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)}/>
+        <div className='modal'>
+        <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} modalContent={<NewReview />}/>
+        </div>
       </div>
     )
   }
