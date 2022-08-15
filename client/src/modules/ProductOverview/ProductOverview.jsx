@@ -8,6 +8,8 @@ import MyOutfitButton from './ProductInfo/MyOutfitButton.jsx'
 import StyleSelector from './StyleSelector/StyleSelector.jsx'
 import Cart from './Cart/Cart.jsx'
 
+import Gallery from './Gallery/Gallery.jsx'
+
 
 export default function ProductOverview() {
 
@@ -72,6 +74,8 @@ export default function ProductOverview() {
         <StyleSelector styles={styles} setStyle={setStyle} />
 
         <Cart style={style} setStyle={setStyle} />
+        <br></br>
+        <Gallery style={style} />
       </div>
     )
   } else {
