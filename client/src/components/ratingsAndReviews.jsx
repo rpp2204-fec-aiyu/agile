@@ -1,7 +1,7 @@
 const React = require('react')
 const axios = require('axios');
 import ReviewsList from './reviewsList.jsx';
-import ReactModal from 'react-modal';
+import Modal from './modal.jsx';
 
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -23,9 +23,19 @@ export default class RatingsAndReviews extends React.Component {
       })
   }
 
-  onAddReviewClick() {
+  onAddReviewButtonClick() {
     console.log('clicked');
     this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    //close modal when submit button is clicked
+    this.setState({modalIsOpen: false});
+    //pass down as a prop to Modal
+  }
+
+  addNewReview() {
+
   }
 
   render() {
@@ -34,14 +44,12 @@ export default class RatingsAndReviews extends React.Component {
       var moreReviewsButton = <button>MORE REVIEWS</button>
     }
 
-    ReactModal.setAppElement('#app');
-
     return (
       <div id='reviewsList'>
         <ReviewsList reviewsList={this.state.reviews} />
         {moreReviewsButton}
-        <button onClick={this.onAddReviewClick.bind(this)}>ADD A REVIEW +</button>
-        <ReactModal isOpen={this.state.modalIsOpen} />
+        <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
+        <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)}/>
       </div>
     )
   }
