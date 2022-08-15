@@ -36,7 +36,7 @@ export default class StyleSelector extends React.Component {
         {/*<Title /> */}
         {/*this.state.photos.length ? <ThumbnailContainer photos={this.state.photos}/> : null*/}
         {/*{this.state.styles.length ? <ThumbnailContainer styles={this.state.styles}/> : null} */}
-        <ThumbnailContainer styles={this.props.styles} setStyle={this.props.setStyle}/>
+        <ThumbnailContainer styles={this.props.styles} setStyle={this.props.setStyle} setPrice={this.props.setPrice}/>
 
       </div>
     )

@@ -14,6 +14,12 @@ export default function ThumbnailContainer(props) {
   function handleClick(style) {
     setTitle(style.name)
     props.setStyle(style)
+    if(style.sale_price) {
+      props.setPrice(style.sale_price)
+    } else {
+      props.setPrice(style.original_price)
+    }
+
   }
 
 

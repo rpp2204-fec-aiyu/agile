@@ -71,7 +71,7 @@ export default function ProductOverview() {
         <Overview slogan={slogan} description={description} />
         <MyOutfitButton />
 
-        <StyleSelector styles={styles} setStyle={setStyle} />
+        <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} />
 
         <Cart style={style} setStyle={setStyle} />
         <br></br>
