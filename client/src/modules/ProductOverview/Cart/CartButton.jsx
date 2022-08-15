@@ -21,7 +21,7 @@ export default function CartButton(props) {
   if(props.size && props.quantitySelection) {
 
     return (
-      <button onClick={addItemToCart}>Add to Cart</button>
+      <button onClick={addItemToCart}>Add to Cart +</button>
     )
   }
 
