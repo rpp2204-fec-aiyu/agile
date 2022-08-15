@@ -8,6 +8,10 @@ export default function Gallery(props) {
     setGalleryPhoto(photo)
   }
 
+  useEffect(() => {
+    setGalleryPhoto(props.style.photos[0].url)
+  },[props.style])
+
   return (
     <div>
       <img src={galleryPhoto} style={{maxWidth: '50%'}}
