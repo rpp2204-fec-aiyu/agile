@@ -9,6 +9,7 @@ export default class Stars extends React.Component {
   onStarClick(starRating) {
     console.log('starRating: ', starRating);
     this.setState({rating: starRating});
+    this.props.starCount(starRating);
   }
 
   render() {

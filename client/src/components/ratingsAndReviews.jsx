@@ -52,7 +52,7 @@ export default class RatingsAndReviews extends React.Component {
         {moreReviewsButton}
         <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
         <div className='modal'>
-        <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} modalContent={<NewReview />}/>
+        <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModal={this.closeModal.bind(this)} />}/>
         </div>
       </div>
     )
