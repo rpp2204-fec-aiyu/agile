@@ -18,8 +18,8 @@ export default function Gallery(props) {
           key={props.style.style_id}>
       </img>
       <br></br>
-      {props.style.photos.map(photo => (
-        <img src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} width='75' height='75'></img>
+      {props.style.photos.map((photo, i) => (
+        <img key={i} src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} width='75' height='75'></img>
       ))}
     </div>
   )
