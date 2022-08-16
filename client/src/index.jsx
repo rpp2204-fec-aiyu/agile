@@ -8,13 +8,6 @@ class App extends React.Component {
     super()
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:3000/products')
-  //     .then(results => {
-  //       console.log(results.data)
-  //     })
-  // }
-
   render() {
     return (
       <ProductOverview />
