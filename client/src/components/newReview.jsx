@@ -4,7 +4,7 @@ import Stars from './stars.jsx';
 export default class NewReview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {recommends: null, size: null, width: null, comfort: null, quality: null, length: null, fit: null};
+    this.state = {recommends: null, size: null, width: null, comfort: null, quality: null, length: null, fit: null, reviewSummaryValue: '', reviewBodyValue: '', emailValue: '', nickname: ''};
     this.rating;
   }
 
@@ -49,8 +49,48 @@ export default class NewReview extends React.Component {
     this.setState({fit: event.target.value});
   }
 
-  validateInputFields() {
+  handleReviewSummaryChange(event) {
+    console.log('event.target.value: ', event.target.value);
+    console.log('\nreviewSummary text length: ', event.target.value.length)
+    if (event.target.value.length <= 59) {
+      this.setState({reviewSummaryValue: event.target.value});
+    }
+  }
 
+  handleReviewBodyChange(event) {
+    console.log('event.target.value: ', event.target.value);
+    console.log('\nreviewBody text length: ', event.target.value.length)
+    if (event.target.value.length <= 999) {
+      this.setState({reviewBodyValue: event.target.value});
+    }
+  }
+
+  handleEmailChange(event) {
+    console.log('event.target.value: ', event.target.value);
+    console.log('\nemail text length: ', event.target.value.length)
+    if (event.target.value.length <= 59) {
+      this.setState({emailValue: event.target.value});
+    }
+  }
+
+  handleNicknameChange(event) {
+    console.log('event.target.value: ', event.target.value);
+    console.log('\nnickname text length: ', event.target.value.length)
+    if (event.target.value.length <= 59) {
+      this.setState({nickname: event.target.value});
+    }
+  }
+
+  validateInputFields() {
+    if (this.state.reviewBodyValue.length < 50) {
+      //this is a mandatory req
+    }
+    if (this.state.emailValue.length === 0) {
+      //this is a mandatory req
+    }
+    if (this.state.nickname.length === 0) {
+      //this is a mandatory req
+    }
   }
 
   handleAddReviewSubmitClick() {
@@ -97,6 +137,13 @@ export default class NewReview extends React.Component {
   }
 
   render() {
+    var reviewBodyCharCountMessage;
+    var counter = 50 - this.state.reviewBodyValue.length
+    if (counter > 0) {
+      reviewBodyCharCountMessage = `Minimum required characters left: ${counter}`;
+    } else {
+      reviewBodyCharCountMessage = 'Minimum reached';
+    }
     return (
       <div>
           <h2>Write Your Review</h2>
@@ -120,10 +167,27 @@ export default class NewReview extends React.Component {
           {this.generateCharacteristicsInput('Length', 'Runs Short', 'Runs Long')}
           {this.generateCharacteristicsInput('Fit', 'Runs tight', 'Runs long')}
           <h4>Review summary</h4>
+            <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
+              <textarea placeholder='Example: Best purchase ever!' value={this.state.reviewSummaryValue} onChange={this.handleReviewSummaryChange.bind(this)}>
+              </textarea>
+            </form>
           <h4>Review body</h4>
+            <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
+                <textarea placeholder='Why did you like the product or not?' value={this.state.reviewBodyValue} onChange={this.handleReviewBodyChange.bind(this)}>
+                </textarea>
+            </form>
+            <p>{reviewBodyCharCountMessage}</p>
           <h4>Upload your photos</h4>
           <h4>What is your nickname</h4>
+            <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
+                <input type="text" placeholder='Example: jackson11!' value={this.state.nickname} onChange={this.handleNicknameChange.bind(this)}></input>
+                <p>For privacy reasons, do not use your full name or email address</p>
+            </form>
           <h4>Your email</h4>
+            <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
+                <input type="text" placeholder='Example: jackson11@email.com' value={this.state.emailValue} onChange={this.handleEmailChange.bind(this)}></input>
+                <p>For authentication reasons, you will not be emailed</p>
+            </form>
           <button onClick={this.handleAddReviewSubmitClick.bind(this)}>Submit review</button>
       </div>
     )
