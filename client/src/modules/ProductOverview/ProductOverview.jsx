@@ -41,6 +41,8 @@ export default function ProductOverview() {
 
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
+  const [salePrice, setSalePrice] = useState(null)
+  //const [isOnSale, setIsOnSale] = useState(null)
 
   useEffect(()=> {
     getCurrentProduct()
@@ -58,6 +60,9 @@ export default function ProductOverview() {
             console.log("STYLES FROM GET REQ: ", styles)
             setStyles(styles)
             setStyle(styles[0])
+            setSalePrice(styles[0].sale_price)
+            //if(style)
+            //setIsOnSale(style.sale_price)
           })
       })
   }, [])
@@ -67,11 +72,11 @@ export default function ProductOverview() {
       <div>
         <Category category={category} />
         <Title title={title} />
-        <Price price={price} />
+        <Price price={price} salePrice={salePrice} />
         <Overview slogan={slogan} description={description} />
         <MyOutfitButton />
 
-        <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} />
+        <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
 
         <Cart style={style} setStyle={setStyle} />
         <br></br>
