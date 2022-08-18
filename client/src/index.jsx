@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const QuesAns = require('./QuestionAnswer/QuesAns.jsx')
 
 class App extends React.Component {
   constructor() {
@@ -9,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Hello From React
+        <QuesAns />
       </div>
     )
   }
