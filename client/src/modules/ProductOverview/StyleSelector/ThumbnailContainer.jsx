@@ -21,7 +21,9 @@ export default function ThumbnailContainer(props) {
              width='75'
              height='75'
              style={{borderRadius: '50%'}}
-             key={style.style_id}>
+             key={style.style_id}
+             class='product-style_thumnbnail'
+             style={{cursor: 'pointer'}}>
              </img> //style={{"pointer-events": "all"}}
       ))}
     </div>
