@@ -23,7 +23,7 @@ export default function ThumbnailContainer(props) {
              height='75'
              style={{borderRadius: '50%', cursor:'pointer', }}
              key={style.style_id}
-             class='product-style_thumnbnail'
+             className='product-style_thumnbnail'
              >
              </img>
       ))}
