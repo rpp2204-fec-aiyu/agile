@@ -15,17 +15,19 @@ export default function ThumbnailContainer(props) {
   return (
     <div>
       <h4><strong>Style > </strong>{title}</h4>
+      <div style={{display: 'flex', flexWrap: 'wrap', width: '330px', }}>
       {props.styles.map(style => (
         <img src={style.photos[0].thumbnail_url}
              onClick={()=>handleClick(style)}
              width='75'
              height='75'
-             style={{borderRadius: '50%', cursor:'pointer'}}
+             style={{borderRadius: '50%', cursor:'pointer', }}
              key={style.style_id}
              class='product-style_thumnbnail'
              >
-             </img> //style={{"pointer-events": "all"}}
+             </img>
       ))}
+      </div>
     </div>
   )
 }
