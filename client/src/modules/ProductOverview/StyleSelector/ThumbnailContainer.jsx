@@ -20,10 +20,10 @@ export default function ThumbnailContainer(props) {
              onClick={()=>handleClick(style)}
              width='75'
              height='75'
-             style={{borderRadius: '50%'}}
+             style={{borderRadius: '50%', cursor:'pointer'}}
              key={style.style_id}
              class='product-style_thumnbnail'
-             style={{cursor: 'pointer'}}>
+             >
              </img> //style={{"pointer-events": "all"}}
       ))}
     </div>
