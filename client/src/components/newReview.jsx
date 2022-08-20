@@ -1,16 +1,19 @@
 const React = require('react')
 import Stars from './stars.jsx';
+import Modal from './modal.jsx';
+import NewPhotos from './newPhotos.jsx';
 
 export default class NewReview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {recommends: null, size: null, width: null, comfort: null, quality: null, length: null, fit: null, reviewSummaryValue: '', reviewBodyValue: '', emailValue: '', nickname: ''};
-    this.rating;
+    this.state = {rating: null, recommends: null, characteristics: {
+      size: null, width: null, comfort: null, quality: null, length: null, fit: null
+    }, reviewSummaryValue: '', reviewBodyValue: '', emailValue: '', nickname: '', modalIsOpen: false, photos: []};
   }
 
   getStarCount(rating) {
-    this.rating = rating;
-    console.log('this.rating: ', this.rating);
+    this.setState({'rating': rating})
+    console.log('this.state.rating: ', this.state.rating);
   }
 
   captureRecommendInput(event) {
@@ -21,32 +24,68 @@ export default class NewReview extends React.Component {
 
   captureSizeInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({size: event.target.value});
+    // this.setState({characteristics.size: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        size: event.target.value
+      }
+    }))
   }
 
   captureWidthInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({width: event.target.value});
+    // this.setState({characteristics.width: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        width: event.target.value
+      }
+    }))
   }
 
   captureComfortInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({comfort: event.target.value});
+    // this.setState({characteristics.comfort: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        comfort: event.target.value
+      }
+    }))
   }
 
   captureQualityInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({quality: event.target.value});
+    // this.setState({characteristics.quality: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        quality: event.target.value
+      }
+    }))
   }
 
   captureLengthInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({length: event.target.value});
+    // this.setState({characteristics.length: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        length: event.target.value
+      }
+    }))
   }
 
   captureFitInput(event) {
     console.log('event.target.value: ', event.target.value);
-    this.setState({fit: event.target.value});
+    // this.setState({characteristics.fit: event.target.value});
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        fit: event.target.value
+      }
+    }))
   }
 
   handleReviewSummaryChange(event) {
@@ -81,25 +120,15 @@ export default class NewReview extends React.Component {
     }
   }
 
-  validateInputFields() {
-    if (this.state.reviewBodyValue.length < 50) {
-      //this is a mandatory req
-    }
-    if (this.state.emailValue.length === 0) {
-      //this is a mandatory req
-    }
-    if (this.state.nickname.length === 0) {
-      //this is a mandatory req
-    }
+  savePhotos(photoList) {
+    this.setState({'photos': photoList});
+    console.log('this.state.photos: ', this.state.photos);
   }
 
-  handleAddReviewSubmitClick() {
-    //call validation function to see if all fields were correctly filled out
-      //if so, continue
-      //if not, do not continue and give user input
-    //call an addNewReview function that takes in information from modal to make post call to API - investigate how to get information from modal
-    //call closeModal function
-    this.props.closeModal();
+  closeModal() {
+    //close modal when submit button is clicked
+    this.setState({modalIsOpen: false});
+    //pass down as a prop to Modal
   }
 
   generateCharacteristicsInput(characteristicName, oneDescription, twoDescription) {
@@ -136,6 +165,92 @@ export default class NewReview extends React.Component {
     )
   }
 
+  validateInputFields() {
+    var errorMessages = [];
+    if (this.state.rating === undefined) {
+      //this is a mandatory req
+      var errorString = 'Rating is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.recommends === null) {
+      //this is a mandatory req
+      var errorString = 'Product recommendation is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.size === null) {
+      var errorString = 'Size is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.fit === null) {
+      var errorString = 'Fit is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.width === null) {
+      var errorString = 'Width is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.comfort === null) {
+      var errorString = 'Comfort is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.quality === null) {
+      var errorString = 'Quality is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.length === null) {
+      var errorString = 'Length is blank';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.reviewBodyValue.length < 50) {
+      //this is a mandatory req
+      var errorString = 'Review body is less than the 50 character minimum';
+      errorMessages.push(errorString);
+    }
+    if (this.state.emailValue.length === 0 || this.state.emailValue.indexOf('@') === -1 || this.state.emailValue.slice(0, this.state.emailValue.indexOf('@')).length === 0) {
+      //this is a mandatory req
+      var errorString = 'Email address is invalid';
+      errorMessages.push(errorString);
+    }
+
+    if (this.state.nickname.length === 0) {
+      //this is a mandatory req
+      var errorString = 'Nickname is blank';
+      errorMessages.push(errorString);
+    }
+    console.log('errorMessages');
+    return errorMessages;
+  }
+
+  handleAddReviewSubmitClick() {
+    //call validation function to see if all fields were correctly filled out
+    var errorMessages = this.validateInputFields();
+    console.log('errorMessages2: ', errorMessages);
+    if (errorMessages.length > 0) {
+      var errorString = '';
+      errorMessages.forEach((errorMessage) => {
+        errorString += errorMessage + '\n';
+        return;
+      })
+      console.log('errorString: ', errorString);
+      alert(`You must enter the following: \n${errorString}`);
+      return;
+    }
+    //if so, continue
+
+    //call an addNewReview function that takes in information from modal to make post call to API
+    this.props.addNewReview(this.state);
+    //call closeModal function
+    this.props.closeModal();
+  }
+
   render() {
     var reviewBodyCharCountMessage;
     var counter = 50 - this.state.reviewBodyValue.length
@@ -154,7 +269,7 @@ export default class NewReview extends React.Component {
           </div>
           <h4>Do you recommend this product?</h4>
           <div onChange={this.captureRecommendInput.bind(this)}>
-            <input type='radio' id='doesRecommend' value='Yes' name='recommends' checked></input>
+            <input type='radio' id='doesRecommend' value='Yes' name='recommends' Checked></input>
             <label for='doesRecommend'>Yes</label>
             <input type='radio' id='doesNotRecommend' value='No' name='recommends'></input>
             <label for='doesNotRecommend'>No</label>
@@ -178,6 +293,7 @@ export default class NewReview extends React.Component {
             </form>
             <p>{reviewBodyCharCountMessage}</p>
           <h4>Upload your photos</h4>
+          <NewPhotos savePhotos={this.savePhotos.bind(this)}/>
           <h4>What is your nickname</h4>
             <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
                 <input type="text" placeholder='Example: jackson11!' value={this.state.nickname} onChange={this.handleNicknameChange.bind(this)}></input>
