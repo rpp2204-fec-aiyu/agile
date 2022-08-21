@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.get('/products', (req, res) => {
-  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) //71703/styles
+  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) // 71701
     .then(results => {
       console.log('FROM GET REQ: ', results.data)
       res.status(200).send(results.data)
