@@ -8,7 +8,6 @@ function App() {
   const getCurrentProduct = () => {
     return axios.get('/products')
       .then(products => {
-        console.log(products.data)
         return products.data[4]
       })
   }
@@ -28,7 +27,6 @@ function App() {
 
   if(!!productId) {
     //TODO: Add Components
-    console.log(product, productId)
     return (
       <>
 
