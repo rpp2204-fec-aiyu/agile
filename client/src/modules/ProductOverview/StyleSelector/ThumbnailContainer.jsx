@@ -15,7 +15,7 @@ export default function ThumbnailContainer(props) {
   return (
     <div>
       <h4><strong>Style > </strong>{title}</h4>
-      <div style={{display: 'flex', flexWrap: 'wrap', width: '330px', }}>
+      <div style={{display: 'flex', flexWrap: 'wrap', width: '330px', gap: '10px' }}>
       {props.styles.map(style => (
         <img src={style.photos[0].thumbnail_url}
              onClick={()=>handleClick(style)}
