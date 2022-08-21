@@ -28,6 +28,9 @@ function App() {
         setProduct(product)
         setProductId(product.id)
       })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
 
