@@ -7,11 +7,11 @@ function App() {
 
   const getCurrentProduct = () => {
     /* products.data[<index>]
-    * 0: Camo Onesie Jacket
-    * 1: Sunglasses
-    * 2: Morning Joggers Pants
-    * 3: Slackers Slacks Pants
-    * 4: Heir Force Ones Shoes
+    * 0: Camo Onesie Jacket     id: 71697
+    * 1: Sunglasses             id: 71698
+    * 2: Morning Joggers Pants  id: 71699
+    * 3: Slackers Slacks Pants  id: 71700
+    * 4: Heir Force Ones Shoes  id: 71701
     */
     return axios.get('/products')
       .then(products => {
