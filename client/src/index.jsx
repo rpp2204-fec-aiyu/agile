@@ -1,28 +1,43 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
+import React from 'react'
+import ReactDOM from 'react-dom'
 import axios from 'axios'
+//TODO: Import Components
 
 function App() {
+
   const getCurrentProduct = () => {
     return axios.get('/products')
-      .then(results => {
-        return results.data[4]
+      .then(products => {
+        return products.data[4]
       })
   }
-}
 
-class App extends React.Component {
-  constructor() {
-    super()
-  }
+  const [product, setProduct] = useState(null)
+  const [productId, setProductId] = useState(null)
 
-  render() {
+  useEffect(() => {
+    getCurrentProduct()
+      .then(product => {
+        setCurrentProduct(product)
+        setProductId(product.id)
+      })
+  }, [])
+
+
+
+  if(!!product.id) {
+    //TODO: Add Components
     return (
-      <div>
-        Hello From React
-      </div>
+      <>
+
+      </>
+    )
+  } else {
+    return (
+      <></>
     )
   }
 }
+
 
 ReactDOM.render(<App/>, document.getElementById('app'))
