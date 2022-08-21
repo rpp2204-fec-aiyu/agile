@@ -10,6 +10,8 @@ app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+const axios = require('axios')
+
 app.get('/products', (req, res) => {
   axios.get(`${BASEURL}/products`, {headers: {Authorization: APIKEY}})
     .then(products => {
