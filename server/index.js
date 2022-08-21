@@ -15,7 +15,7 @@ const axios = require('axios')
 app.get('/products', (req, res) => {
   axios.get(`${BASEURL}/products`, {headers: {Authorization: APIKEY}})
     .then(products => {
-      res.status(200).send(products)
+      res.status(200).send(products.data)
     })
     .catch(err => {
       console.log(err)
