@@ -6,6 +6,13 @@ import axios from 'axios'
 function App() {
 
   const getCurrentProduct = () => {
+    /* products.data[<index>]
+    * 0: Camo Onesie Jacket
+    * 1: Sunglasses
+    * 2: Morning Joggers Pants
+    * 3: Slackers Slacks Pants
+    * 4: Heir Force Ones Shoes
+    */
     return axios.get('/products')
       .then(products => {
         return products.data[4]
@@ -22,7 +29,6 @@ function App() {
         setProductId(product.id)
       })
   }, [])
-
 
 
   if(!!productId) {
