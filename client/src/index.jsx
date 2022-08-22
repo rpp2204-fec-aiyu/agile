@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <RatingsAndReviews product_id={71701}/>
+        <RatingsAndReviews product_id={71697}/>
       </div>
     )
   }

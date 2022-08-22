@@ -1,10 +1,42 @@
 const React = require('react')
 import Stars from './stars.jsx';
+const axios = require('axios');
+import Modal from './modal.jsx';
 
 export default class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isFullReviewBodyShown: false}
+    this.state = {isFullReviewBodyShown: false, helpfulnessCount: this.props.review.helpfulness, helpfulButtonClicked: false, 'photo1ModalIsOpen': false, 'photo2ModalIsOpen': false, 'photo3ModalIsOpen': false, 'photo4ModalIsOpen': false, 'photo5ModalIsOpen': false}
+  }
+
+  expandModal(photoNum) {
+    console.log('photoNum: ', photoNum);
+    if (photoNum === 1) {
+      this.setState({photo1ModalIsOpen: true});
+    } else if (photoNum === 2) {
+      this.setState({photo2ModalIsOpen: true});
+    } else if (photoNum === 3) {
+      this.setState({photo3ModalIsOpen: true});
+    } else if (photoNum === 4) {
+      this.setState({photo4ModalIsOpen: true});
+    } else if (photoNum === 5) {
+      this.setState({photo5ModalIsOpen: true});
+    }
+  }
+
+  closeModal(photoNum) {
+    console.log('modal closed');
+    if (photoNum === 1) {
+      this.setState({photo1ModalIsOpen: false});
+    } else if (photoNum === 2) {
+      this.setState({photo2ModalIsOpen: false});
+    } else if (photoNum === 3) {
+      this.setState({photo3ModalIsOpen: false});
+    } else if (photoNum === 4) {
+      this.setState({photo4ModalIsOpen: false});
+    } else if (photoNum === 5) {
+      this.setState({photo5ModalIsOpen: false});
+    }
   }
 
   generateStarsFromRating(rating) {
@@ -25,6 +57,18 @@ export default class Review extends React.Component {
         })}
       </div>
     return stars;
+  }
+
+  addToHelpfulNessCount() {
+
+    axios.put(`http://localhost:3000/reviews/${this.props.review.review_id}/helpful`)
+    .then((response) => {
+      console.log('response from marking review as helpful in /review/:review_id/helpful: ', 'success');
+      this.setState({helpfulnessCount: this.state.helpfulnessCount + 1, helpfulButtonClicked: true});
+    })
+    .catch((err) => {
+      alert('Error updating helpfulness count');
+    })
   }
 
   formatDate(date) {
@@ -78,13 +122,43 @@ export default class Review extends React.Component {
 
   render() {
     console.log('this.props.review: ', this.props.review);
+    var helpfulnessCount = this.props.helpfulness;
     var reviewBody;
     var recommendation;
+    var helpfulButton;
+    var photos;
 
     if (this.props.review.body.length > 250 && this.state.isFullReviewBodyShown === false) {
       reviewBody = this.splitReviewBody(this.props.review.body);
     } else {
       reviewBody = <p className='reviewBody'>{this.props.review.body}</p>
+    }
+
+    if (this.props.review.photos.length > 0) {
+      //iterate through the photos
+      console.log('this.state[`photo${index}ModalIsOpen`]: ', this.state[`photo1ModalIsOpen`]);
+      console.log('this.state[`photo${index}ModalIsOpen`]: ', this.state.photo1ModalIsOpen);
+      photos = this.props.review.photos.map((photo, index) => {
+        index += 1;
+        return (
+          //for each photo, return an image for the photo with a modal
+          <div className='photo'>
+            <img src={photo.url} key={photo.id} className='reviewPhotoThumbnail' onClick={this.expandModal.bind(this, index)}/>
+            <div className='reviewPhotoModal'>
+              <Modal isOpen={this.state[`photo${index}ModalIsOpen`]}  closeModal={this.closeModal.bind(this, index)} modalContent=
+                {
+                  <div>
+                    <img src={photo.url}/>
+                    <button type='button' onClick={this.closeModal.bind(this, index)}>Exit
+                    </button>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+        )
+      })
+
     }
 
     if (this.props.review.recommend) {
@@ -97,6 +171,12 @@ export default class Review extends React.Component {
       var response = <div className='reviewResponse'>Response from seller: {`\n${this.props.review.response}`}</div>
     }
 
+    if (this.state.helpfulButtonClicked) {
+      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)} disabled><u>{this.state.helpfulnessCount}</u></button>;
+    } else {
+      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.state.helpfulnessCount}</u></button>;
+    }
+
     return (
       <div>
         <span>
@@ -107,13 +187,16 @@ export default class Review extends React.Component {
           <span className='reviewSummary'><b>{this.props.review.summary}</b>
           </span>
           {reviewBody}
+          {photos.map((photo) => { return photo; })}
         </span>
         {recommendation}
         <p className='reviewUserName'>{this.props.review.reviewer_name}</p>
         {response}
         <div className='reviewHelpfulness'>
-          <a></a>
-          Helpful? Yes({this.props.review.helpfulness})</div>
+          Helpful? Yes(
+            {helpfulButton}
+            )
+          </div>
       </div>
     )
   }

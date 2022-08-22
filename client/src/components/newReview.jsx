@@ -28,7 +28,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        size: event.target.value
+        size: parseInt(event.target.value)
       }
     }))
   }
@@ -39,7 +39,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        width: event.target.value
+        width: parseInt(event.target.value)
       }
     }))
   }
@@ -50,7 +50,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        comfort: event.target.value
+        comfort: parseInt(event.target.value)
       }
     }))
   }
@@ -61,7 +61,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        quality: event.target.value
+        quality: parseInt(event.target.value)
       }
     }))
   }
@@ -72,7 +72,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        length: event.target.value
+        length: parseInt(event.target.value)
       }
     }))
   }
@@ -83,7 +83,7 @@ export default class NewReview extends React.Component {
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
-        fit: event.target.value
+        fit: parseInt(event.target.value)
       }
     }))
   }
@@ -214,6 +214,7 @@ export default class NewReview extends React.Component {
       var errorString = 'Review body is less than the 50 character minimum';
       errorMessages.push(errorString);
     }
+
     if (this.state.emailValue.length === 0 || this.state.emailValue.indexOf('@') === -1 || this.state.emailValue.slice(0, this.state.emailValue.indexOf('@')).length === 0) {
       //this is a mandatory req
       var errorString = 'Email address is invalid';
@@ -259,6 +260,34 @@ export default class NewReview extends React.Component {
     } else {
       reviewBodyCharCountMessage = 'Minimum reached';
     }
+
+    var generateSizeInput;
+    var generateWidthInput;
+    var generateComfortInput;
+    var generateQualityInput;
+    var generateLengthInput;
+    var generateFitInput;
+
+    if (this.props.productSizeMetaData) {
+      generateSizeInput = this.generateCharacteristicsInput('Size', 'A size too small', 'A size too big');
+    }
+    if (this.props.productWidthMetaData) {
+      generateWidthInput = this.generateCharacteristicsInput('Width', 'Too narrow', 'Too wide');
+    }
+    if (this.props.productComfortMetaData) {
+      generateComfortInput = this.generateCharacteristicsInput('Comfort', 'Uncomfortable', 'Perfect');
+
+    }
+    if (this.props.productQualityMetaData) {
+      generateQualityInput =  this.generateCharacteristicsInput('Quality', 'Poor', 'Perfect');
+    }
+    if (this.props.productLengthMetaData) {
+      generateLengthInput = this.generateCharacteristicsInput('Length', 'Runs Short', 'Runs Long');
+    }
+    if (this.props.productFitMetaData) {
+      generateFitInput = this.generateCharacteristicsInput('Fit', 'Runs tight', 'Runs long');
+    }
+
     return (
       <div>
           <h2>Write Your Review</h2>
@@ -275,12 +304,12 @@ export default class NewReview extends React.Component {
             <label for='doesNotRecommend'>No</label>
           </div>
           <h4>Characteristics</h4>
-          {this.generateCharacteristicsInput('Size', 'A size too small', 'A size too big')}
-          {this.generateCharacteristicsInput('Width', 'Too narrow', 'Too wide')}
-          {this.generateCharacteristicsInput('Comfort', 'Uncomfortable', 'Perfect')}
-          {this.generateCharacteristicsInput('Quality', 'Poor', 'Perfect')}
-          {this.generateCharacteristicsInput('Length', 'Runs Short', 'Runs Long')}
-          {this.generateCharacteristicsInput('Fit', 'Runs tight', 'Runs long')}
+          {generateSizeInput}
+          {generateWidthInput}
+          {generateComfortInput}
+          {generateQualityInput}
+          {generateLengthInput}
+          {generateFitInput}
           <h4>Review summary</h4>
             <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
               <textarea placeholder='Example: Best purchase ever!' value={this.state.reviewSummaryValue} onChange={this.handleReviewSummaryChange.bind(this)}>
