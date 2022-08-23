@@ -10,34 +10,34 @@ import Cart from './Cart/Cart.jsx'
 
 import Gallery from './Gallery/Gallery.jsx'
 
+//TODO: Get product features from product_id query to API
+export default function ProductOverview({ product, productId }) {
 
-export default function ProductOverview() {
+  // function getCurrentProduct() {
+  //   return axios.get('http://localhost:3000/products')
+  //     .then(results => {
+  //       console.log('CURRENT PRODUCT: ', results.data)
+  //       return results.data
+  //     })
+  //     .then(result => {
+  //       return result[0]
+  //     })
+  // }
 
-  function getCurrentProduct() {
-    return axios.get('http://localhost:3000/products')
-      .then(results => {
-        console.log('CURRENT PRODUCT: ', results.data)
-        return results.data
-      })
-      .then(result => {
-        return result[0]
-      })
-  }
-
-  function getCurrentProductStyles(id) {
-    return axios.get(`/products/${id}`)
+  function getCurrentProductStyles(id) { //Refactor to get features and then styles
+    return axios.get(`/products/${id}/styles`) //changes endpoint to include styles
       .then(results => {
         return results.data.results
     })
   }
 
-  const [currentProduct, setCurrentProduct] = useState(null)
-  const [category, setCategory] = useState(null)
-  const [title, setTitle] = useState(null)
-  const [price, setPrice] = useState(null)
-  const [slogan, setSlogan] = useState(null)
-  const [description, setDescription] = useState(null)
-  const [id, setId] = useState(null)
+  const [currentProduct, setCurrentProduct] = useState(product)
+  const [category, setCategory] = useState(product.category)
+  const [title, setTitle] = useState(product.name)
+  const [price, setPrice] = useState(product.price)
+  const [slogan, setSlogan] = useState(product.slogan)
+  const [description, setDescription] = useState(product.description)
+  const [id, setId] = useState(productId)
 
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
@@ -45,26 +45,26 @@ export default function ProductOverview() {
   //const [isOnSale, setIsOnSale] = useState(null)
 
   useEffect(()=> {
-    getCurrentProduct()
-      .then(product => {
-        setCurrentProduct(product)
-        setCategory(product.category)
-        setTitle(product.name)
-        setPrice(product.default_price)
-        setSlogan(product.slogan)
-        setDescription(product.description)
-        setId(product.id)
+    // getCurrentProduct()
+    //   .then(product => {
+    //     setCurrentProduct(product)
+    //     setCategory(product.category)
+    //     setTitle(product.name)
+    //     setPrice(product.default_price)
+    //     setSlogan(product.slogan)
+    //     setDescription(product.description)
+    //     setId(product.id)
 
-        getCurrentProductStyles(product.id)
-          .then(styles => {
-            console.log("STYLES FROM GET REQ: ", styles)
-            setStyles(styles)
-            setStyle(styles[0])
-            setSalePrice(styles[0].sale_price)
-            //if(style)
-            //setIsOnSale(style.sale_price)
-          })
+    getCurrentProductStyles(id)
+      .then(styles => {
+        console.log("STYLES FROM GET REQ: ", styles)
+        setStyles(styles)
+        setStyle(styles[0])
+        setSalePrice(styles[0].sale_price)
+        //if(style)
+        //setIsOnSale(style.sale_price)
       })
+    //})
   }, [])
 
   if(style) {
@@ -89,50 +89,3 @@ export default function ProductOverview() {
     )
   }
 }
-
-
-
-
-
-
-
-// export default class ProductOverview extends React.Component {
-//   constructor(props) {
-//     super(props)
-
-//     this.state = {
-//       currentProduct: {
-//         category: null,
-//         name: null,
-//         default_price: null,
-//         slogan: null,
-//         description: null,
-//         id: null
-//       }
-//     }
-//   }
-
-//   componentDidMount() {
-//     axios.get('http://localhost:3000/products')
-//       .then(results => {
-//         console.log(results.data)
-//         this.setState({
-//           currentProduct: results.data[3]
-//         }, () => console.log(this.state.currentProduct))
-//       })
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <Category category={this.state.currentProduct.category} />
-//         <Title title={this.state.currentProduct.name} />
-//         <Price price={this.state.currentProduct.default_price} />
-//         <Overview slogan={this.state.currentProduct.slogan} description={this.state.currentProduct.description} />
-//         <MyOutfit />
-
-//         {this.state.currentProduct.id ? <StyleSelector id={this.state.currentProduct.id}/> : null}
-//       </div>
-//     )
-//   }
-// }
