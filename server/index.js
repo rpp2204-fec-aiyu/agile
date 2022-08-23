@@ -21,12 +21,11 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.get('/products/:product_id', (req, res) => {
+app.get('/products/:product_id/styles', (req, res) => {
   let id = req.params.product_id
   console.log('ID FROM URL',id)
   axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
     .then(results => {
-      //console.log(results.data)
       res.status(200).send(results.data)
     })
     .catch(err => {
