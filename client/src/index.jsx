@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import '../dist/styles.css';
 //TODO: Import Components
 import QuesAns from './QuestionAnswer/QuesAns.jsx'
+import RatingsAndReviews from './components/ratingsAndReviews.jsx'
 
 function App() {
 
@@ -40,6 +42,7 @@ function App() {
     return (
       <>
         <QuesAns />
+        <RatingsAndReviews product_id={71697}/>
       </>
     )
   } else {
@@ -48,6 +51,5 @@ function App() {
     )
   }
 }
-
 
 ReactDOM.render(<App/>, document.getElementById('app'))
