@@ -61,7 +61,7 @@ export default class Review extends React.Component {
 
   addToHelpfulNessCount() {
 
-    axios.put(`http://localhost:3000/reviews/${this.props.review.review_id}/helpful`)
+    axios.put(`/reviews/${this.props.review.review_id}/helpful`)
     .then((response) => {
       console.log('response from marking review as helpful in /review/:review_id/helpful: ', 'success');
       this.setState({helpfulnessCount: this.state.helpfulnessCount + 1, helpfulButtonClicked: true});
@@ -176,7 +176,7 @@ export default class Review extends React.Component {
     } else {
       helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.state.helpfulnessCount}</u></button>;
     }
-
+    console.log('photos: ', photos);
     return (
       <div>
         <span>
@@ -187,7 +187,7 @@ export default class Review extends React.Component {
           <span className='reviewSummary'><b>{this.props.review.summary}</b>
           </span>
           {reviewBody}
-          {photos.map((photo) => { return photo; })}
+          {photos}
         </span>
         {recommendation}
         <p className='reviewUserName'>{this.props.review.reviewer_name}</p>

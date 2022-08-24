@@ -3,6 +3,8 @@ const axios = require('axios');
 import ReviewsList from './reviewsList.jsx';
 import Modal from './modal.jsx';
 import NewReview from './newReview.jsx';
+import SortReview from './sortReviews.jsx';
+import RatingsBreakdown from './ratingsBreakdown.jsx';
 
 
 export default class RatingsAndReviews extends React.Component {
@@ -12,8 +14,17 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   componentDidMount() {
+    this.getReviewsList();
+    this.getReviewMetaData();
+  }
+
+  getReviewsList(sortOrder) {
     axios.get('http://localhost:3000/reviews', {
-      params: {product_id: this.props.product_id}
+      params: {
+        product_id: this.props.product_id,
+        sort: sortOrder,
+        count: 100
+      }
     })
       .then((response) => {
         console.log('products.data: ', response.data);
@@ -22,7 +33,11 @@ export default class RatingsAndReviews extends React.Component {
       .catch((err) => {
         throw err;
       })
-    this.getReviewMetaData();
+  }
+
+  sortReviews(sortOrder) {
+    console.log('sortOrder: ', sortOrder);
+    return this.getReviewsList(sortOrder);
   }
 
   onAddReviewButtonClick() {
@@ -31,9 +46,7 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   closeModal() {
-    //close modal when submit button is clicked
     this.setState({modalIsOpen: false});
-    //pass down as a prop to Modal
   }
 
   loadMoreReviews() {
@@ -65,17 +78,20 @@ export default class RatingsAndReviews extends React.Component {
 
   translateCharacteristicsToIds(characteristicsObj) {
     var {size, width, comfort, quality, length, fit} = characteristicsObj;
-    console.log('size: ', size);
-    console.log('width: ', width);
-    console.log('comfort: ', comfort);
-    console.log('quality: ', quality);
 
-    //I have the charasteristics from props here where I could translate right?
     var results = {};
-    results[this.state.productSizeMetaData.id] = size;
-    results[this.state.productQualityMetaData.id] = quality;
-    results[this.state.productComfortMetaData.id] = comfort;
-    results[this.state.productWidthMetaData.id] = width;
+    if (this.state.productSizeMetaData !== undefined) {
+      results[this.state.productSizeMetaData.id] = size;
+    }
+    if (this.state.productQualityMetaData !== undefined) {
+      results[this.state.productQualityMetaData.id] = quality;
+    }
+    if (this.state.productComfortMetaData !== undefined) {
+      results[this.state.productComfortMetaData.id] = comfort;
+    }
+    if (this.state.productWidthMetaData !== undefined) {
+      results[this.state.productWidthMetaData.id] = width;
+    }
     if (this.state.productLengthMetaData !== undefined) {
       console.log('this')
       results[this.state.productLengthMetaData.id] = length;
@@ -90,13 +106,9 @@ export default class RatingsAndReviews extends React.Component {
   addNewReview(newReview) {
     var {rating, recommends, characteristics, reviewSummaryValue, reviewBodyValue, emailValue, nickname, modalIsOpen, photos} = newReview
 
-    console.log('characteristics after submitted: ', characteristics);
-
     characteristics = this.translateCharacteristicsToIds(characteristics);
 
     recommends = recommends === 'Yes' ? true : false;
-
-    console.log('typeof photos[0] === string: ', typeof photos[0]);
 
     var requestBody = {
         'product_id': this.props.product_id,
@@ -136,18 +148,25 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   render() {
-    //if there's one more unrendered review in reviewList than are on the screen, show the button
     if (this.state.reviews.length - this.state.reviewsToRender >= 1) {
       var moreReviewsButton = <button onClick={this.loadMoreReviews.bind(this)}>MORE REVIEWS</button>
     }
 
     return (
-      <div id='reviewsList'>
-        <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender}/>
-        {moreReviewsButton}
-        <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
-        <div className='modal'>
-        <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModal={this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} product_id={this.props.product_id} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData}/>}/>
+      <div id='ratingsAndReviews'>
+        <div id='ratingsBreakdown'>
+          <RatingsBreakdown reviews={this.state.reviews} ratings={this.state.productRatings} recommendations={this.state.productRecommendations} />
+        </div>
+        <div id='reviewsList'>
+          <div id='reviewListSort'>
+            <SortReview sortReviews={this.sortReviews.bind(this)} />
+          </div>
+          <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} />
+          {moreReviewsButton}
+          <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
+          <div className='modal'>
+            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModal={this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} product_id={this.props.product_id} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
+          </div>
         </div>
       </div>
     )

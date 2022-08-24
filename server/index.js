@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/reviews', (req, res) => {
-  // console.log('req.query: ', req.query);
+  console.log('req.query: ', req.query);
   axios.get(`${apiUrl}/reviews`, {
     headers: {'Authorization': APIKEY},
     params: req.query
@@ -40,9 +40,9 @@ app.get('/reviews/meta', (req, res) => {
 app.put('/reviews/:review_id/helpful', (req, res) => {
   console.log('req.params.review_id: ', req.params.review_id);
   var pathParam = req.params.review_id;
-  axios.put(`${apiUrl}/reviews/${pathParam}/helpful`, {
-    headers: {'Authorization': APIKEY}
-  })
+  // const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  axios.put(`${apiUrl}/reviews/${pathParam}/helpful`, {}, {headers: {'Authorization': APIKEY}}
+  )
     .then((response) => {
       // console.log(response.data)
       res.send('success');
@@ -54,13 +54,11 @@ app.post('/reviews', (req, res) => {
   console.log({'Authorization': APIKEY});
   console.log(req.body.data);
   console.log('typeof req.body.data: ', typeof req.body.data);
-  axios.post(`${apiUrl}/reviews`, {
-    headers: {'Authorization': APIKEY},
-    data: req.body.data
-  })
+  axios.post(`${apiUrl}/reviews`, req.body.data, {headers: {'Authorization': APIKEY}
+})
     .then((response) => {
       console.log(response.data)
-      res.send(JSON.stringify('Created'));
+      res.send('Created');
     })
     .catch((err) => { throw err; });
 })
