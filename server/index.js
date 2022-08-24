@@ -13,13 +13,25 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.get('/products', (req, res) => {
-  axios.get(`${BASEURL}/products`, {headers: {Authorization: APIKEY}})
-    .then(products => {
-      res.status(200).send(products.data)
+  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) // 71701
+    .then(results => {
+      console.log('FROM GET REQ: ', results.data)
+      res.status(200).send(results.data)
     })
     .catch(err => {
       console.log(err)
-      res.send(err)
+    })
+})
+
+app.get('/products/:product_id/styles', (req, res) => {
+  let id = req.params.product_id
+  console.log('ID FROM URL',id)
+  axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
+    .then(results => {
+      res.status(200).send(results.data)
+    })
+    .catch(err => {
+      console.log(err)
     })
 })
 

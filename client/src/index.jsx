@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import '../dist/styles.css';
 //TODO: Import Components
+import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import QuesAns from './QuestionAnswer/QuesAns.jsx'
 import RatingsAndReviews from './components/ratingsAndReviews.jsx'
 
@@ -41,6 +42,7 @@ function App() {
     //TODO: Add Components
     return (
       <>
+        <ProductOverview />
         <QuesAns />
         <RatingsAndReviews product_id={71697}/>
       </>
