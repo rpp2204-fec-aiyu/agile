@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 //TODO: Import Components
+import QuesAns from './QuestionAnswer/QuesAns.jsx'
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
     //TODO: Add Components
     return (
       <>
-
+        <QuesAns />
       </>
     )
   } else {
