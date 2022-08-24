@@ -5,6 +5,7 @@ import Modal from './modal.jsx';
 import NewReview from './newReview.jsx';
 import SortReview from './sortReviews.jsx';
 import RatingsBreakdown from './ratingsBreakdown.jsx';
+import ProductBreakdown from './productBreakdown.jsx';
 
 
 export default class RatingsAndReviews extends React.Component {
@@ -156,6 +157,9 @@ export default class RatingsAndReviews extends React.Component {
       <div id='ratingsAndReviews'>
         <div id='ratingsBreakdown'>
           <RatingsBreakdown reviews={this.state.reviews} ratings={this.state.productRatings} recommendations={this.state.productRecommendations} />
+        </div>
+        <div id='productBreakdown'>
+          <ProductBreakdown reviews={this.state.reviews} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />
         </div>
         <div id='reviewsList'>
           <div id='reviewListSort'>
