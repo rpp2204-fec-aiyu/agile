@@ -23,6 +23,7 @@ function App() {
       })
   }
 
+
   const [product, setProduct] = useState(null)
   const [productId, setProductId] = useState(null)
 
@@ -43,6 +44,7 @@ function App() {
     return (
       <>
         <ProductOverview />
+        <RelatedProducts />
         <QuesAns />
         <RatingsAndReviews product_id={71697}/>
       </>
@@ -52,6 +54,8 @@ function App() {
       <></>
     )
   }
+
 }
+
 
 ReactDOM.render(<App/>, document.getElementById('app'))
