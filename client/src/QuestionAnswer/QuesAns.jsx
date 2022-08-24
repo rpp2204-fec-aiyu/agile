@@ -1,7 +1,11 @@
-const React = require('react')
-const axios = require('axios')
-const {useState, useEffect} = require('react')
-const QuestionView = require('./QuestionView.jsx');
+// const React = require('react')
+// const axios = require('axios')
+// const {useState, useEffect} = require('react')
+// const QuestionView = require('./QuestionView.jsx');
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import QuestionView from './QuestionView.jsx'
 
 const QuesAns = () => {
   const [questionList, setQuestionList] = useState([]);
@@ -61,4 +65,5 @@ const QuesAns = () => {
   )
 }
 
-module.exports = QuesAns;
+export default QuesAns;
+//module.exports = QuesAns;

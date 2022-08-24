@@ -1,4 +1,5 @@
-const React = require('react')
+//const React = require('react')
+import React from 'react'
 
 const QuestionView = ({question, answerToShow, setAnswerToShow}) => {
   return(
@@ -34,4 +35,5 @@ const QuestionView = ({question, answerToShow, setAnswerToShow}) => {
   )
 }
 
-module.exports = QuestionView;
+//module.exports = QuestionView;
+export default QuestionView;
