@@ -1,46 +1,64 @@
 const React = require('react')
 const axios = require('axios')
+const {useState, useEffect} = require('react')
 const QuestionView = require('./QuestionView.jsx');
 
-class QuesAns extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      questionList: []
-    }
-  }
+const QuesAns = () => {
+  const [questionList, setQuestionList] = useState([]);
+  const [questionToShow, setQuestionToShow] = useState(2);
+  const [answerToShow, setAnswerToShow] = useState(2);
 
-  getQuestionList() {
-    axios.get('/questions')
+  const getQuestionList = () => {
+   axios.get('/questions')
       .then((res) => {
-        const questionList = res.data;
-        this.setState({questionList});
-        //console.log('SUCESSFULLY GET BACK THE QUESTIONS LIST ', res);
+        console.log('SUCESSFULLY GET BACK THE QUESTIONS LIST ', res.data.results);
+        setQuestionList([...res.data.results]);
       })
       .catch((err) => {
         console.log('FAIL TO GET BACK THE QUESTIONS LIST', err);
       })
   }
 
-  componentDidMount(){
-    this.getQuestionList();
+  const showMoreQuestion = () => {
+    setQuestionToShow(questionList.length);
   }
 
-  render() {
-    return(
+  const showMoreAns = () => {
+    let longest = 0;
+    for (var i = 0; i < questionList.length; i++) {
+      const current = questionList[i];
+      if(Object.keys(current.answers).length > longest) {
+        longest = Object.keys(current.answers).length;
+      }
+    }
+    setAnswerToShow(longest);
+  }
+
+  useEffect(() => {
+    getQuestionList();
+  }, [])
+
+
+  return(
+    <div>
+
+      <h1>Questions and Answers</h1>
+      <input placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."/>
+      <button>Search</button>
+
       <div>
-        <h1>Questions and Answers</h1>
-        <input placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."/>
-        <div>
-          {this.state.questionList.map(question =>
-            <QuestionView question={question}/>
-          )}
-
-          <p></p>
-        </div>
+        {questionList.slice(0, questionToShow).map(question =>
+          <QuestionView question={question} answerToShow={answerToShow} setAnswerToShow={setAnswerToShow}/>
+        )}
+      <br />
+      <span onClick={() => {showMoreAns()}}>Load More Answers</span>
+      <br />
+      <button onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button>
+      <button>ADD A QUESTION +</button>
       </div>
-    )
-  }
+
+    </div>
+  )
 }
 
 module.exports = QuesAns;

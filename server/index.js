@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/../client/dist'))
 app.get('/questions', (req , res) => {
   return getQuestionsList()
     .then((result) => {
-      res.status(200).send(result.results);
+      res.status(200).send(result);
       //console.log('GOT BACK THE LIST', result);
     })
     .catch((err) => {

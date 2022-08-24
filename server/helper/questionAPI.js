@@ -18,9 +18,9 @@ let getProductId = () => {
     //console.log('ERROR IN GET DATA', err);
   })
 }
-
+//product_id range:71697 - 71701
 let getQuestionsList = () => {
-  return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=71698', {
+  return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=71701', {
     headers: {
       'Authorization': `${process.env.APIKEY}`
     }
