@@ -1,19 +1,57 @@
-// const React = require('react');
-// const ReactDOM = require('react-dom');
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import axios from 'axios';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import '../dist/styles.css';
+//TODO: Import Components
+import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
+import QuesAns from './QuestionAnswer/QuesAns.jsx'
+import RatingsAndReviews from './components/ratingsAndReviews.jsx'
 
-class App extends React.Component {
+function App() {
 
-  render() {
+  const getCurrentProduct = () => {
+    /* products.data[<index>]
+    * 0: Camo Onesie Jacket     id: 71697
+    * 1: Sunglasses             id: 71698
+    * 2: Morning Joggers Pants  id: 71699
+    * 3: Slackers Slacks Pants  id: 71700
+    * 4: Heir Force Ones Shoes  id: 71701
+    */
+    return axios.get('/products')
+      .then(products => {
+        return products.data[4]
+      })
+  }
+
+
+  const [product, setProduct] = useState(null)
+  const [productId, setProductId] = useState(null)
+
+  useEffect(() => {
+    getCurrentProduct()
+      .then(product => {
+        setProduct(product)
+        setProductId(product.id)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+
+  if(!!productId) {
+    //TODO: Add Components
     return (
       <>
-
+        <ProductOverview />
         <RelatedProducts />
+        <QuesAns />
+        <RatingsAndReviews product_id={71697}/>
       </>
-
+    )
+  } else {
+    return (
+      <></>
     )
   }
 
