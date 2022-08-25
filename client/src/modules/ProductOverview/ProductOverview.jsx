@@ -3,6 +3,7 @@ import axios from 'axios'
 import Category from './ProductInfo/Category.jsx'
 import Title from './ProductInfo/Title.jsx'
 import Price from './ProductInfo/Price.jsx'
+import StarRating from './ProductInfo/StarRating.jsx'
 import Overview from './ProductInfo/Overview.jsx'
 import MyOutfitButton from './ProductInfo/MyOutfitButton.jsx'
 import StyleSelector from './StyleSelector/StyleSelector.jsx'
@@ -47,12 +48,12 @@ export default function ProductOverview({ product, productId }) {
   }, [])
 
   if(style) {
-    console.log('features: ', features)
     return (
       <div>
         <Category category={category} />
         <Title title={title} />
         <Price price={price} salePrice={salePrice} />
+        <StarRating />
         <Overview slogan={slogan} description={description} features={features} />
         <MyOutfitButton />
 
