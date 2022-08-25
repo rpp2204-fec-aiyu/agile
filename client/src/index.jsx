@@ -43,7 +43,7 @@ function App() {
     //TODO: Add Components
     return (
       <>
-        <ProductOverview />
+        <ProductOverview product={product} productId={productId}/>
         <RelatedProducts />
         <QuesAns />
         <RatingsAndReviews product_id={71697}/>
