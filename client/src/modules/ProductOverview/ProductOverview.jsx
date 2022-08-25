@@ -10,24 +10,12 @@ import Cart from './Cart/Cart.jsx'
 
 import Gallery from './Gallery/Gallery.jsx'
 
-//TODO: Get product features from product_id query to API
 export default function ProductOverview({ product, productId }) {
 
-  // function getCurrentProduct() {
-  //   return axios.get('http://localhost:3000/products')
-  //     .then(results => {
-  //       console.log('CURRENT PRODUCT: ', results.data)
-  //       return results.data
-  //     })
-  //     .then(result => {
-  //       return result[0]
-  //     })
-  // }
-
-  function getCurrentProductStyles(id) { //Refactor to get features and then styles
-    return axios.get(`/products/${id}/styles`) //changes endpoint to include styles
+  function getCurrentProductStyles(id) {
+    return axios.get(`/productOverview/${id}`) //orchestrates endpoint
       .then(results => {
-        return results.data.results
+        return results.data
     })
   }
 
@@ -39,32 +27,23 @@ export default function ProductOverview({ product, productId }) {
   const [description, setDescription] = useState(product.description)
   const [id, setId] = useState(productId)
 
+  const [features, setFeatures] = useState(null)
+
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
   const [salePrice, setSalePrice] = useState(null)
-  //const [isOnSale, setIsOnSale] = useState(null)
 
   useEffect(()=> {
-    // getCurrentProduct()
-    //   .then(product => {
-    //     setCurrentProduct(product)
-    //     setCategory(product.category)
-    //     setTitle(product.name)
-    //     setPrice(product.default_price)
-    //     setSlogan(product.slogan)
-    //     setDescription(product.description)
-    //     setId(product.id)
 
     getCurrentProductStyles(id)
       .then(styles => {
         console.log("STYLES FROM GET REQ: ", styles)
-        setStyles(styles)
-        setStyle(styles[0])
-        setSalePrice(styles[0].sale_price)
-        //if(style)
-        //setIsOnSale(style.sale_price)
+        setFeatures(styles.styles.features)
+        setStyles(styles.styles)
+        setStyle(styles.styles[0])
+        setSalePrice(styles.styles[0].sale_price)
       })
-    //})
+
   }, [])
 
   if(style) {
@@ -73,7 +52,7 @@ export default function ProductOverview({ product, productId }) {
         <Category category={category} />
         <Title title={title} />
         <Price price={price} salePrice={salePrice} />
-        <Overview slogan={slogan} description={description} />
+        <Overview slogan={slogan} description={description} features={features} />
         <MyOutfitButton />
 
         <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
