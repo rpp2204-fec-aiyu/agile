@@ -27,7 +27,7 @@ export default function ProductOverview({ product, productId }) {
   const [description, setDescription] = useState(product.description)
   const [id, setId] = useState(productId)
 
-  const [features, setFeatures] = useState(null)
+  const [features, setFeatures] = useState([])
 
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
@@ -38,7 +38,7 @@ export default function ProductOverview({ product, productId }) {
     getCurrentProductStyles(id)
       .then(styles => {
         console.log("STYLES FROM GET REQ: ", styles)
-        setFeatures(styles.styles.features)
+        setFeatures(styles.features)
         setStyles(styles.styles)
         setStyle(styles.styles[0])
         setSalePrice(styles.styles[0].sale_price)
@@ -47,6 +47,7 @@ export default function ProductOverview({ product, productId }) {
   }, [])
 
   if(style) {
+    console.log('features: ', features)
     return (
       <div>
         <Category category={category} />
