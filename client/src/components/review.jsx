@@ -6,7 +6,7 @@ import Modal from './modal.jsx';
 export default class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isFullReviewBodyShown: false, helpfulnessCount: this.props.review.helpfulness, helpfulButtonClicked: false, 'photo1ModalIsOpen': false, 'photo2ModalIsOpen': false, 'photo3ModalIsOpen': false, 'photo4ModalIsOpen': false, 'photo5ModalIsOpen': false}
+    this.state = {isFullReviewBodyShown: false, helpfulButtonClicked: false, 'photo1ModalIsOpen': false, 'photo2ModalIsOpen': false, 'photo3ModalIsOpen': false, 'photo4ModalIsOpen': false, 'photo5ModalIsOpen': false}
   }
 
   expandModal(photoNum) {
@@ -63,8 +63,8 @@ export default class Review extends React.Component {
 
     axios.put(`/reviews/${this.props.review.review_id}/helpful`)
     .then((response) => {
-      console.log('response from marking review as helpful in /review/:review_id/helpful: ', 'success');
-      this.setState({helpfulnessCount: this.state.helpfulnessCount + 1, helpfulButtonClicked: true});
+      this.setState({helpfulButtonClicked: true});
+      this.props.getReviewsList();
     })
     .catch((err) => {
       alert('Error updating helpfulness count');
@@ -109,9 +109,6 @@ export default class Review extends React.Component {
   }
 
   splitReviewBody(reviewBody) {
-    //O:
-      //shortened review body of 250 characters
-      //a 'Show more' clickable link to expand body to full display
     var shortenedReviewBody = reviewBody.slice(0, 251);
     var result = <div>
       <p className='reviewBody'>{shortenedReviewBody}</p>
@@ -172,9 +169,9 @@ export default class Review extends React.Component {
     }
 
     if (this.state.helpfulButtonClicked) {
-      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)} disabled><u>{this.state.helpfulnessCount}</u></button>;
+      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)} disabled><u>{this.props.review.helpfulness}</u></button>;
     } else {
-      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.state.helpfulnessCount}</u></button>;
+      helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.props.review.helpfulness}</u></button>;
     }
     console.log('photos: ', photos);
     return (

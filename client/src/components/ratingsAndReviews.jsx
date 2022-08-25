@@ -11,15 +11,18 @@ import ProductBreakdown from './productBreakdown.jsx';
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined}
+    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant'}
   }
 
   componentDidMount() {
-    this.getReviewsList();
+    this.getReviewsList(this.state.sortOrder);
     this.getReviewMetaData();
   }
 
   getReviewsList(sortOrder) {
+    if (sortOrder === undefined) {
+      sortOrder = this.state.sortOrder;
+    }
     axios.get('http://localhost:3000/reviews', {
       params: {
         product_id: this.props.product_id,
@@ -29,7 +32,9 @@ export default class RatingsAndReviews extends React.Component {
     })
       .then((response) => {
         console.log('products.data: ', response.data);
-        this.setState({reviews: response.data.results});
+        this.setState()
+
+        this.setState({reviews: response.data.results, 'sortOrder': sortOrder});
       })
       .catch((err) => {
         throw err;
@@ -37,12 +42,60 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   sortReviews(sortOrder) {
-    console.log('sortOrder: ', sortOrder);
     return this.getReviewsList(sortOrder);
   }
 
+  checkFilters() {
+    //I: n/a
+    //O: an array of enabled filters (ex: [5, 3])
+    //C:
+    //E:
+
+    //note to self: declare the following state -filterBy: {5: false, } filterBy5, filterBy4...
+
+    //declare a filterList array
+
+    //check to see which if any of the filter states are true (in addition to the one just passed) by iterating through filterBy state
+      //if one is true, append it to filterList
+
+    //return filterList
+  }
+
+  applyFilters(ratingNum) {
+    //I: a number rating to filter by
+    //O: n/a; filters this.state.reviews correctly
+    //C:
+    //E: works if 0:many filters have already been applied...
+
+    //declare a reviewsList variable
+
+    //filterList = this.checkFilters()
+
+    //if filterList is not empty
+      //make a call to this.getReviewsList to refresh the reviews state
+
+    //if ratingNum is defined
+      //set filterBy.ratingNum to true
+      //append ratingNum to filterList
+
+    //iterate through the this.state.reviews array, removing all the reviews that do not have a rating contained in filterList
+
+    //setState for reviews to include the subset of filtered reviews only
+  }
+
+  removeFilters(ratingNum, turnOffAllFilters) {
+    //filterList = this.checkFilters()
+
+    //if turnOffAllFilters is true AND filterList is not empty
+      //make a call to this.getReviewsList to refresh the reviews state
+      //turn off applicable filterBy states using elements in filterList
+
+    //if ratingNum is not undefined
+      //remove the filterBy state for ratingNum only
+      //call this.applyFilters()
+  }
+
   onAddReviewButtonClick() {
-    console.log('clicked');
     this.setState({modalIsOpen: true});
   }
 
@@ -59,8 +112,6 @@ export default class RatingsAndReviews extends React.Component {
       params: {product_id: this.props.product_id}
     })
       .then((response) => {
-        console.log('reviewMeta.data: ', response.data);
-        console.log('productLengthMetaData from API: ', response.data.characteristics.Length);
         this.setState({
           productRatings: response.data.ratings,
           productRecommendations: response.data.recommended,
@@ -140,8 +191,9 @@ export default class RatingsAndReviews extends React.Component {
     })
       .then((response) => {
         console.log('response.data: ', response.data);
-        // this.setState({reviews: response.data.results});
-        return;
+        this.getReviewsList(this.state.sortOrder);
+        //update reviewsMetadata
+        this.getReviewMetaData();
       })
       .catch((err) => {
         throw err;
@@ -165,7 +217,7 @@ export default class RatingsAndReviews extends React.Component {
           <div id='reviewListSort'>
             <SortReview sortReviews={this.sortReviews.bind(this)} />
           </div>
-          <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} />
+          <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} getReviewsList={this.getReviewsList.bind(this)} />
           {moreReviewsButton}
           <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
           <div className='modal'>

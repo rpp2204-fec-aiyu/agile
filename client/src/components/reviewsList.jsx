@@ -8,7 +8,6 @@ export default class ReviewsList extends React.Component {
   }
 
   render() {
-    console.log('here: ', this.props.reviewsList);
     return (
       <div>
         {this.props.reviewsList.map((review, index) => {
@@ -16,7 +15,7 @@ export default class ReviewsList extends React.Component {
 
           //only render the list of reviews we're supposed to
           if (index < this.props.reviewsToRender) {
-            return (<Review review={review} />)
+            return (<Review review={review} key={review.review_id} getReviewsList={this.props.getReviewsList}/>)
           }
         })}
       </div>
