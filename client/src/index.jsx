@@ -8,7 +8,6 @@ import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
 import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
 import RelatedProducts from './modules/RelatedProducts/RelatedProducts.jsx'
 
-
 function App() {
 
   const getCurrentProduct = () => {

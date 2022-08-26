@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`questions and answers matches snapshot 1`] = `
+<div>
+  <h1>
+    Questions and Answers
+  </h1>
+  <input
+    placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."
+  />
+  <button>
+    Search
+  </button>
+  <div>
+    <br />
+    <br />
+    <button>
+      ADD A QUESTION +
+    </button>
+  </div>
+</div>
+`;
