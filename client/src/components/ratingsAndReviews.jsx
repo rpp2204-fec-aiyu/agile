@@ -11,7 +11,7 @@ import ProductBreakdown from './productBreakdown.jsx';
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant'}
+    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant', filterBy: {'5': false, '4': false, '3': false, '2': false, '1': false}}
   }
 
   componentDidMount() {
@@ -31,9 +31,6 @@ export default class RatingsAndReviews extends React.Component {
       }
     })
       .then((response) => {
-        console.log('products.data: ', response.data);
-        this.setState()
-
         this.setState({reviews: response.data.results, 'sortOrder': sortOrder});
       })
       .catch((err) => {
@@ -41,58 +38,135 @@ export default class RatingsAndReviews extends React.Component {
       })
   }
 
+  getReviewsPromise() {
+    return (
+      axios.get('http://localhost:3000/reviews', {
+        params: {
+          product_id: this.props.product_id,
+          sort: this.state.sortOrder,
+          count: 100
+        }
+      })
+    )
+  }
+
   sortReviews(sortOrder) {
     return this.getReviewsList(sortOrder);
   }
 
   checkFilters() {
-    //I: n/a
-    //O: an array of enabled filters (ex: [5, 3])
-    //C:
-    //E:
-
-    //note to self: declare the following state -filterBy: {5: false, } filterBy5, filterBy4...
-
-    //declare a filterList array
-
-    //check to see which if any of the filter states are true (in addition to the one just passed) by iterating through filterBy state
-      //if one is true, append it to filterList
-
-    //return filterList
+    var filterList = [];
+    //check to see which if any of the filters are enabled
+    for (var key in this.state.filterBy) {
+      if (this.state.filterBy[key]) {
+        filterList.push(parseInt(key));
+      }
+    }
+    return filterList;
   }
 
-  applyFilters(ratingNum) {
-    //I: a number rating to filter by
-    //O: n/a; filters this.state.reviews correctly
-    //C:
-    //E: works if 0:many filters have already been applied...
+  applyFilterLogic(reviewList, filterList) {
+    var filteredReviewList = reviewList.filter((review) => {
+      // console.log('filterList: ', filterList);
+      // console.log('review.rating: ', review.rating);
+      if (filterList.indexOf(review.rating) !== -1) { //if rating is found in filterList, add it to filteredReviewList
+        return review;
+      }
+    })
+    this.setState({reviews: filteredReviewList});
+  }
 
-    //declare a reviewsList variable
+  applyFilters(ratingNum, arrayOfRatings) {
+    var reviewsList;
+    var filterList = arrayOfRatings !== undefined ? arrayOfRatings : this.checkFilters();
 
-    //filterList = this.checkFilters()
-
-    //if filterList is not empty
-      //make a call to this.getReviewsList to refresh the reviews state
-
-    //if ratingNum is defined
-      //set filterBy.ratingNum to true
-      //append ratingNum to filterList
-
-    //iterate through the this.state.reviews array, removing all the reviews that do not have a rating contained in filterList
-
-    //setState for reviews to include the subset of filtered reviews only
+    //if ratingNum is defined, add it to filterBy state
+    if (ratingNum !== undefined) {
+      console.log(`filter by ${ratingNum}`);
+      this.setState((prevState) => {
+        var newState = {};
+        for (var key in prevState.filterBy) {
+          if (key === ratingNum.toString()) {
+            //set filterBy.ratingNum to true
+            newState[ratingNum] = true;
+          } else {
+            newState[key] = prevState.filterBy[key];
+          }
+        }
+        return {filterBy: newState};
+      })
+      filterList.push(parseInt(ratingNum));
+    }
+    //if at least one filter was already applied before this func was invoked, fetch a new list of reviews to filter from
+    if (filterList.length >= 1) {
+      this.getReviewsPromise()
+        .then((response) => {
+          this.applyFilterLogic(response.data.results, filterList);
+        })
+        .catch((err) => {
+          throw err;
+        })
+    } else if (ratingNum !== undefined) { //if the first filter, avoid API call since reviews are already unfiltered
+      this.applyFilterLogic(this.state.reviews, filterList);
+    } else if (filterList.length === 0 && ratingNum === undefined) { //if the last filter was removed
+      this.getReviewsPromise()
+        .then((response) => {
+          this.setState({reviews: response.data.results});
+        })
+        .catch((err) => {
+          throw err;
+        })
+    } else {
+      new Error('ApplyFilters did not work as expected');
+    }
   }
 
   removeFilters(ratingNum, turnOffAllFilters) {
-    //filterList = this.checkFilters()
+    var filterList = this.checkFilters();
 
     //if turnOffAllFilters is true AND filterList is not empty
+    if (turnOffAllFilters) {
       //make a call to this.getReviewsList to refresh the reviews state
+      this.getReviewsList();
       //turn off applicable filterBy states using elements in filterList
+      filterList.forEach((ratingNum) => {
+        this.setState((prevState) => {
+          var newState = {};
+          console.log('prevState.filterBy2: ', prevState.filterBy);
+          for (var key in prevState.filterBy) {
+            newState[key] = false;
+          }
+          return {filterBy: newState};
+        })
+      })
+    }
 
-    //if ratingNum is not undefined
+    //if ratingNum is defined
+    if (ratingNum !== undefined) {
       //remove the filterBy state for ratingNum only
-      //call this.applyFilters()
+      var newState = {};
+      this.setState((prevState) => {
+        for (var key in prevState.filterBy) {
+          if (parseInt(key) === ratingNum) {
+            newState[key] = false;
+          } else {
+            console.log('key: ', key);
+            console.log('prevState.filterBy[key]: ', prevState.filterBy[key]);
+            newState[key] = prevState.filterBy[key];
+          }
+        }
+        return { filterBy: newState };
+      }, () => {
+        var filterList = [];
+        for (var key in newState) {
+          if (newState[key]) {
+            filterList.push(parseInt(key));
+          }
+        }
+        // console.log(`filterList should not contain recently removed ratingNum of ${ratingNum}: `, filterList);
+        this.applyFilters(undefined, filterList);
+      })
+    }
   }
 
   onAddReviewButtonClick() {
@@ -145,7 +219,6 @@ export default class RatingsAndReviews extends React.Component {
       results[this.state.productWidthMetaData.id] = width;
     }
     if (this.state.productLengthMetaData !== undefined) {
-      console.log('this')
       results[this.state.productLengthMetaData.id] = length;
     }
     if (this.state.productFitMetaData !== undefined) {
@@ -208,7 +281,7 @@ export default class RatingsAndReviews extends React.Component {
     return (
       <div id='ratingsAndReviews'>
         <div id='ratingsBreakdown'>
-          <RatingsBreakdown reviews={this.state.reviews} ratings={this.state.productRatings} recommendations={this.state.productRecommendations} />
+          <RatingsBreakdown ratings={this.state.productRatings} recommendations={this.state.productRecommendations}  applyFilters={this.applyFilters.bind(this)} removeFilters={this.removeFilters.bind(this)} filterBy={this.state.filterBy}/>
         </div>
         <div id='productBreakdown'>
           <ProductBreakdown reviews={this.state.reviews} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />

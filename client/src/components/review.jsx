@@ -25,7 +25,6 @@ export default class Review extends React.Component {
   }
 
   closeModal(photoNum) {
-    console.log('modal closed');
     if (photoNum === 1) {
       this.setState({photo1ModalIsOpen: false});
     } else if (photoNum === 2) {
@@ -118,7 +117,7 @@ export default class Review extends React.Component {
   }
 
   render() {
-    console.log('this.props.review: ', this.props.review);
+    // console.log('this.props.review: ', this.props.review);
     var helpfulnessCount = this.props.helpfulness;
     var reviewBody;
     var recommendation;
@@ -133,8 +132,6 @@ export default class Review extends React.Component {
 
     if (this.props.review.photos.length > 0) {
       //iterate through the photos
-      console.log('this.state[`photo${index}ModalIsOpen`]: ', this.state[`photo1ModalIsOpen`]);
-      console.log('this.state[`photo${index}ModalIsOpen`]: ', this.state.photo1ModalIsOpen);
       photos = this.props.review.photos.map((photo, index) => {
         index += 1;
         return (
@@ -173,7 +170,6 @@ export default class Review extends React.Component {
     } else {
       helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.props.review.helpfulness}</u></button>;
     }
-    console.log('photos: ', photos);
     return (
       <div>
         <span>

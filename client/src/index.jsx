@@ -45,8 +45,8 @@ function App() {
     return (
       <>
         {/* <ProductOverview /> */}
-        <RelatedProducts />
-        <QuesAns />
+        {/* <RelatedProducts />
+        <QuesAns /> */}
         <RatingsAndReviews product_id={71697}/>
       </>
     )

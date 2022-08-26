@@ -84,11 +84,9 @@ export default class RatingsBreakdown extends React.Component {
     } else {
       average = this.calculateNearestTenth(average);
     }
-
     // console.log('count: ', count);
     // console.log('sum: ', sum);
     // console.log('average: ', average);
-
     return average;
   }
 
@@ -114,14 +112,26 @@ export default class RatingsBreakdown extends React.Component {
     return stars;
   }
 
+  handleRatingFilterClick(e) {
+    var filterBy = this.props.filterBy;
+    var ratingNum = e.currentTarget.className[0];
+
+    if (filterBy[ratingNum]) {
+      // console.log(`turn filterBy ${ratingNum} off`);
+      this.props.removeFilters(parseInt(ratingNum), false);
+    } else {
+      // console.log(`turn filterBy ${ratingNum} on`);
+      this.props.applyFilters(parseInt(ratingNum));
+    }
+  }
+
   getRatingsBreakdown() {
     var ratings = this.props.ratings;
-
     var counter = 6;
     var rows = [...Array(5)].map((row, index) => {
       counter--;
       return (
-        <div id={`${counter}stars`}>
+        <div className={`${counter}-star-row`} onClick={this.handleRatingFilterClick.bind(this)}>
           <div className='side' key={index}>
             <div>{counter} stars</div>
           </div>
@@ -138,12 +148,46 @@ export default class RatingsBreakdown extends React.Component {
     })
     return rows;
   }
+
+  generateFiltersMessage() {
+    var filtersObj = this.props.filterBy;
+    var filtersApplied = '';
+
+    for (var key in filtersObj) {
+      if (filtersObj[key]) {
+        if (filtersApplied.length === 0) {
+          filtersApplied += `Filtered by ${key} rating`;
+        } else {
+          filtersApplied += `; Filtered by ${key} rating`
+        }
+      }
+    }
+    return filtersApplied;
+  }
+
+  handleTurnOffFiltersClick() {
+    this.props.removeFilters(undefined, true);
+  }
+
   render() {
+    var filtersObj = this.state.filterBy;
+    // console.log('this.props.filterBy: ', this.props.filterBy);
+    var removeFiltersButton;
+    var filtersApplied = this.generateFiltersMessage();
+    var filtersMessage = <div id='ratings-filters'>{filtersApplied}</div>
+
+    if (filtersApplied.length > 0)  {
+      removeFiltersButton =
+      <button type='button' id='remove-rating-filters' onClick={this.handleTurnOffFiltersClick.bind(this)}>Remove all filters</button>
+    }
+
     return (
       <div id='ratingSummary'>
         <h3>RATINGS &amp; REVIEWS</h3>
         <h1>{this.calculateAvgRating()}</h1>
         {this.generateStarsFromRating()}
+        {filtersMessage}
+        {removeFiltersButton}
         <p>based on {this.getCountOfRatings()} reviews</p>
         <div id='ratingBreakdown'>
           <div className='row'>
