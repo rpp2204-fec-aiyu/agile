@@ -5,7 +5,7 @@ import '../dist/styles.css';
 //TODO: Import Components
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
-import QuesAns from './modules/QuestionsAnswer/QuesAns.jsx'
+import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
 import RelatedProducts from './modules/RelatedProducts/RelatedProducts.jsx'
 
 
@@ -46,9 +46,9 @@ function App() {
     return (
       <>
         <ProductOverview />
-        <RelatedProducts />
-        <QuesAns />
         <RatingsAndReviews product_id={71697}/>
+        <QuesAns />
+        <RelatedProducts />
       </>
     )
   } else {
