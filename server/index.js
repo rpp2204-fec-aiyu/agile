@@ -23,12 +23,23 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.get('/products/:product_id/styles', (req, res) => {
+app.get('/productOverview/:product_id', (req, res) => {
   let id = req.params.product_id
-  console.log('ID FROM URL',id)
-  axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
+  let productInfo = {};
+  axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}})
     .then(results => {
-      res.status(200).send(results.data)
+      productInfo.features = results.data.features;
+      return productInfo;
+    })
+    .then(productInfo => {
+      axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
+        .then(results => {
+          productInfo.styles = results.data.results;
+          res.status(200).send(productInfo);
+        })
+        .catch(err => {
+          console.log(err)
+        })
     })
     .catch(err => {
       console.log(err)
