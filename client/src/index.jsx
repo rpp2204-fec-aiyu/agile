@@ -4,9 +4,10 @@ import axios from 'axios'
 import '../dist/styles.css';
 //TODO: Import Components
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
-import QuesAns from './QuestionAnswer/QuesAns.jsx'
-import RatingsAndReviews from './components/ratingsAndReviews.jsx'
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx'
+import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
+import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
+import RelatedProducts from './modules/RelatedProducts/RelatedProducts.jsx'
+
 
 function App() {
 
@@ -41,13 +42,13 @@ function App() {
 
 
   if(!!productId) {
-    //TODO: Add Components
     return (
       <>
-        {/* <ProductOverview /> */}
-        {/* <RelatedProducts />
-        <QuesAns /> */}
+
+        <ProductOverview product={product} productId={productId}/>
         <RatingsAndReviews product_id={71697}/>
+        <QuesAns />
+        <RelatedProducts />
       </>
     )
   } else {
