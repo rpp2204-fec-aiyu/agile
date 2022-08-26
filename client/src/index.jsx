@@ -40,13 +40,12 @@ function App() {
 
 
   if(!!productId) {
-    //TODO: Add Components
     return (
       <>
         <ProductOverview product={product} productId={productId}/>
-        <RelatedProducts />
-        <QuesAns />
         <RatingsAndReviews product_id={71697}/>
+        <QuesAns />
+        <RelatedProducts />
       </>
     )
   } else {
