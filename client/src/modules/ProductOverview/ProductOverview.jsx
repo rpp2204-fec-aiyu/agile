@@ -23,7 +23,7 @@ export default function ProductOverview({ product, productId }) {
   const [currentProduct, setCurrentProduct] = useState(product)
   const [category, setCategory] = useState(product.category)
   const [title, setTitle] = useState(product.name)
-  const [price, setPrice] = useState(product.price)
+  const [price, setPrice] = useState(product.default_price)
   const [slogan, setSlogan] = useState(product.slogan)
   const [description, setDescription] = useState(product.description)
   const [id, setId] = useState(productId)
