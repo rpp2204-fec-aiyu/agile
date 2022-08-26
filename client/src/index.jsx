@@ -6,6 +6,7 @@ import '../dist/styles.css';
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import QuesAns from './QuestionAnswer/QuesAns.jsx'
 import RatingsAndReviews from './components/ratingsAndReviews.jsx'
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx'
 
 function App() {
 
@@ -43,10 +44,10 @@ function App() {
     //TODO: Add Components
     return (
       <>
-        <ProductOverview />
-        <RelatedProducts />
+        {/* <ProductOverview /> */}
+        {/* <RelatedProducts /> */}
         <QuesAns />
-        <RatingsAndReviews product_id={71697}/>
+        {/* <RatingsAndReviews product_id={71697}/> */}
       </>
     )
   } else {
