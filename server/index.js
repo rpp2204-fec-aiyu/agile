@@ -46,6 +46,18 @@ app.get('/productOverview/:product_id', (req, res) => {
     })
 })
 
+app.post('/cart', (req, res) => {
+  let skuId = req.body
+  console.log(req.body)
+  axios.post(`${BASEURL}/cart`, skuId, {headers: {Authorization: APIKEY}})
+    .then(results => {
+      res.status(201).send(results.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 app.get('/reviews', (req, res) => {
   console.log('req.query: ', req.query);
   axios.get(`${BASEURL}/reviews`, {
