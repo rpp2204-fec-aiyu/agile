@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`questions and answers matches snapshot 1`] = `
-<div>
+<div
+  className="qaBackground"
+>
   <h1>
     Questions and Answers
   </h1>
@@ -14,7 +16,9 @@ exports[`questions and answers matches snapshot 1`] = `
   <div>
     <br />
     <br />
-    <button>
+    <button
+      onClick={[Function]}
+    >
       ADD A QUESTION +
     </button>
   </div>
