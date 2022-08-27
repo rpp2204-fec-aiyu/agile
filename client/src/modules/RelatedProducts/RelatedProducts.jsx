@@ -9,37 +9,60 @@ export default class RelatedProducts extends React.Component {
       name0 : '',
       original_price0 : '',
       photo0 : '',
-      rating : 0,
+      name1 : '',
+      original_price1 : '',
+      photo1 : '',
+      rating1 : 0,
+      rating2 : 0,
       liked : false,
+      related : [],
   }
 
   }
 
   componentDidMount() {
-    this.getProducts_Productid_syles();
-    this.getReviews()
+    this.getRelate();
+    this.getProductsSyles();
+    this.getReviews();
   }
 
-  getProducts_Productid_syles() {
+   getRelate() {
     let id = 71701;
-    axios.get(`/products/${id}/styles`)
+     axios.get(`/products/${id}/related`)
     .then((data) => {
+      let uni = [...new Set(data.data)]; //[71702, 71704, 71705, 71697, 71699]
       this.setState({
-        product_id : data.data.product_id,
-        name0 : data.data.results[0].name,
-        original_price0 : data.data.results[0].original_price,
-        photo0 : data.data.results[0].photos[0].url,
+        related : uni,
       });
     })
-    .catch((err) => {
-      console.log(err);
+  }
+
+  getProductsSyles() {
+    console.log("############",this.related)
+    let id = 71702;
+     axios.get(`/productOverview/${id}`)
+    .then((data) => {
+      this.setState({
+        name0 : data.data.styles[0].name,
+        original_price0 : data.data.styles[0].original_price,
+        photo0 : data.data.styles[0].photos[0].url,
+      });
+    })
+    let id1 = 71699;
+     axios.get(`/productOverview/${id1}`)
+    .then((data) => {
+      this.setState({
+        name1 : data.data.styles[0].name,
+        original_price1 : data.data.styles[0].original_price,
+        photo1 : data.data.styles[0].photos[0].url,
+      });
     })
   }
 
-  getReviews() {
-    axios.get('/reviews', {
+   getReviews() {
+     axios.get('/reviews', {
       params: {
-        product_id: 71701,
+        product_id: 71702,
       }
     })
     .then((data) => {
@@ -51,11 +74,25 @@ export default class RelatedProducts extends React.Component {
         avgRating = (avgRating / data.data.results.length * 2).toFixed() / 2;
       }
       this.setState({
-        rating : avgRating,
+        rating1 : avgRating,
       });
     })
-    .catch((err) => {
-      console.log(err);
+     axios.get('/reviews', {
+      params: {
+        product_id: 71699,
+      }
+    })
+    .then((data) => {
+      let avgRating1 = 0;
+      if (data.data.results.length >= 0) {
+        for (let i = 0; i < data.data.results.length; i++) {
+          avgRating1 += data.data.results[i].rating;
+        }
+        avgRating1 = (avgRating1 / data.data.results.length * 2).toFixed() / 2;
+      }
+      this.setState({
+        rating2 : avgRating1,
+      });
     })
   }
 
@@ -82,6 +119,7 @@ export default class RelatedProducts extends React.Component {
   render () {
     return (
       <div>
+        RELATED PRODUCTS
       <div
         className="container"
         onClick={() => this.toggle()}
@@ -100,11 +138,36 @@ export default class RelatedProducts extends React.Component {
        {this.state.name0}
      </div>
      <div>
-       ${this.state.original_price0}
+       {this.state.original_price0}
      </div>
 
-    { this.showRating(this.state.rating)}
+    { this.showRating(this.state.rating1)}
+    <div>
+    YOUR OUTFIT
+    </div>
 
+      <div
+        className="container"
+        onClick={() => this.toggle()}
+      >
+        {this.state.liked === false ? (
+         <i className="fa fa-times" />
+        ) : (
+          <i className="fa fa-times" />
+        )}
+      </div>
+      <div>
+     <img src={this.state.photo1} />
+     </div>
+     CATEGORY
+     <div>
+       {this.state.name1}
+     </div>
+     <div>
+       {this.state.original_price1}
+     </div>
+
+    { this.showRating(this.state.rating2)}
   </div>
     )
   }
