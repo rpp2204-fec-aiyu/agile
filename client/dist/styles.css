@@ -33,6 +33,15 @@
   margin-top: 10px;
 }
 
+/* The bar container */
+.characteristic-container {
+  width: 100%;
+  background-color: grey;
+  text-align: center;
+  color: white;
+  height: 16px;
+}
+
 /* Place text to the right */
 .right {
   text-align: right;
