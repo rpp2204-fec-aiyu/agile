@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
 
 export default function CartButton(props) {
-  const [cart, setCart] = useState([])
 
   function addItemToCart() {
-    let cartItem = { style_id: props.style.style_id, size: props.size, quantitySelection: props.quantitySelection }
-    setCart(prevCart => [...prevCart, cartItem] )
-    console.log('CART ITEM ', cartItem)
-    //console.log(cart)
+    axios.post('/cart', {
+      sku_id: props.skuId
+    } )
+      .then(results => {
+        console.log(results.data)
+      })
   }
-
-  useEffect(() => {
-    console.log(cart)
-  }, [cart])
 
   //if size not selected
 
