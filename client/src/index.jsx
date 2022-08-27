@@ -45,9 +45,9 @@ function App() {
       <>
 
         <ProductOverview product={product} productId={productId}/>
+        <RelatedProducts />
         <RatingsAndReviews product_id={71697}/>
         <QuesAns />
-        <RelatedProducts />
       </>
     )
   } else {
