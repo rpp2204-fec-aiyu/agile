@@ -8,21 +8,23 @@ export default function Cart(props) {
   const [size, setSize] = useState(null)//useState(Object.entries(props.style.skus)[0][1].size)
   const [quantity, setQuantity] = useState(null)//useState(Object.entries(props.style.skus)[0][1].quantity)
   const [quantitySelection, setQuantitySelection] = useState(1)
+  const [skuId, setSkuId] = useState(null)
 
   function handleSizeQuantity(style) {
     setSize(style.size)
     setQuantity(style.quantity)
+    setSkuId(style.skuId)
   }
 
   useEffect(()=> {
-    console.log(size, quantity, quantitySelection)
-  }, [size, quantity, quantitySelection])
+    console.log(size, quantity, quantitySelection, skuId)
+  }, [size, quantity, quantitySelection, skuId])
 
   return (
     <>
       <Size style={props.style} setStyle={props.setStyle} handleSizeQuantity={handleSizeQuantity}/>
       <Quantity quantity={quantity} size={size} setQuantitySelection={setQuantitySelection}/>
-      <CartButton style={props.style} size={size} quantitySelection={quantitySelection} />
+      <CartButton style={props.style} size={size} quantitySelection={quantitySelection} skuId={skuId} />
     </>
   )
 
