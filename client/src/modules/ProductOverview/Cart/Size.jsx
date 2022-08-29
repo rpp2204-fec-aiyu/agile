@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 
 export default function Size(props) {
 
-  //TODO if no quantities, dropdown should be disabled and read 'out of stock'
+  let stock = Object.entries(props.style.skus).filter(sku => sku[1].quantity > 0)
   let inStock = Object.entries(props.style.skus).filter(sku => sku[1].quantity > 0).length;
+
   if(!inStock) {
     return (
       <label>Size:
@@ -24,7 +25,7 @@ export default function Size(props) {
           )}>
 
           <option value='selectsize'>Select Size</option>
-          {Object.entries(props.style.skus).filter(sku => sku[1].quantity > 0).map((sku, i) => (  //check quantity > 0
+          {stock.map((sku, i) => (  //check quantity > 0
             <option data-quantity={sku[1].quantity} data-skuid={sku[0]} key={i}>{sku[1].size}</option>
           ))}
 
