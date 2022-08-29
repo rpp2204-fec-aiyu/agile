@@ -29,8 +29,8 @@ export default function ProductOverview({ product, productId }) {
   const [id, setId] = useState(productId)
 
   const [features, setFeatures] = useState([])
-
   const [reviews, setReviews] = useState([])
+
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
   const [salePrice, setSalePrice] = useState(null)
@@ -41,7 +41,7 @@ export default function ProductOverview({ product, productId }) {
       .then(data => {
         console.log("STYLES FROM GET REQ: ", data)
         setFeatures(data.features)
-        setReviews(Object.values(data.reviews))
+        setReviews(Object.entries(data.reviews))
 
         setStyles(data.styles)
         setStyle(data.styles[0])
@@ -56,7 +56,7 @@ export default function ProductOverview({ product, productId }) {
         <Category category={category} />
         <Title title={title} />
         <Price price={price} salePrice={salePrice} />
-        <StarRating />
+        <StarRating reviews={reviews}/>
         <Overview slogan={slogan} description={description} features={features} />
         <MyOutfitButton />
 
