@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 export default function Size(props) {
 
   //TODO if no quantities, dropdown should be disabled and read 'out of stock'
-  if(!Object.entries(props.style.skus).filter(sku => sku[1].quantity > 0).length) {
+  let inStock = Object.entries(props.style.skus).filter(sku => sku[1].quantity > 0).length;
+  if(!inStock) {
     return (
       <label>Size:
         <select disabled>
