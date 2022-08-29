@@ -13,7 +13,7 @@ import Gallery from './Gallery/Gallery.jsx'
 
 export default function ProductOverview({ product, productId }) {
 
-  function getCurrentProductStyles(id) {
+  function getCurrentProductData(id) {
     return axios.get(`/productOverview/${id}`) //orchestrates endpoint
       .then(results => {
         return results.data
@@ -36,7 +36,7 @@ export default function ProductOverview({ product, productId }) {
 
   useEffect(()=> {
 
-    getCurrentProductStyles(id)
+    getCurrentProductData(id)
       .then(styles => {
         console.log("STYLES FROM GET REQ: ", styles)
         setFeatures(styles.features)
