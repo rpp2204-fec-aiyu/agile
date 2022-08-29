@@ -37,12 +37,12 @@ export default function ProductOverview({ product, productId }) {
   useEffect(()=> {
 
     getCurrentProductData(id)
-      .then(styles => {
-        console.log("STYLES FROM GET REQ: ", styles)
-        setFeatures(styles.features)
-        setStyles(styles.styles)
-        setStyle(styles.styles[0])
-        setSalePrice(styles.styles[0].sale_price)
+      .then(data => {
+        console.log("STYLES FROM GET REQ: ", data)
+        setFeatures(data.features)
+        setStyles(data.styles)
+        setStyle(data.styles[0])
+        setSalePrice(data.styles[0].sale_price)
       })
 
   }, [])
