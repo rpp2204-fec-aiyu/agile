@@ -17,7 +17,7 @@ export default function CartButton(props) {
 
   //if out of stock
 
-  if(props.size && props.quantitySelection) {
+  if((props.size && props.size !== 'selectsize') && props.quantitySelection) {
 
     return (
       <button onClick={addItemToCart}>Add to Cart +</button>
