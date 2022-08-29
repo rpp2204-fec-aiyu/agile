@@ -30,6 +30,7 @@ export default function ProductOverview({ product, productId }) {
 
   const [features, setFeatures] = useState([])
 
+  const [reviews, setReviews] = useState([])
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
   const [salePrice, setSalePrice] = useState(null)
@@ -40,6 +41,8 @@ export default function ProductOverview({ product, productId }) {
       .then(data => {
         console.log("STYLES FROM GET REQ: ", data)
         setFeatures(data.features)
+        setReviews(Object.values(data.reviews))
+
         setStyles(data.styles)
         setStyle(data.styles[0])
         setSalePrice(data.styles[0].sale_price)
