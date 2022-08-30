@@ -10,13 +10,10 @@ export default class ReviewsList extends React.Component {
   render() {
     console.log('reviewsList: ', this.props.reviewsList);
     return (
-      <div>
+      <div id='reviews-container'>
         {this.props.reviewsList.map((review, index) => {
-          //go through the entire list to calculate the review rating
-
-          //only render the list of reviews we're supposed to
           if (index < this.props.reviewsToRender) {
-            return (<Review review={review} key={review.review_id} getReviewsList={this.props.getReviewsList}/>)
+            return (<Review review={review} key={review.review_id} getReviewsList={this.props.getReviewsList} dataTestID={index + 1}/>)
           }
         })}
       </div>
