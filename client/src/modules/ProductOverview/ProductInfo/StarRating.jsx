@@ -12,6 +12,9 @@ export default function StarRating(props) {
   let avg = ratings.ratingsTotal / ratings.totalReviews
   console.log('AVG', avg)
 
+  let roundToQuarter = (number) => {
+    return parseFloat((Math.round(number * 4) / 4).toFixed(2))
+  }
 
   return (
     <div style={{display: 'flex', height: '20px'}}>
