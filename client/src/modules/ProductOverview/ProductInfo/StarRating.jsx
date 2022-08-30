@@ -12,15 +12,39 @@ export default function StarRating(props) {
   let avg = ratings.ratingsTotal / ratings.totalReviews
   console.log('AVG', avg)
 
-  let roundToQuarter = (number) => {
+  function roundToQuarter(number)  {
     return parseFloat((Math.round(number * 4) / 4).toFixed(2))
   }
 
-  return (
-    <div style={{display: 'flex', height: '20px'}}>
-      {[...Array(5)].map(star => {
-        return (<div>&#9733;</div>)
-      })}
-    </div>
-  )
+  let roundedAvg = roundToQuarter(avg)
+
+  function generateStarsFromRating(rating) {
+    var stars =
+    <div className='rating'>
+        {[...Array(5)].map((star, index) => {
+          index += 1;
+          return (
+            <button
+              className={`starButton ${index <= rating ? 'on' : 'off'}`}
+              type="button"
+              key={index}
+              >
+              <span>&#9733;
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    return stars;
+  }
+
+  return generateStarsFromRating(roundedAvg)
+    // (
+    // <div style={{display: 'flex', height: '20px'}}>
+    //   {[...Array(5)].map(star => {
+    //     return (<div>&#9733;</div>)
+    //   })}
+    // </div>
+    // )
+
 }
