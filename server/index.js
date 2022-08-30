@@ -15,7 +15,7 @@ app.use(express.json())
 app.get('/products', (req, res) => {
   axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) // 71701
     .then(results => {
-      console.log('FROM GET REQ: ', results.data)
+      //console.log('FROM GET REQ: ', results.data)
       res.status(200).send(results.data)
     })
     .catch(err => {
@@ -25,7 +25,7 @@ app.get('/products', (req, res) => {
 
 app.get('/productOverview/:product_id', (req, res) => {
   let id = req.params.product_id
-  let productInfo = {};
+  const productInfo = {};
   axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}})
     .then(results => {
       productInfo.features = results.data.features;
@@ -40,6 +40,18 @@ app.get('/productOverview/:product_id', (req, res) => {
         .catch(err => {
           console.log(err)
         })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+app.post('/cart', (req, res) => {
+  let skuId = req.body
+  console.log(req.body)
+  axios.post(`${BASEURL}/cart`, skuId, {headers: {Authorization: APIKEY}})
+    .then(results => {
+      res.status(201).send(results.data)
     })
     .catch(err => {
       console.log(err)
@@ -106,6 +118,75 @@ app.get('/questions', (req , res) => {
     .catch((err) => {
       res.status(500).send(err);
       //console.log('FAIL TO GET THE LIST', err);
+    })
+})
+
+app.get('/relatedProducts/:product_id/', (req, res) => {
+  let id = req.params.product_id;
+  const relatedProd = {};
+  axios.get(`${BASEURL}/products/${id}/related`, {headers: {'Authorization': APIKEY}})
+    .then(results => {
+      let uni = [...new Set(results.data)]
+      relatedProd.relatedArr = uni;
+      return relatedProd;
+    })
+    .then(relatedProd => {
+      const id1 = relatedProd.relatedArr[0];
+      axios.get(`${BASEURL}/products/${id1}/styles`, {headers: {'Authorization': APIKEY}})
+        .then(results => {
+          relatedProd.relatedStyle1 = results.data.results;
+          return relatedProd;
+        })
+        .then(relatedProd => {
+          let id2 = relatedProd.relatedArr[1];
+          axios.get(`${BASEURL}/products/${id2}/styles`, {headers: {'Authorization': APIKEY}})
+            .then(results => {
+              relatedProd.relatedStyle2 = results.data.results;
+              return relatedProd;
+            })
+            .then(relatedProd => {
+              let id3 = relatedProd.relatedArr[2];
+              axios.get(`${BASEURL}/products/${id3}/styles`, {headers: {'Authorization': APIKEY}})
+                .then(results => {
+                  relatedProd.relatedStyle3 = results.data.results;
+                  return relatedProd;
+                })
+                .then(relatedProd => {
+                  let id4 = relatedProd.relatedArr[3];
+                  axios.get(`${BASEURL}/products/${id4}/styles`, {headers: {'Authorization': APIKEY}})
+                    .then(results => {
+                      relatedProd.relatedStyle4 = results.data.results;
+                      return relatedProd;
+                    })
+                    .then(relatedProd => {
+                      let id5 = relatedProd.relatedArr[4];
+                      axios.get(`${BASEURL}/products/${id5}/styles`, {headers: {'Authorization': APIKEY}})
+                        .then(results => {
+                          relatedProd.relatedStyle5 = results.data.results;
+                          res.send(relatedProd);
+                        })
+                        .catch(err => {
+                          console.log(err)
+                        })
+                    })
+                    .catch(err => {
+                      console.log(err)
+                    })
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+    .catch((err) => {
+      res.status(500).send(err);
     })
 })
 

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RelatedProducts matches snapshot 1`] = `
+<div>
+  RELATED PRODUCTS
+  <div
+    className="container"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-star-o"
+    />
+  </div>
+  <div>
+    <img
+      src=""
+    />
+  </div>
+  CATEGORY
+  <div />
+  <div />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <div>
+    YOUR OUTFIT
+  </div>
+  <div
+    className="container"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-times"
+    />
+  </div>
+  <div>
+    <img
+      src=""
+    />
+  </div>
+  CATEGORY
+  <div />
+  <div />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+  <i
+    className="fa fa-star-o"
+  />
+</div>
+`;
