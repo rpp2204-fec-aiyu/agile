@@ -13,9 +13,8 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.get('/products', (req, res) => {
-  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) // 71701
+  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}})
     .then(results => {
-      //console.log('FROM GET REQ: ', results.data)
       res.status(200).send(results.data)
     })
     .catch(err => {
@@ -33,7 +32,6 @@ app.get('/productOverview/:product_id', (req, res) => {
 
   Promise.all([idRequest, stylesRequest, reviewsRequest])
     .then(results => {
-      console.log('RESULTS: ', results)
       productInfo.features = results[0].data.features
       productInfo.styles = results[1].data.results
       productInfo.reviews = results[2].data.ratings
