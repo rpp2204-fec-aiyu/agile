@@ -4,7 +4,7 @@ import axios from 'axios'
 import QuestionView from './QuestionView.jsx'
 import AddQuesForm from './AddQuesForm.jsx'
 
-const QuesAns = () => {
+const QuesAns = ({product, productId}) => {
   const [questionList, setQuestionList] = useState([]);
   const [questionToShow, setQuestionToShow] = useState(2);
   const [showQuesForm, setShowQuesForm] = useState(false);
@@ -13,9 +13,9 @@ const QuesAns = () => {
   const handleShowQuesForm = () => setShowQuesForm(true);
 
   const getQuestionList = () => {
-   axios.get('/questions')
+   axios.get(`/questions/${productId}`)
       .then((res) => {
-        console.log('SUCESSFULLY GET BACK THE QUESTIONS LIST ', res.data.results);
+        console.log('SUCESSFULLY GET BACK THE QUESTIONS LIST ', res.data);
         setQuestionList([...res.data.results]);
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ const QuesAns = () => {
       <br />
       {questionList.length > 2 ? <button onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
       <button onClick={handleShowQuesForm}>ADD A QUESTION +</button>
-      {showQuesForm && <AddQuesForm onHide={handleCloseQuesForm}/>}
+      {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm}/>}
       </div>
 
     </div>

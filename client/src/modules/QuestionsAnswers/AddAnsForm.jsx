@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const AddAnsForm = ({onHide}) => {
+  // const [ansFormValues, setAnsFormValues] = useState([
+
+  // ])
   return(
     <div className="qaModalContainer">
       <button className="closeButton" onClick={onHide}>X</button>

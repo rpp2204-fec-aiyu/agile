@@ -109,16 +109,31 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     .catch((err) => { throw err; });
 })
 
-app.get('/questions', (req , res) => {
-  return getQuestionsList()
-    .then((result) => {
-      res.status(200).send(result);
-      //console.log('GOT BACK THE LIST', result);
+app.get('/questions/:product_id', (req , res) => {
+  let id = req.params.product_id;
+  console.log('HERE ARE THE CURRENT ID:', id);
+  axios.get(`${BASEURL}/qa/questions?product_id=${id}`, {
+    headers: {
+      'Authorization': APIKEY
+    }
+  })
+    .then(result => {
+      res.status(200).send(result.data);
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).send(err);
-      //console.log('FAIL TO GET THE LIST', err);
     })
+
+
+  // return getQuestionsList()
+  //   .then((result) => {
+  //     res.status(200).send(result);
+  //     //console.log('GOT BACK THE LIST', result);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send(err);
+  //     //console.log('FAIL TO GET THE LIST', err);
+  //   })
 })
 
 app.get('/relatedProducts/:product_id/', (req, res) => {
