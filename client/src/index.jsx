@@ -38,21 +38,15 @@ function App() {
       })
   }, [])
 
+  if(!productId) return null
 
-  if(!!productId) {
-    return (
-      <>
-
-        <ProductOverview product={product} productId={productId}/>
-        <RatingsAndReviews product_id={71697}/>
-        <QuesAns />
-      </>
-    )
-  } else {
-    return (
-      <></>
-    )
-  }
+  return (
+    <>
+      <ProductOverview product={product} productId={productId}/>
+      <RatingsAndReviews product_id={71697}/>
+      <QuesAns />
+    </>
+  )
 
 }
 
