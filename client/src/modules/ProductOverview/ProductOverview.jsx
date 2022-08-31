@@ -13,7 +13,7 @@ import Gallery from './Gallery/Gallery.jsx'
 
 export default function ProductOverview({ product, productId }) {
 
-  function getCurrentProductStyles(id) {
+  function getCurrentProductData(id) {
     return axios.get(`/productOverview/${id}`) //orchestrates endpoint
       .then(results => {
         return results.data
@@ -29,6 +29,7 @@ export default function ProductOverview({ product, productId }) {
   const [id, setId] = useState(productId)
 
   const [features, setFeatures] = useState([])
+  const [reviews, setReviews] = useState([])
 
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
@@ -36,13 +37,15 @@ export default function ProductOverview({ product, productId }) {
 
   useEffect(()=> {
 
-    getCurrentProductStyles(id)
-      .then(styles => {
-        console.log("STYLES FROM GET REQ: ", styles)
-        setFeatures(styles.features)
-        setStyles(styles.styles)
-        setStyle(styles.styles[0])
-        setSalePrice(styles.styles[0].sale_price)
+    getCurrentProductData(id)
+      .then(data => {
+        console.log("STYLES FROM GET REQ: ", data)
+        setFeatures(data.features)
+        setReviews(Object.entries(data.reviews))
+
+        setStyles(data.styles)
+        setStyle(data.styles[0])
+        setSalePrice(data.styles[0].sale_price)
       })
 
   }, [])
@@ -53,7 +56,7 @@ export default function ProductOverview({ product, productId }) {
         <Category category={category} />
         <Title title={title} />
         <Price price={price} salePrice={salePrice} />
-        <StarRating />
+        <StarRating reviews={reviews}/>
         <Overview slogan={slogan} description={description} features={features} />
         <MyOutfitButton />
 
