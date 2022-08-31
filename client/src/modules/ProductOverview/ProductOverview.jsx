@@ -50,26 +50,23 @@ export default function ProductOverview({ product, productId }) {
 
   }, [])
 
-  if(style) {
-    return (
-      <div>
-        <Category category={category} />
-        <Title title={title} />
-        <Price price={price} salePrice={salePrice} />
-        <StarRating reviews={reviews}/>
-        <Overview slogan={slogan} description={description} features={features} />
-        <MyOutfitButton />
+  if(!style) return null
 
-        <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+  return (
+    <div>
+      <Category category={category} />
+      <Title title={title} />
+      <Price price={price} salePrice={salePrice} />
+      <StarRating reviews={reviews}/>
+      <Overview slogan={slogan} description={description} features={features} />
+      <MyOutfitButton />
 
-        <Cart style={style} setStyle={setStyle} />
-        <br></br>
-        <Gallery style={style} />
-      </div>
-    )
-  } else {
-    return (
-      <div></div>
-    )
-  }
+      <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+
+      <Cart style={style} setStyle={setStyle} />
+      <br></br>
+      <Gallery style={style} />
+    </div>
+  )
+
 }
