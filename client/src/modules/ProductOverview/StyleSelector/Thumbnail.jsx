@@ -7,7 +7,7 @@ export default function Thumbnail(props) {
         onClick={()=>props.handleClick(props.style)}
         width='75'
         height='75'
-        style={{borderRadius: '50%', cursor:'pointer', objectFit: 'cover' }}
+        style={{borderRadius: '50%', cursor:'pointer', objectFit: 'cover', border: '1px solid #000000' }}
         className='product-style_thumnbnail'
     />
   )
