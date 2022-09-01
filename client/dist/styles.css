@@ -122,16 +122,25 @@
 /*PRODUCT OVERVIEW*/
 #productTitle {
   font-size: 33px;
+  color: #25383C;
 }
 
-.gallery {
+#stylesThumbnailContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 340px;
+  gap: 10px;
+}
+
+#gallery {
   position: relative;
 }
 
-.galleryMainImage {
+#galleryMainImage {
   position: relative;
   height: auto;
   width: auto;
+  min-height: 467px;
   max-width: 700px;
   max-height: 900px;
   /* object-fit: contain; */
