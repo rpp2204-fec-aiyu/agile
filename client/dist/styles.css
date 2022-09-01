@@ -142,8 +142,8 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 10px;
-  left: 10px;
+  top: 30px;
+  left: 20px;
   gap: 15px;
   /* height: 400px; */
 }
