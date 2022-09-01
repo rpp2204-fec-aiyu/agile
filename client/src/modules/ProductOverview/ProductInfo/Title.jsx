@@ -4,8 +4,8 @@ export default function Title(props) {
 
 
   return (
-    <h1>
-      {props.title}
-    </h1>
+    <div id='productTitle'>
+      <strong>{props.title}</strong>
+    </div>
   )
 }
