@@ -5,9 +5,10 @@ export default function Overview(props) {
 
   return (
     <div>
-      Slogan: {props.slogan}
+      <h3>{props.slogan}</h3>
+
       <p>
-      Description: {props.description}
+        {props.description}
       </p>
       <ul>
         <label>--Features--
