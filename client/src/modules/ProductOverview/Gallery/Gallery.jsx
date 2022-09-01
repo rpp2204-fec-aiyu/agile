@@ -13,14 +13,16 @@ export default function Gallery(props) {
   },[props.style])
 
   return (
-    <div>
-      <img src={galleryPhoto} style={{maxWidth: '50%'}}
+    <div className='gallery'>
+      <img className='galleryMainImage' src={galleryPhoto} //style={{maxWidth: '50%'}}
           key={props.style.style_id}>
       </img>
       <br></br>
-      {props.style.photos.map((photo, i) => (
-        <img key={i} src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} style={{cursor: 'pointer'}} width='75' height='75'></img>
-      ))}
+      <div className='galleryThumbnailContainer'>
+        {props.style.photos.map((photo, i) => (
+          <img className='galleryThumbnail' key={i} src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} style={{cursor: 'pointer', objectFit: 'cover'}} width='75' height='75' ></img>
+        ))}
+      </div>
     </div>
   )
 }
