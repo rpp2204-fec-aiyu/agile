@@ -20,7 +20,7 @@ export default function Gallery(props) {
       <br></br>
       <div className='galleryThumbnailContainer'>
         {props.style.photos.map((photo, i) => (
-          <img className='galleryThumbnail' key={i} src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} style={{cursor: 'pointer', objectFit: 'cover'}} width='75' height='75' ></img>
+          <img className='galleryThumbnail' key={i} src={photo.thumbnail_url} onClick={()=>handleClick(photo.url)} style={{cursor: 'pointer', objectFit: 'cover'}} width='60' height='60' ></img>
         ))}
       </div>
     </div>
