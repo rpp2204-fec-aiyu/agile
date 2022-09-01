@@ -115,6 +115,15 @@
   right: 50%;
 }
 
+
+
+
+
+/*PRODUCT OVERVIEW*/
+#productTitle {
+  font-size: 33px;
+}
+
 .gallery {
   position: relative;
 }
@@ -123,7 +132,7 @@
   position: relative;
   height: auto;
   width: auto;
-  max-width: 900px;
+  max-width: 700px;
   max-height: 900px;
   /* object-fit: contain; */
 
@@ -136,6 +145,7 @@
   top: 10px;
   left: 10px;
   gap: 3px;
+  /* height: 400px; */
 }
 
 .galleryThumbnail {
