@@ -150,5 +150,8 @@
 
 .galleryThumbnail {
   border: 1px solid #000000;
+}
 
+#featuresList {
+  list-style-type: '\2713';
 }
