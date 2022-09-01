@@ -114,3 +114,31 @@
   margin: 10px;
   right: 50%;
 }
+
+.gallery {
+  position: relative;
+}
+
+.galleryMainImage {
+  position: relative;
+  height: auto;
+  width: auto;
+  max-width: 900px;
+  max-height: 900px;
+  /* object-fit: contain; */
+
+}
+
+.galleryThumbnailContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 10px;
+  left: 10px;
+  gap: 3px;
+}
+
+.galleryThumbnail {
+  border: 1px solid #000000;
+
+}
