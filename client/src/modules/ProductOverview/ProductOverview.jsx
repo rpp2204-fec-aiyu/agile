@@ -56,7 +56,7 @@ export default function ProductOverview({ product, productId }) {
     <div>
       <div style={{display: 'flex'}}>
         <Gallery style={style} />
-        <div style={{marginLeft: '30px'}}>
+        <div style={{marginLeft: '30px', color: '#25383C'}}>
           <StarRating reviews={reviews}/>
           <br/>
           <Category category={category} />
@@ -67,6 +67,7 @@ export default function ProductOverview({ product, productId }) {
           <br />
 
           <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+          <br/>
 
           <Cart style={style} setStyle={setStyle} />
           <MyOutfitButton />
