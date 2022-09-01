@@ -56,11 +56,15 @@ export default function ProductOverview({ product, productId }) {
     <div>
       <div style={{display: 'flex'}}>
         <Gallery style={style} />
-        <div>
+        <div style={{marginLeft: '30px'}}>
           <StarRating reviews={reviews}/>
+          <br/>
           <Category category={category} />
+
           <Title title={title} />
+          <br />
           <Price price={price} salePrice={salePrice} />
+          <br />
 
           <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
 
