@@ -31,7 +31,7 @@ export default function Gallery(props) {
     console.log('HEIGHT',height)
   }, [galleryPhoto])
 
-  useEffect(()=> {
+  useEffect(()=> { //TODO: add condition for 6 thumbnails
     if(imageHeight <= 467) {
       setMaxThumbnails(5)
     } else {
