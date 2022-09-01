@@ -5,7 +5,7 @@ export default function Category(props) {
 
   return (
     <div>
-      Category: {props.category}
+      {props.category.toUpperCase()}
     </div>
   )
 }
