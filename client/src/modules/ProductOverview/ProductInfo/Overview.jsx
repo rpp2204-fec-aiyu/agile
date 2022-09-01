@@ -12,7 +12,7 @@ export default function Overview(props) {
           {props.description}
         </p>
       </div>
-      <div style={{borderLeft: '1px solid #000000', marginRight: '150px'}}>
+      <div style={{borderLeft: '2px solid #696969', marginRight: '150px'}}>
         <ul id='featuresList'>
 
           {props.features.map((feature, i) => {
