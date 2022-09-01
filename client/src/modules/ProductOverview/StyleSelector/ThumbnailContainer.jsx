@@ -15,8 +15,9 @@ export default function ThumbnailContainer(props) {
 
   return (
     <div>
-      <h4><strong>Style > </strong>{title}</h4>
-      <div style={{display: 'flex', flexWrap: 'wrap', width: '330px', gap: '10px' }}>
+      <strong>STYLE > </strong>{title.toUpperCase()}
+      <br/>
+      <div style={{display: 'flex', flexWrap: 'wrap', width: '340px', gap: '10px' }}>
       {props.styles.map(style => (
         <Thumbnail style={style}
                    key={style.style_id}
