@@ -4,8 +4,8 @@ export default function Title(props) {
 
 
   return (
-    <div>
-      Title: {props.title}
-    </div>
+    <h1>
+      {props.title}
+    </h1>
   )
 }
