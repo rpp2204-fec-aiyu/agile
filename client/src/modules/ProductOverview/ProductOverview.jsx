@@ -54,18 +54,23 @@ export default function ProductOverview({ product, productId }) {
 
   return (
     <div>
-      <Category category={category} />
-      <Title title={title} />
-      <Price price={price} salePrice={salePrice} />
-      <StarRating reviews={reviews}/>
+      <div style={{display: 'flex'}}>
+        <Gallery style={style} />
+        <div>
+          <StarRating reviews={reviews}/>
+          <Category category={category} />
+          <Title title={title} />
+          <Price price={price} salePrice={salePrice} />
+
+          <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+
+          <Cart style={style} setStyle={setStyle} />
+          <MyOutfitButton />
+        </div>
+        <br></br>
+
+      </div>
       <Overview slogan={slogan} description={description} features={features} />
-      <MyOutfitButton />
-
-      <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
-
-      <Cart style={style} setStyle={setStyle} />
-      <br></br>
-      <Gallery style={style} />
     </div>
   )
 
