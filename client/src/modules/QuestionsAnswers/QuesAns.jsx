@@ -41,7 +41,7 @@ const QuesAns = ({product, productId}) => {
 
       <div>
         {questionList.slice(0, questionToShow).map(question =>
-          <QuestionView question={question}/>
+          <QuestionView question={question} product={product}/>
         )}
       <br />
       <br />

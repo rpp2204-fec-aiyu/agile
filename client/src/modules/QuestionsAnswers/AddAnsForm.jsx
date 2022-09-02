@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 
-const AddAnsForm = ({onHide}) => {
-  // const [ansFormValues, setAnsFormValues] = useState([
+const AddAnsForm = ({onHide, product, question}) => {
+  const [ansFormValues, setAnsFormValues] = useState({
+    ansBody: "",
+    nickName: "",
+    email: "",
+    photos: []
+  })
 
-  // ])
   return(
     <div className="qaModalContainer">
       <button className="closeButton" onClick={onHide}>X</button>
       <div className="qaModalTitle">
         <h3>Submit your Answer</h3>
-        <h5>subtitle</h5>
+        <h5>{product.name}: {question.question_body}</h5>
       </div>
 
       <div className="qaModalBody">
-        <label>Your Answer</label>
+        <label>Your Answer *</label>
           <br />
           <textarea
           maxLength={1000}
@@ -21,7 +25,7 @@ const AddAnsForm = ({onHide}) => {
           <br />
           <br />
 
-        <label>What is your nickname</label>
+        <label>What is your nickname *</label>
         <br />
         <input
         maxLength={60}
@@ -32,7 +36,7 @@ const AddAnsForm = ({onHide}) => {
         <br />
         <br />
 
-        <label>Your email</label>
+        <label>Your email *</label>
         <br />
         <input
         maxLength={60}

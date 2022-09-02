@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 // import { Modal, Button, Form } from "react-bootstrap";
 
 const AddQuesForm = ({product, onHide}) => {
@@ -6,7 +7,7 @@ const AddQuesForm = ({product, onHide}) => {
     questionBody: "",
     nickName: "",
     email: "",
-    product_id: ""
+    product_id: null
 });
   const [formError, setFormError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -19,14 +20,27 @@ const AddQuesForm = ({product, onHide}) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(`CLICKED: Question: ${quesFormValues.questionBody}`);
     setFormError(validation(quesFormValues))
     setIsSubmit(true);
   }
 
   useEffect(() => {
     if(Object.keys(formError).length === 0 && isSubmit) {
-      onHide();
+      axios.post('/qa/questions', {
+        body: quesFormValues.questionBody,
+        name: quesFormValues.nickName,
+        email: quesFormValues.email,
+        product_id: product.id
+      })
+        .then((result) => {
+          console.log('successfully post a question', result);
+          onHide();
+        })
+        .catch((err) => {
+          console.log('FAIL TO POST A QUESTION', err);
+        })
+      // console.log(`CLICKED: Question: ${quesFormValues.questionBody}, NickNAme: ${quesFormValues.nickName}, email: ${quesFormValues.email}, product_id: ${product.id}`)
+      // onHide();
     }
   }, [formError]);
 

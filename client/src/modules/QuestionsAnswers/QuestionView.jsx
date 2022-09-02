@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AddAnsForm from './AddAnsForm.jsx'
 import AnswerView from './AnswerView.jsx'
 
-const QuestionView = ({question}) => {
+const QuestionView = ({question, product}) => {
   const [answerToShow, setAnswerToShow] = useState(2);
   const [loadAnsButton, setLoadAnsButton] = useState(false);
   const [showAnsForm, setShowAnsForm] = useState(false);
@@ -43,7 +43,7 @@ const QuestionView = ({question}) => {
 
       {Object.keys(question.answers).length > 2 ? <span onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
 
-      {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}/>}
+      {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
     </div>
   )
 }
