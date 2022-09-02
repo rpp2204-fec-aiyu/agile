@@ -141,7 +141,7 @@ export default class Review extends React.Component {
             <div className='reviewPhotoModal'>
               <Modal isOpen={this.state[`photo${index}ModalIsOpen`]}  closeModal={this.closeModal.bind(this, index)} modalContent=
                 {
-                  <div>
+                  <div className='review-photo-modal'>
                     <img src={photo.url}/>
                     <button type='button' onClick={this.closeModal.bind(this, index)}>Exit
                     </button>
