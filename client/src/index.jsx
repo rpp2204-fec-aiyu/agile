@@ -6,7 +6,6 @@ import '../dist/styles.css';
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
 import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
-import RelatedProducts from './modules/RelatedProducts/RelatedProducts.jsx'
 
 function App() {
 
@@ -39,22 +38,15 @@ function App() {
       })
   }, [])
 
+  if(!productId) return null
 
-  if(!!productId) {
-    return (
-      <>
-
-        <ProductOverview product={product} productId={productId}/>
-        <RelatedProducts />
-        <RatingsAndReviews product_id={71697}/>
-        <QuesAns />
-      </>
-    )
-  } else {
-    return (
-      <></>
-    )
-  }
+  return (
+    <>
+      <ProductOverview product={product} productId={productId}/>
+      <RatingsAndReviews product_id={71697}/>
+      <QuesAns />
+    </>
+  )
 
 }
 
