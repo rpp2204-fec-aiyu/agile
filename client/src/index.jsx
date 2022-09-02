@@ -44,10 +44,10 @@ function App() {
     return (
       <>
 
-        <ProductOverview product={product} productId={productId}/>
-        <RelatedProducts />
-        <RatingsAndReviews product_id={71697}/>
-        <QuesAns />
+        {/* <ProductOverview product={product} productId={productId}/>
+        <RelatedProducts /> */}
+        <RatingsAndReviews product_id={71697} product={product}/>
+        {/* <QuesAns /> */}
       </>
     )
   } else {
