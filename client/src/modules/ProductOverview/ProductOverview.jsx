@@ -55,7 +55,7 @@ export default function ProductOverview({ product, productId }) {
   return (
     <div>
       <div style={{display: 'flex'}}>
-        <Gallery style={style} />
+        <Gallery style={style} data-testid={'galleryTest'} />
         <div style={{marginLeft: '30px', color: '#25383C'}}>
           <StarRating reviews={reviews}/>
           <br/>
