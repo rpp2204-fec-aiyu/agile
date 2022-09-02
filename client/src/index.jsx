@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import '../dist/styles.css';
-//TODO: Import Components
+
+import WithClickTracking from './WithClickTracking.jsx'
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
 import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
@@ -19,7 +20,7 @@ function App() {
     */
     return axios.get('/products')
       .then(products => {
-        return products.data[4]
+        return products.data[0]
       })
   }
 
@@ -32,19 +33,24 @@ function App() {
       .then(product => {
         setProduct(product)
         setProductId(product.id)
+        //window.location.pathname = `/${product.id}`
       })
       .catch(err => {
         console.log(err)
       })
   }, [])
 
+  const ProductOverviewWithClickTracking = WithClickTracking(ProductOverview)
+  const RatingsAndReviewsWithClickTracking = WithClickTracking(RatingsAndReviews)
+  const QuesAnsWithClickTracking = WithClickTracking(QuesAns)
+
   if(!productId) return null
 
   return (
     <>
-      <ProductOverview product={product} productId={productId}/>
-      <RatingsAndReviews product_id={71697}/>
-      <QuesAns />
+      <ProductOverviewWithClickTracking product={product} productId={productId}/>
+      <RatingsAndReviewsWithClickTracking product_id={71697}/>
+      <QuesAnsWithClickTracking />
     </>
   )
 
