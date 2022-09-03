@@ -286,6 +286,15 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   render() {
+    var closeModalButton =
+      <button
+        type="button"
+        className="newReviewCloseButton"
+        data-dismiss="modal"
+        aria-label="Close"
+        onClick={this.closeModal.bind(this)}>&times;
+      </button>
+
     if (this.state.reviews.length - this.state.reviewsToRender >= 1) {
       var moreReviewsButton = <button onClick={this.loadMoreReviews.bind(this)}>MORE REVIEWS</button>
     }
@@ -308,9 +317,9 @@ export default class RatingsAndReviews extends React.Component {
           <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} getReviewsList={this.getReviewsList.bind(this)} />
           {moreReviewsButton}
           <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
-          <div className='modal'>
-            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModal={this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} productName={this.props.product.name} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
-          </div>
+          <>
+            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModalButton={closeModalButton} addNewReview={this.addNewReview.bind(this)} productName={this.props.product.name} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
+          </>
         </div>
       </div>
     )

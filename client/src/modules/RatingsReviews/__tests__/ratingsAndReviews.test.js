@@ -17,9 +17,9 @@ const server = setupServer(
   rest.get('http://localhost:3000/reviews', (req, res, ctx) => {
     return res(
       ctx.json({
-        "product": "71697",
+        "product": 71697,
         "page": 0,
-        "count": 5,
+        "count": 6,
         "results":
           [
             {
@@ -206,4 +206,18 @@ describe.only('RatingsAndReviews', () => {
     const reviewList = await screen.findAllByTestId(/review/);
     expect(reviewList).toHaveLength(2);
   })
+  // it('if a filter is applied, then the user sorts the filtered list of reviews, the filter should be removed', async () => {
+  //   render(<RatingsAndReviews product_id={71697} />);
+  //   fireEvent.click(await screen.findByTestId('3-rating-filter'));
+  //   expect(await screen.findByText('Remove all filters')).toBeInTheDocument();
+  //   const reviewList1 = await screen.findAllByTestId(/review/);
+  //   expect(reviewList1).toHaveLength(1);
+  //   //now click sort button on newest
+  //   expect(screen.getByText('Newest')).toBeInTheDocument();
+  //   fireEvent.click(await screen.getByText('Newest'));
+  //   screen.debug();
+  //   const reviewList2 = await screen.findAllByTestId(/review/);
+  //   expect(reviewList2).toHaveLength(2);
+  //   // expect(screen.getAllByRole('option')[3]).toBeInTheDocument();
+  // })
 })
