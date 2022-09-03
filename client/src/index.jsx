@@ -24,7 +24,6 @@ function App() {
       })
   }
 
-
   const [product, setProduct] = useState(null)
   const [productId, setProductId] = useState(null)
 
@@ -33,7 +32,6 @@ function App() {
       .then(product => {
         setProduct(product)
         setProductId(product.id)
-        //window.location.pathname = `/${product.id}`
       })
       .catch(err => {
         console.log(err)
