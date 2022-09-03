@@ -115,6 +115,8 @@ export default class RatingsBreakdown extends React.Component {
   handleRatingFilterClick(e) {
     var filterBy = this.props.filterBy;
     var ratingNum = e.currentTarget.className[0];
+    console.log('e.currentTarget.className: ', e.currentTarget.className);
+    console.log('e.currentTarget: ',  e.currentTarget);
 
     if (filterBy[ratingNum]) {
       // console.log(`turn filterBy ${ratingNum} off`);
@@ -131,7 +133,7 @@ export default class RatingsBreakdown extends React.Component {
     var rows = [...Array(5)].map((row, index) => {
       counter--;
       return (
-        <div className={`${counter}-star-row`} onClick={this.handleRatingFilterClick.bind(this)}>
+        <div className={`${counter}-star-row`} data-testid={`${counter}-rating-filter`} onClick={this.handleRatingFilterClick.bind(this)}>
           <div className='side' key={index}>
             <div>{counter} stars</div>
           </div>

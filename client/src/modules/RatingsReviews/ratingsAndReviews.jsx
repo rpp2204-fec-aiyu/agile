@@ -17,6 +17,14 @@ export default class RatingsAndReviews extends React.Component {
   componentDidMount() {
     this.getReviewsList(this.state.sortOrder);
     this.getReviewMetaData();
+    // this.getReviewsPromise()
+    //   .then((response) => {
+    //     this.setState({reviews: response.data.results, 'sortOrder': 'relevant'});
+    //     this.getReviewMetaData();
+    //   })
+    //   .catch((err) => {
+    //     throw err;
+    //   })
   }
 
   getReviewsList(sortOrder) {

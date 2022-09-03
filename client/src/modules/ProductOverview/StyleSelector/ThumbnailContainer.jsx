@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Thumbnail from './Thumbnail.jsx'
 
 export default function ThumbnailContainer(props) {
 
@@ -14,18 +15,16 @@ export default function ThumbnailContainer(props) {
 
   return (
     <div>
-      <h4><strong>Style > </strong>{title}</h4>
-      <div style={{display: 'flex', flexWrap: 'wrap', width: '330px', gap: '10px' }}>
+      <strong>STYLE > </strong>{title.toUpperCase()}
+      <br/>
+      <br/>
+      <div id='stylesThumbnailContainer'>
       {props.styles.map(style => (
-        <img src={style.photos[0].thumbnail_url}
-             onClick={()=>handleClick(style)}
-             width='75'
-             height='75'
-             style={{borderRadius: '50%', cursor:'pointer', }}
-             key={style.style_id}
-             className='product-style_thumnbnail'
-             >
-             </img>
+        <Thumbnail style={style}
+                   key={style.style_id}
+                   handleClick={handleClick}
+                   src={style.photos[0].thumbnail_url}
+        />
       ))}
       </div>
     </div>

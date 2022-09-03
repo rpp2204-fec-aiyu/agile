@@ -17,12 +17,12 @@ export default class ProductBreakdown extends React.Component {
     var width = this.props.productWidthMetaData;
     var fit = this.props.productFitMetaData;
     var length = this.props.productLengthMetaData;
-    console.log('quality: ', quality);
-    console.log('size: ', size);
-    console.log('comfort: ', comfort);
-    console.log('width: ', width);
-    console.log('fit: ', fit);
-    console.log('length: ', length);
+    // console.log('quality: ', quality);
+    // console.log('size: ', size);
+    // console.log('comfort: ', comfort);
+    // console.log('width: ', width);
+    // console.log('fit: ', fit);
+    // console.log('length: ', length);
 
     if (quality) {
       var qualityBreakdown =

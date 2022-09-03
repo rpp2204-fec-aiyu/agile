@@ -10,7 +10,7 @@ export default class Review extends React.Component {
   }
 
   expandModal(photoNum) {
-    console.log('photoNum: ', photoNum);
+    // console.log('photoNum: ', photoNum);
     if (photoNum === 1) {
       this.setState({photo1ModalIsOpen: true});
     } else if (photoNum === 2) {
@@ -171,7 +171,7 @@ export default class Review extends React.Component {
       helpfulButton = <button type='button' className='reviewHelpful' onClick={this.addToHelpfulNessCount.bind(this)}><u>{this.props.review.helpfulness}</u></button>;
     }
     return (
-      <div>
+      <div className='review' data-testid={`review${this.props.dataTestID}`}>
         <span>
           {this.generateStarsFromRating(this.props.review.rating)}
           <div className='reviewDate'>

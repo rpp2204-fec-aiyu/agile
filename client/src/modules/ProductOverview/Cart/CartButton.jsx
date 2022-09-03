@@ -14,10 +14,9 @@ export default function CartButton(props) {
   }
 
   //if size not selected
+  //TODO: opening select menu may be difficult without external library, consider using 'focus.()'
 
-  //if out of stock
-
-  if(props.size && props.quantitySelection) {
+  if((props.size && props.size !== 'selectsize') && props.quantitySelection) {
 
     return (
       <button onClick={addItemToCart}>Add to Cart +</button>

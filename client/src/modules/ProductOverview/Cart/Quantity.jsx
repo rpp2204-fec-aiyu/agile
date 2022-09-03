@@ -13,7 +13,7 @@ export default function Quantity(props) {
   //document.getElementById('quantitySelector').disabled = true;
 
   //must select size for quantity dropdown to be enabled
-  if(props.quantity === 'selectsize' || props.size === null) {
+  if(props.size === 'selectsize' || props.size === null) {
     return (
       <label>Quantity:
         <select disabled>
