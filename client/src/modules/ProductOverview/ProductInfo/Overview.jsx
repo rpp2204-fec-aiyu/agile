@@ -4,9 +4,10 @@ export default function Overview(props) {
 
 
   return (
-    <div style={{display: 'flex', position: 'relative', marginTop: '30px', color: '#25383C'}}>
+    <div style={{display: 'flex', position: 'relative', marginTop: '15px', color: '#25383C'}}>
       <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', marginLeft: '120px', width: '550px'}} >
-        <h3>{props.slogan}</h3>
+        {/* <h3>{props.slogan}</h3> */}
+        <span style={{fontSize: '20px'}}><strong>{props.slogan}</strong></span>
 
         <p>
           {props.description}
