@@ -39,8 +39,6 @@ const AddQuesForm = ({product, onHide}) => {
         .catch((err) => {
           console.log('FAIL TO POST A QUESTION', err);
         })
-      // console.log(`CLICKED: Question: ${quesFormValues.questionBody}, NickNAme: ${quesFormValues.nickName}, email: ${quesFormValues.email}, product_id: ${product.id}`)
-      // onHide();
     }
   }, [formError]);
 
