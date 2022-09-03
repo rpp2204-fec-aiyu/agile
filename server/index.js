@@ -12,6 +12,20 @@ app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+// app.get('/:product_id', (req, res) => {
+//   res.send('testing')
+// })
+app.post('/interactions', (req, res) => {
+  let interactions = req.body
+  axios.post(`${BASEURL}/interactions`, interactions, {headers: {Authorization: APIKEY}})
+    .then(results => {
+      res.status(201).send(results.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 app.get('/products', (req, res) => {
   axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}})
     .then(results => {
