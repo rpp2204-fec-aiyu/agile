@@ -41,7 +41,7 @@ export default class newPhotos extends React.Component {
 
     thumbnails = [...Array(numOfPhotosUploaded)].map((photo, index) => {
       return (
-        <img src={this.state.files[index]} key={`photo${index}`}/>
+        <img className='newReviewPhoto' src={this.state.files[index]} key={`photo${index}`}/>
       )
     })
 

@@ -175,10 +175,10 @@
 }
 
 .review-photo-modal {
-  width: 500px;
+  width: 400px;
   height: 400px;
   padding: 25px;
-  top: 15%;
+  top: 50px;
   left: 50px;
   position: fixed;
   border-radius: 12px;
@@ -189,11 +189,85 @@
   padding: 25px;
 }
 
+.newReviewModal {
+  padding: 25px;
+  top: 50px;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  overflow: auto;
+  position: fixed;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  /* flex-flow: column wrap; */
+  padding: 25px;
+}
+
+.newReviewCloseButton {
+  position: fixed;
+  right: 60px;
+  top: 60px;
+}
+
+.reviewCloseModalButton {
+  position: fixed;
+  top: 51px;
+  left: 475px;
+  border-radius: 4px;
+}
+
+#newReviewSubmitButton {
+  height:100px;
+  width:100px;
+  align-self: center;
+}
+
+#newReviewHeader {
+  align-self: center;
+}
+
+#newReviewAboutSubheader {
+  align-self: center;
+}
+
+.newReviewCharacteristics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+}
+
+.photos {
+  display: flex;
+}
+
+.reviewPhotoThumbnail {
+  justify-content: flex-start;
+}
+
 .reviewPhotoThumbnail {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 150px;
+  width: 75px;
+  height: 75px;
+}
+
+.newReviewPhoto {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 75px;
+  height: 75px;
+}
+
+.review-photo-modal img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  /* aspect-ratio: attr(width) / attr(height); */
 }
 
 .reviewPhotoThumbnail:hover {
