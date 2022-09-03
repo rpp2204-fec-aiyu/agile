@@ -47,11 +47,10 @@ function App() {
   return (
     <>
       <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={71697}/>
+      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
       <QuesAnsWithClickTracking />
     </>
   )
-
 }
 
 

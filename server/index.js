@@ -4,6 +4,7 @@ const APIKEY = process.env.APIKEY
 const BASEURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
 const {getProductId, getQuestionsList} = require('./helper/questionAPI.js')
 const axios = require('axios')
+const createPhotoURL = require('./helper/createPhotoURLs.js');
 
 const express = require('express')
 const app = express();
@@ -84,17 +85,19 @@ app.get('/reviews', (req, res) => {
     .catch((err) => { throw err; });
 })
 
-app.post('/reviews', (req, res) => {
-  console.log({'Authorization': APIKEY});
-  console.log(req.body.data);
-  console.log('typeof req.body.data: ', typeof req.body.data);
-  axios.post(`${BASEURL}/reviews`, req.body.data, {headers: {'Authorization': APIKEY}
-})
-    .then((response) => {
-      console.log(response.data)
-      res.status(201).send('Created');
+app.post('/reviews', (req, res, next) => {
+  createPhotoURL(req, res, next)
+    .then(() => {
+      // console.log('req.body: ', req.body);
+      axios.post(`${BASEURL}/reviews`, req.body, {
+        headers: { 'Authorization': APIKEY }
+      })
+        .then((response) => {
+          res.status(201).send('Created');
+        })
+        .catch((err) => { throw err; });
     })
-    .catch((err) => { throw err; });
+    .catch((err) => { throw err; })
 })
 
 app.get('/reviews/meta', (req, res) => {

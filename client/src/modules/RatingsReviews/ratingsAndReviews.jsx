@@ -17,14 +17,6 @@ export default class RatingsAndReviews extends React.Component {
   componentDidMount() {
     this.getReviewsList(this.state.sortOrder);
     this.getReviewMetaData();
-    // this.getReviewsPromise()
-    //   .then((response) => {
-    //     this.setState({reviews: response.data.results, 'sortOrder': 'relevant'});
-    //     this.getReviewMetaData();
-    //   })
-    //   .catch((err) => {
-    //     throw err;
-    //   })
   }
 
   getReviewsList(sortOrder) {
@@ -59,6 +51,18 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   sortReviews(sortOrder) {
+    var filterList = this.checkFilters();
+
+    filterList.forEach((ratingNum) => {
+      this.setState((prevState) => {
+        var newState = {};
+        console.log('prevState.filterBy: ', prevState.filterBy);
+        for (var key in prevState.filterBy) {
+          newState[key] = false;
+        }
+        return {filterBy: newState};
+      })
+    })
     return this.getReviewsList(sortOrder);
   }
 
@@ -282,15 +286,27 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   render() {
+    var closeModalButton =
+      <button
+        type="button"
+        className="newReviewCloseButton"
+        data-dismiss="modal"
+        aria-label="Close"
+        onClick={this.closeModal.bind(this)}>&times;
+      </button>
+
     if (this.state.reviews.length - this.state.reviewsToRender >= 1) {
       var moreReviewsButton = <button onClick={this.loadMoreReviews.bind(this)}>MORE REVIEWS</button>
     }
 
     return (
       <div id='ratingsAndReviews'>
-        <div id='ratingsBreakdown'>
-          <RatingsBreakdown ratings={this.state.productRatings} recommendations={this.state.productRecommendations}  applyFilters={this.applyFilters.bind(this)} removeFilters={this.removeFilters.bind(this)} filterBy={this.state.filterBy}/>
+        <div id='ratingsAndReviewsHeader'>
+        <h3>RATINGS &amp; REVIEWS</h3>
         </div>
+        <>
+          <RatingsBreakdown ratings={this.state.productRatings} recommendations={this.state.productRecommendations}  applyFilters={this.applyFilters.bind(this)} removeFilters={this.removeFilters.bind(this)} filterBy={this.state.filterBy}/>
+        </>
         <div id='productBreakdown'>
           <ProductBreakdown reviews={this.state.reviews} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />
         </div>
@@ -301,9 +317,9 @@ export default class RatingsAndReviews extends React.Component {
           <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} getReviewsList={this.getReviewsList.bind(this)} />
           {moreReviewsButton}
           <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
-          <div className='modal'>
-            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModal={this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} product_id={this.props.product_id} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
-          </div>
+          <>
+            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModalButton={closeModalButton} addNewReview={this.addNewReview.bind(this)} productName={this.props.product.name} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
+          </>
         </div>
       </div>
     )
