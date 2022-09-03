@@ -47,7 +47,7 @@ function App() {
   return (
     <>
       <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={product} product={product}/>
+      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
       <QuesAnsWithClickTracking />
     </>
   )
