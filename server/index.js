@@ -13,10 +13,23 @@ app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.get('/products', (req, res) => {
-  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}}) // 71701
+// app.get('/:product_id', (req, res) => {
+//   res.send('testing')
+// })
+app.post('/interactions', (req, res) => {
+  let interactions = req.body
+  axios.post(`${BASEURL}/interactions`, interactions, {headers: {Authorization: APIKEY}})
     .then(results => {
-      //console.log('FROM GET REQ: ', results.data)
+      res.status(201).send(results.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+app.get('/products', (req, res) => {
+  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}})
+    .then(results => {
       res.status(200).send(results.data)
     })
     .catch(err => {
@@ -27,20 +40,20 @@ app.get('/products', (req, res) => {
 app.get('/productOverview/:product_id', (req, res) => {
   let id = req.params.product_id
   const productInfo = {};
-  axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}})
+
+  idRequest = axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}});
+  stylesRequest = axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
+  reviewsRequest = axios.get(`${BASEURL}/reviews/meta`, {headers: {'Authorization': APIKEY}, params: {product_id: id}})
+
+  Promise.all([idRequest, stylesRequest, reviewsRequest])
     .then(results => {
-      productInfo.features = results.data.features;
-      return productInfo;
+      productInfo.features = results[0].data.features
+      productInfo.styles = results[1].data.results
+      productInfo.reviews = results[2].data.ratings
+      return productInfo
     })
     .then(productInfo => {
-      axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
-        .then(results => {
-          productInfo.styles = results.data.results;
-          res.status(200).send(productInfo);
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      res.status(200).send(productInfo)
     })
     .catch(err => {
       console.log(err)
