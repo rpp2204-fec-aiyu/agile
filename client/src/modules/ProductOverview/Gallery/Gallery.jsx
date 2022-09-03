@@ -25,10 +25,10 @@ export default function Gallery(props) {
   function getImgDimensions({ width, height }) {
     console.log('width height', width, height)
     if(height > width) {
-      setClientHeight('800')
-      setClientWidth('600')
+      setClientHeight('600')
+      setClientWidth('700')
     } else {
-      setClientHeight('467')
+      setClientHeight('600')
       setClientWidth('700')
       //console.log('PORTRAIT: ', portrait)
     }
