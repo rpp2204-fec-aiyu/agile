@@ -36,13 +36,14 @@ const QuestionView = ({question, product}) => {
       <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
 
       {Object.keys(question.answers).slice(0, answerToShow).map(key =>
-        <AnswerView answer={question.answers[key]}/>
+        <AnswerView key={question.answers[key].id} answer={question.answers[key]}/>
       )}
 
       <br />
 
       {Object.keys(question.answers).length > 2 ? <span onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
-
+      <br />
+      *******************************************************************************
       {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
     </div>
   )

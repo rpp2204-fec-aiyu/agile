@@ -8,6 +8,8 @@ const QuesAns = ({product, productId}) => {
   const [questionList, setQuestionList] = useState([]);
   const [questionToShow, setQuestionToShow] = useState(2);
   const [showQuesForm, setShowQuesForm] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filtered, setFiltered] = useState([]);
 
   const handleCloseQuesForm = () => setShowQuesForm(false);
   const handleShowQuesForm = () => setShowQuesForm(true);
@@ -27,6 +29,21 @@ const QuesAns = ({product, productId}) => {
     setQuestionToShow(questionList.length);
   }
 
+  const handleChange = (e) => {
+    //let filtered = [];
+    setSearchTerm(e.target.value);
+    console.log(" HERE IS WHAT USER SEARCH: ", searchTerm);
+    if(searchTerm.length >= 2) {
+      setFiltered(questionList.filter(question => question.question_body.includes(searchTerm)));
+      console.log("here is the result list: ", filtered);
+    }
+
+    //console.log('FILTER', filtered);
+  }
+  const handleSearch = () => {
+    setQuestionList(filtered);
+  }
+
   useEffect(() => {
     getQuestionList();
   }, [])
@@ -36,12 +53,12 @@ const QuesAns = ({product, productId}) => {
     <div className="qaBackground">
 
       <h1>Questions and Answers</h1>
-      <input placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."/>
-      <button>Search</button>
+      <input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
+      <button onClick={handleSearch}>Search</button>
 
       <div>
         {questionList.slice(0, questionToShow).map(question =>
-          <QuestionView question={question} product={product}/>
+          <QuestionView key={question.question_id} question={question} product={product}/>
         )}
       <br />
       <br />
