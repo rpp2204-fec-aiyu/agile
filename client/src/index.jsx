@@ -46,12 +46,11 @@ function App() {
 
   return (
     <>
-      {/* <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={71697}/> */}
-      <QuesAnsWithClickTracking product={product} productId={productId}/>
+      <ProductOverviewWithClickTracking product={product} productId={productId}/>
+      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
+      <QuesAnsWithClickTracking />
     </>
   )
-
 }
 
 

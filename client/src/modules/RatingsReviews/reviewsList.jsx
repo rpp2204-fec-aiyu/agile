@@ -8,7 +8,7 @@ export default class ReviewsList extends React.Component {
   }
 
   render() {
-    console.log('reviewsList: ', this.props.reviewsList);
+    // console.log('reviewsList: ', this.props.reviewsList);
     return (
       <div id='reviews-container'>
         {this.props.reviewsList.map((review, index) => {
