@@ -3,14 +3,23 @@ cloudinary.config({
   secure: true
 });
 require('dotenv').config();
-const axios = require('axios')
+const axios = require('axios');
 
 var createPhotoURL = (req, res, next) => {
-  if (!req.body.photos) {
+  if (!req.body.data.rawPhotos) {
+    console.log('test')
+    // !req.body.rawPhotos;
     next();
   }
 
-  var photos = req.body.photos;
+  var photos;
+  if (req.body.data.rawPhotos) {
+    photos = req.body.data.rawPhotos;
+  }
+  // if (req.body.rawPhotos) {
+  //   console.log('req.body.photos: ', req.body.rawPhotos);
+  //   photos = req.body.rawPhotos;
+  // }
 
   var APIrequests = uploadPhotoToCloudinary(photos);
 
@@ -20,7 +29,8 @@ var createPhotoURL = (req, res, next) => {
       results.forEach((photo, index) => {
         formattedPhotos.push(photo.url);
       })
-      req.body.photos = formattedPhotos;
+      req.body.data.photos = formattedPhotos;
+      delete req.body.data.rawPhotos;
     })
     .catch((err) => {
       throw err;
