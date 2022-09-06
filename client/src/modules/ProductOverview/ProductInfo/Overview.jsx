@@ -4,7 +4,7 @@ export default function Overview(props) {
 
 
   return (
-    <div style={{display: 'flex', position: 'relative', marginTop: '30px', color: '#25383C'}}>
+    <div style={{display: 'flex', position: 'relative', marginTop: '30px', color: '#25383C'}} data-testid="overviewTest">
       <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', marginLeft: '120px', width: '550px'}} >
         <h3>{props.slogan}</h3>
 
