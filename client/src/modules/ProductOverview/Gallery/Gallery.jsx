@@ -42,7 +42,7 @@ export default function Gallery(props) {
 
 
   return (
-    <div id='gallery'>
+    <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} />
       {/* key={props.style.style_id}> */}
       <br></br>
