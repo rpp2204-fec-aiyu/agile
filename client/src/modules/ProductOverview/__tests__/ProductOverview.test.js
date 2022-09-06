@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import ReactDOM from 'react-dom'
 import React from 'react';
 import '@testing-library/jest-dom'
@@ -7,6 +11,7 @@ import regeneratorRuntime from "regenerator-runtime";
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import Gallery from '../Gallery/Gallery.jsx'
+import ProductOverview from '../ProductOverview.jsx'
 
 // it('Renders ProductOverview component', () => {
 //   axios.get('/products', {headers: {'Authorization': APIKEY}})
