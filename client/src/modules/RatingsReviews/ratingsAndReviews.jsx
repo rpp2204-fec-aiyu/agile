@@ -4,6 +4,7 @@ import ReviewsList from './reviewsList.jsx';
 import Modal from './modal.jsx';
 import NewReview from './newReview.jsx';
 import SortReview from './sortReviews.jsx';
+import SearchReview from './searchReviews.jsx';
 import RatingsBreakdown from './ratingsBreakdown.jsx';
 import ProductBreakdown from './productBreakdown.jsx';
 
@@ -11,7 +12,7 @@ import ProductBreakdown from './productBreakdown.jsx';
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant', filterBy: {'5': false, '4': false, '3': false, '2': false, '1': false}}
+    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, searchTerm: '', productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant', filterBy: {'5': false, '4': false, '3': false, '2': false, '1': false}}
   }
 
   componentDidMount() {
@@ -38,12 +39,17 @@ export default class RatingsAndReviews extends React.Component {
       })
   }
 
-  getReviewsPromise() {
+  getReviewsPromise(sortOrder) {
+    //if sortOrder is defined
+      //use it for the sort parameter
+    //otherwise
+      //use state
+    var sortOrder = sortOrder !== undefined ? sortOrder : this.state.sortOrder;
     return (
       axios.get('http://localhost:3000/reviews', {
         params: {
           product_id: this.props.product_id,
-          sort: this.state.sortOrder,
+          sort: sortOrder,
           count: 100
         }
       })
@@ -63,7 +69,69 @@ export default class RatingsAndReviews extends React.Component {
         return {filterBy: newState};
       })
     })
-    return this.getReviewsList(sortOrder);
+    this.getReviewsPromise(sortOrder)
+        .then((response) => {
+          this.setState({reviews: response.data.results});
+          //filter by searchTerm if applicable
+          if (this.state.searchTerm.length >= 3) {
+            console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
+        })
+        .catch((err) => { throw err; })
+  }
+
+  searchReviews(e) {
+    //purpose:
+      //sets searchKeyword state
+      //iterates through existing reviews state and filters out non-matched reviews
+
+    //O: n/a
+    //I: search terms that get updated from searchReviews
+    //C:
+    //E:
+      //must expand and contract reviews state without refreshing the list
+      //changes to the sort and rating filters should not remove the search term filter
+
+    console.log('e.target.value: ', e.target.value);
+
+   //if there's already a searchTerm applied, and the current searchTerm is different/shorter, reset state and refresh reviews before filtering
+   if (this.state.searchTerm.length >= 3 && (this.state.searchTerm.length - e.target.value.length > 0)) {
+    console.log('this.state.searchTerm is greater or equal to 3');
+    console.log('this.state.searchTerm.length - e.target.value.length > 0');
+     //update searchTerm state to current event
+     this.setState({searchTerm: e.target.value});
+     //invoke this.applyFilters() to refresh reviews list with the existing fitlers
+     this.applyFilters();
+   } else if (this.state.searchTerm.length >= 3 && (e.target.value.length - this.state.searchTerm.length > 0)) {
+   //if there's already a searchTerm applied, and the current searchTerm is longer, reset state and filter the existing filtered reviews
+     //set searchTerm state to be equal to the event
+     this.setState({searchTerm: e.target.value});
+     this.filterReviewsBySearchTerm(e.target.value);
+     //filtering by the existing review list
+   } else if (e.target.value.length < 3) {
+    //if the current searchTerm is less than 3 characters, apply no searchTerm, but set state to current searchTerm
+      //do nothing
+      this.setState({searchTerm: e.target.value});
+      console.log('current searchTerm is less than 3 chars so set new state and do nothing');
+
+    } else if (e.target.value.length === 3) {
+      this.setState({searchTerm: e.target.value});
+      this.filterReviewsBySearchTerm(e.target.value);
+    }
+  }
+
+  filterReviewsBySearchTerm(searchTerm) {
+      var filteredReviewList = this.state.reviews.filter((review) => {
+        // console.log('review: ', review);
+        if (review.summary.indexOf(searchTerm) !== -1 || review.body.indexOf(searchTerm) !== -1) { //if searchTerm is found in a review, add it to filteredReviewList
+          return review;
+        }
+      })
+      console.log('this.state.reviews after searchTerm filtering and ratingNum filtering, if applicable: ', filteredReviewList);
+      console.log('reviews should also be filtered by ratingNums if the followin this.state.filterBy object has true values: ', this.state.filterBy);
+      this.setState({reviews: filteredReviewList});
   }
 
   checkFilters() {
@@ -114,6 +182,10 @@ export default class RatingsAndReviews extends React.Component {
       this.getReviewsPromise()
         .then((response) => {
           this.applyFilterLogic(response.data.results, filterList);
+          if (this.state.searchTerm.length >= 3) {
+            console.log('if rating filter exists, refresh reviews and filter by existing in place searchTerm');
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
         })
         .catch((err) => {
           throw err;
@@ -124,6 +196,11 @@ export default class RatingsAndReviews extends React.Component {
       this.getReviewsPromise()
         .then((response) => {
           this.setState({reviews: response.data.results});
+          if (this.state.searchTerm.length >= 3) {
+            console.log('if last rating filter is removed, refresh reviews and filter by existing in place searchTerm');
+            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
         })
         .catch((err) => {
           throw err;
@@ -139,7 +216,17 @@ export default class RatingsAndReviews extends React.Component {
     //if turnOffAllFilters is true AND filterList is not empty
     if (turnOffAllFilters) {
       //make a call to this.getReviewsList to refresh the reviews state
-      this.getReviewsList();
+      this.getReviewsPromise()
+        .then((response) => {
+          this.setState({reviews: response.data.results});
+          //filter by searchTerm if applicable
+          if (this.state.searchTerm.length >= 3) {
+            console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
+        })
+        .catch((err) => { throw err });
       //turn off applicable filterBy states using elements in filterList
       filterList.forEach((ratingNum) => {
         this.setState((prevState) => {
@@ -311,6 +398,9 @@ export default class RatingsAndReviews extends React.Component {
           <ProductBreakdown reviews={this.state.reviews} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />
         </div>
         <div id='reviewsList'>
+          <div id='reviewListSearch'>
+            <input type='search' onChange={this.searchReviews.bind(this)} placeholder="Search reviews"></input>
+          </div>
           <div id='reviewListSort'>
             <SortReview sortReviews={this.sortReviews.bind(this)} />
           </div>
