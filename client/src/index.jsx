@@ -20,7 +20,7 @@ function App() {
     */
     return axios.get('/products')
       .then(products => {
-        return products.data[0]
+        return products.data[4]
       })
   }
 
@@ -28,10 +28,12 @@ function App() {
   const [productId, setProductId] = useState(null)
 
   useEffect(() => {
+
     getCurrentProduct()
       .then(product => {
         setProduct(product)
         setProductId(product.id)
+        window.location.hash = `!${product.id}`
       })
       .catch(err => {
         console.log(err)
