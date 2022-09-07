@@ -9,6 +9,8 @@ const createPhotoURL = require('./helper/createPhotoURLs.js');
 const express = require('express')
 const app = express();
 
+const path = require('path')
+
 app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -205,6 +207,10 @@ app.get('/relatedProducts/:product_id/', (req, res) => {
       res.status(500).send(err);
     })
 })
+
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../client/dist/index.html'))
+// })
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
