@@ -6,7 +6,7 @@ import NewPhotos from './newPhotos.jsx';
 export default class NewReview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rating: null, recommends: null, characteristics: {
+    this.state = {rating: null, recommends: 'Yes', characteristics: {
       size: null, width: null, comfort: null, quality: null, length: null, fit: null
     }, reviewSummaryValue: '', reviewBodyValue: '', emailValue: '', nickname: '', modalIsOpen: false, photos: []};
   }
@@ -19,7 +19,6 @@ export default class NewReview extends React.Component {
   captureRecommendInput(event) {
     console.log('event.target.value: ', event.target.value);
     this.setState({recommends: event.target.value});
-    event.preventDefault();
   }
 
   captureSizeInput(event) {
@@ -289,51 +288,58 @@ export default class NewReview extends React.Component {
     }
 
     return (
-      <div>
-          <h2>Write Your Review</h2>
-          <h3>About the [INSERT PRODUCT NAME HERE]</h3>
-          <h4>Overall rating</h4>
-          <div>
-            <Stars starCount={this.getStarCount.bind(this)}/>
-          </div>
-          <h4>Do you recommend this product?</h4>
-          <div onChange={this.captureRecommendInput.bind(this)}>
-            <input type='radio' id='doesRecommend' value='Yes' name='recommends' Checked></input>
-            <label for='doesRecommend'>Yes</label>
-            <input type='radio' id='doesNotRecommend' value='No' name='recommends'></input>
-            <label for='doesNotRecommend'>No</label>
-          </div>
-          <h4>Characteristics</h4>
+      <div className='newReviewModal'>
+        {this.props.closeModalButton}
+        <h2 id='newReviewHeader'>Write Your Review</h2>
+        <h3 id='newReviewAboutSubheader'>About the {this.props.productName}</h3>
+        <div className='newReviewRating'>
+        <h4>Overall rating &#42;</h4>
+        <div>
+          <Stars starCount={this.getStarCount.bind(this)} />
+        </div>
+        </div>
+        <div className='newReviewRecommendation'>
+        <h4>Do you recommend this product? &#42;</h4>
+        <div onChange={this.captureRecommendInput.bind(this)}>
+          <input type='radio' id='doesRecommend' value='Yes' name='recommends' checked={this.state.recommends === 'Yes'}></input>
+          <label for='doesRecommend'>Yes</label>
+          <input type='radio' id='doesNotRecommend' value='No' name='recommends' checked={this.state.recommends === 'No'}></input>
+          <label for='doesNotRecommend'>No</label>
+        </div>
+        </div>
+        <h4>Characteristics &#42;</h4>
+        <div className='newReviewCharacteristics'>
           {generateSizeInput}
           {generateWidthInput}
           {generateComfortInput}
           {generateQualityInput}
           {generateLengthInput}
           {generateFitInput}
-          <h4>Review summary</h4>
-            <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
-              <textarea placeholder='Example: Best purchase ever!' value={this.state.reviewSummaryValue} onChange={this.handleReviewSummaryChange.bind(this)}>
-              </textarea>
-            </form>
-          <h4>Review body</h4>
-            <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
-                <textarea placeholder='Why did you like the product or not?' value={this.state.reviewBodyValue} onChange={this.handleReviewBodyChange.bind(this)}>
-                </textarea>
-            </form>
-            <p>{reviewBodyCharCountMessage}</p>
-          <h4>Upload your photos</h4>
-          <NewPhotos savePhotos={this.savePhotos.bind(this)}/>
-          <h4>What is your nickname</h4>
-            <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
-                <input type="text" placeholder='Example: jackson11!' value={this.state.nickname} onChange={this.handleNicknameChange.bind(this)}></input>
-                <p>For privacy reasons, do not use your full name or email address</p>
-            </form>
-          <h4>Your email</h4>
-            <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
-                <input type="text" placeholder='Example: jackson11@email.com' value={this.state.emailValue} onChange={this.handleEmailChange.bind(this)}></input>
-                <p>For authentication reasons, you will not be emailed</p>
-            </form>
-          <button onClick={this.handleAddReviewSubmitClick.bind(this)}>Submit review</button>
+        </div>
+        <h4>Review summary</h4>
+        <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
+          <textarea placeholder='Example: Best purchase ever!' value={this.state.reviewSummaryValue} onChange={this.handleReviewSummaryChange.bind(this)}>
+          </textarea>
+        </form>
+        <h4>Review body &#42;</h4>
+        <form onSumbit={this.handleAddReviewSubmitClick.bind(this)}>
+          <textarea placeholder='Why did you like the product or not?' value={this.state.reviewBodyValue} onChange={this.handleReviewBodyChange.bind(this)}>
+          </textarea>
+        </form>
+        <p>{reviewBodyCharCountMessage}</p>
+        <h4>Upload your photos</h4>
+        <NewPhotos savePhotos={this.savePhotos.bind(this)} />
+        <h4>What is your nickname &#42;</h4>
+        <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
+          <input type="text" placeholder='Example: jackson11!' value={this.state.nickname} onChange={this.handleNicknameChange.bind(this)}></input>
+          <p>For privacy reasons, do not use your full name or email address</p>
+        </form>
+        <h4>Your email &#42;</h4>
+        <form onSubmit={this.handleAddReviewSubmitClick.bind(this)}>
+          <input type="text" placeholder='Example: jackson11@email.com' value={this.state.emailValue} onChange={this.handleEmailChange.bind(this)}></input>
+          <p>For authentication reasons, you will not be emailed</p>
+        </form>
+        <button id='newReviewSubmitButton' onClick={this.handleAddReviewSubmitClick.bind(this)}>Submit review</button>
       </div>
     )
   }

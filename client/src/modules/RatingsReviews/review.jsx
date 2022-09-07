@@ -136,20 +136,20 @@ export default class Review extends React.Component {
         index += 1;
         return (
           //for each photo, return an image for the photo with a modal
-          <div className='photo'>
-            <img src={photo.url} key={photo.id} className='reviewPhotoThumbnail' onClick={this.expandModal.bind(this, index)}/>
+          <>
+            <img src={photo.url} key={photo.id} alt='' className='reviewPhotoThumbnail' onClick={this.expandModal.bind(this, index)}/>
             <div className='reviewPhotoModal'>
               <Modal isOpen={this.state[`photo${index}ModalIsOpen`]}  closeModal={this.closeModal.bind(this, index)} modalContent=
                 {
-                  <div>
-                    <img src={photo.url}/>
-                    <button type='button' onClick={this.closeModal.bind(this, index)}>Exit
+                  <div className='review-photo-modal'>
+                    <img src={photo.url} alt=''/>
+                    <button className='reviewCloseModalButton' type='button' onClick={this.closeModal.bind(this, index)}>&times;
                     </button>
                   </div>
                 }
               />
             </div>
-          </div>
+          </>
         )
       })
 
@@ -180,7 +180,9 @@ export default class Review extends React.Component {
           <span className='reviewSummary'><b>{this.props.review.summary}</b>
           </span>
           {reviewBody}
-          {photos}
+          <div className='photos'>
+            {photos}
+          </div>
         </span>
         {recommendation}
         <p className='reviewUserName'>{this.props.review.reviewer_name}</p>

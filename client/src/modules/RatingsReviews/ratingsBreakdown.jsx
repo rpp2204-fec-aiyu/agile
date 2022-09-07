@@ -93,7 +93,7 @@ export default class RatingsBreakdown extends React.Component {
   generateStarsFromRating() {
     var average = this.calculateAvgRating(true);
     var stars =
-    <div className='rating'>
+    <div id='averageStarRating'>
         {[...Array(5)].map((star, index) => {
           index += 1;
           return (
@@ -173,7 +173,7 @@ export default class RatingsBreakdown extends React.Component {
 
   render() {
     var filtersObj = this.state.filterBy;
-    // console.log('this.props.filterBy: ', this.props.filterBy);
+    console.log('this.props.filterBy: ', this.props.filterBy);
     var removeFiltersButton;
     var filtersApplied = this.generateFiltersMessage();
     var filtersMessage = <div id='ratings-filters'>{filtersApplied}</div>
@@ -184,10 +184,11 @@ export default class RatingsBreakdown extends React.Component {
     }
 
     return (
-      <div id='ratingSummary'>
-        <h3>RATINGS &amp; REVIEWS</h3>
-        <h1>{this.calculateAvgRating()}</h1>
-        {this.generateStarsFromRating()}
+      <div id='ratingsBreakdown'>
+        <div id='ratingsSummary'>
+          <h1 id='averageNumRating'>{this.calculateAvgRating()}</h1>
+          {this.generateStarsFromRating()}
+        </div>
         {filtersMessage}
         {removeFiltersButton}
         <p>based on {this.getCountOfRatings()} reviews</p>
