@@ -236,3 +236,5 @@ if keyword search and rating filter should work together
 
 if a keyword search is applied, and a rating filter is turned off after being enabled, keyword search should not change
 */
+
+//Changing the sort order will always refresh the reviews list.
