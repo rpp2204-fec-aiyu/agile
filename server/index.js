@@ -13,7 +13,7 @@ const path = require('path')
 
 app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.json({limit : '1000kb'}))
 
 // app.get('/:product_id', (req, res) => {
 //   res.send('testing')
@@ -90,14 +90,13 @@ app.get('/reviews', (req, res) => {
 app.post('/reviews', (req, res, next) => {
   createPhotoURL(req, res, next)
     .then(() => {
-      // console.log('req.body: ', req.body);
-      axios.post(`${BASEURL}/reviews`, req.body, {
+        axios.post(`${BASEURL}/reviews`, req.body.data, {
         headers: { 'Authorization': APIKEY }
       })
         .then((response) => {
           res.status(201).send('Created');
         })
-        .catch((err) => { throw err; });
+        .catch((err) => { throw err; })
     })
     .catch((err) => { throw err; })
 })

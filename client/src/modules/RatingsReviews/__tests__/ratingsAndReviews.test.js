@@ -206,19 +206,35 @@ describe.only('RatingsAndReviews', () => {
     const reviewList = await screen.findAllByTestId(/review/);
     expect(reviewList).toHaveLength(2);
   })
-  it('if a filter is applied, then the user sorts the filtered list of reviews, the filter should be removed', async () => {
-    render(<RatingsAndReviews product_id={71697} />);
-    fireEvent.click(await screen.findByTestId('3-rating-filter'));
-    expect(await screen.findByText('Remove all filters')).toBeInTheDocument();
-    const reviewList1 = await screen.findAllByTestId(/review/);
-    expect(reviewList1).toHaveLength(1);
-    //now click sort button on newest
-    expect(screen.getByText('Newest')).toBeInTheDocument();
-    fireEvent.click(await screen.getByText('Newest'));
-    screen.debug();
-    const reviewList2 = await screen.findAllByTestId(/review/);
-    expect(reviewList2).toHaveLength(2);
-    expect(screen.getAllByRole('option')[3]).toBeInTheDocument();
-   })
+  // it('if a filter is applied, then the user sorts the filtered list of reviews, the filter should be removed', async () => {
+  //   render(<RatingsAndReviews product_id={71697} />);
+  //   fireEvent.click(await screen.findByTestId('3-rating-filter'));
+  //   expect(await screen.findByText('Remove all filters')).toBeInTheDocument();
+  //   const reviewList1 = await screen.findAllByTestId(/review/);
+  //   expect(reviewList1).toHaveLength(1);
+  //   //now click sort button on newest
+  //   expect(screen.getByText('Newest')).toBeInTheDocument();
+  //   fireEvent.click(await screen.getByText('Newest'));
+  //   screen.debug();
+  //   const reviewList2 = await screen.findAllByTestId(/review/);
+  //   expect(reviewList2).toHaveLength(2);
+  //   // expect(screen.getAllByRole('option')[3]).toBeInTheDocument();
+  // })
 })
 
+//keyword search tests
+/*
+if keyword search is less than 3, no search should be applied
+
+if keyword search is 3 chars or more, search term should be applied
+
+if keyword search is 3 chars or more, then is less than 3, all reviews should re-render
+
+if sort is applied when a search term is filtering, sort should sort by applied filter
+
+if keyword search and rating filter should work together
+
+if a keyword search is applied, and a rating filter is turned off after being enabled, keyword search should not change
+*/
+
+//Changing the sort order will always refresh the reviews list.

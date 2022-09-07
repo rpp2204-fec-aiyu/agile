@@ -11,7 +11,7 @@ import ProductBreakdown from './productBreakdown.jsx';
 export default class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant', filterBy: {'5': false, '4': false, '3': false, '2': false, '1': false}}
+    this.state = {reviews: [], reviewsToRender: 2, modalIsOpen: false, productRatings: {}, productRecommendations: {}, searchTerm: '', productSizeMetaData: undefined, productQualityMetaData: undefined, productComfortMetaData: undefined, productWidthMetaData: undefined, productLengthMetaData: undefined, productFitMetaData: undefined, sortOrder: 'relevant', filterBy: {'5': false, '4': false, '3': false, '2': false, '1': false}}
   }
 
   componentDidMount() {
@@ -38,12 +38,13 @@ export default class RatingsAndReviews extends React.Component {
       })
   }
 
-  getReviewsPromise() {
+  getReviewsPromise(sortOrder) {
+    var sortOrder = sortOrder !== undefined ? sortOrder : this.state.sortOrder;
     return (
       axios.get('http://localhost:3000/reviews', {
         params: {
           product_id: this.props.product_id,
-          sort: this.state.sortOrder,
+          sort: sortOrder,
           count: 100
         }
       })
@@ -56,14 +57,61 @@ export default class RatingsAndReviews extends React.Component {
     filterList.forEach((ratingNum) => {
       this.setState((prevState) => {
         var newState = {};
-        console.log('prevState.filterBy: ', prevState.filterBy);
+        // console.log('prevState.filterBy: ', prevState.filterBy);
         for (var key in prevState.filterBy) {
           newState[key] = false;
         }
         return {filterBy: newState};
       })
     })
-    return this.getReviewsList(sortOrder);
+    this.getReviewsPromise(sortOrder)
+        .then((response) => {
+          this.setState({reviews: response.data.results});
+          //filter by searchTerm if applicable
+          if (this.state.searchTerm.length >= 3) {
+            // console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
+        })
+        .catch((err) => { throw err; })
+  }
+
+  searchReviews(e) {
+    //sets searchKeyword state
+    //iterates through existing reviews state and filters out non-matched reviews
+
+    // console.log('e.target.value: ', e.target.value);
+
+   //if there's already a searchTerm applied, and the current searchTerm is different/shorter, reset state and refresh reviews before filtering
+   if (this.state.searchTerm.length >= 3 && (this.state.searchTerm.length - e.target.value.length > 0)) {
+    // console.log('this.state.searchTerm is greater or equal to 3');
+    // console.log('this.state.searchTerm.length - e.target.value.length > 0');
+     this.setState({searchTerm: e.target.value});
+     this.applyFilters();
+   } else if (this.state.searchTerm.length >= 3 && (e.target.value.length - this.state.searchTerm.length > 0)) {
+   //if there's already a searchTerm applied, and the current searchTerm is longer, reset state and filter the existing filtered reviews
+     this.setState({searchTerm: e.target.value});
+     this.filterReviewsBySearchTerm(e.target.value);
+   } else if (e.target.value.length < 3) {
+    //if the current searchTerm is less than 3 characters, apply no searchTerm, but set state to current searchTerm
+      this.setState({searchTerm: e.target.value});
+      // console.log('current searchTerm is less than 3 chars so set new state and do nothing');
+
+    } else if (e.target.value.length === 3) {
+      this.setState({searchTerm: e.target.value});
+      this.filterReviewsBySearchTerm(e.target.value);
+    }
+  }
+
+  filterReviewsBySearchTerm(searchTerm) {
+      var filteredReviewList = this.state.reviews.filter((review) => {
+        if (review.summary.indexOf(searchTerm) !== -1 || review.body.indexOf(searchTerm) !== -1) {
+          return review;
+        }
+      })
+      this.setState({reviews: filteredReviewList});
+      // console.log('this.state.reviews after searchTerm filtering and ratingNum filtering, if applicable: ', filteredReviewList);
   }
 
   checkFilters() {
@@ -99,7 +147,6 @@ export default class RatingsAndReviews extends React.Component {
         var newState = {};
         for (var key in prevState.filterBy) {
           if (key === ratingNum.toString()) {
-            //set filterBy.ratingNum to true
             newState[ratingNum] = true;
           } else {
             newState[key] = prevState.filterBy[key];
@@ -114,6 +161,10 @@ export default class RatingsAndReviews extends React.Component {
       this.getReviewsPromise()
         .then((response) => {
           this.applyFilterLogic(response.data.results, filterList);
+          if (this.state.searchTerm.length >= 3) {
+            // console.log('if rating filter exists, refresh reviews and filter by existing in place searchTerm');
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
         })
         .catch((err) => {
           throw err;
@@ -124,6 +175,11 @@ export default class RatingsAndReviews extends React.Component {
       this.getReviewsPromise()
         .then((response) => {
           this.setState({reviews: response.data.results});
+          if (this.state.searchTerm.length >= 3) {
+            // console.log('if last rating filter is removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
         })
         .catch((err) => {
           throw err;
@@ -138,13 +194,22 @@ export default class RatingsAndReviews extends React.Component {
 
     //if turnOffAllFilters is true AND filterList is not empty
     if (turnOffAllFilters) {
-      //make a call to this.getReviewsList to refresh the reviews state
-      this.getReviewsList();
+      //refresh the reviews state
+      this.getReviewsPromise()
+        .then((response) => {
+          this.setState({reviews: response.data.results});
+          //filter by searchTerm if applicable
+          if (this.state.searchTerm.length >= 3) {
+            // console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
+            this.filterReviewsBySearchTerm(this.state.searchTerm);
+          }
+        })
+        .catch((err) => { throw err });
       //turn off applicable filterBy states using elements in filterList
       filterList.forEach((ratingNum) => {
         this.setState((prevState) => {
           var newState = {};
-          console.log('prevState.filterBy2: ', prevState.filterBy);
           for (var key in prevState.filterBy) {
             newState[key] = false;
           }
@@ -162,8 +227,8 @@ export default class RatingsAndReviews extends React.Component {
           if (parseInt(key) === ratingNum) {
             newState[key] = false;
           } else {
-            console.log('key: ', key);
-            console.log('prevState.filterBy[key]: ', prevState.filterBy[key]);
+            // console.log('key: ', key);
+            // console.log('prevState.filterBy[key]: ', prevState.filterBy[key]);
             newState[key] = prevState.filterBy[key];
           }
         }
@@ -270,7 +335,7 @@ export default class RatingsAndReviews extends React.Component {
         'recommend': recommends,
         'name': nickname,
         'email': emailValue,
-        'photos': photos,
+        'rawPhotos': photos,
         'characteristics': characteristics
       }
     })
@@ -311,6 +376,9 @@ export default class RatingsAndReviews extends React.Component {
           <ProductBreakdown reviews={this.state.reviews} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />
         </div>
         <div id='reviewsList'>
+          <div id='reviewListSearch'>
+            <input type='search' onChange={this.searchReviews.bind(this)} placeholder="Search reviews"></input>
+          </div>
           <div id='reviewListSort'>
             <SortReview sortReviews={this.sortReviews.bind(this)} />
           </div>
@@ -318,7 +386,7 @@ export default class RatingsAndReviews extends React.Component {
           {moreReviewsButton}
           <button onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
           <>
-            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModalButton={closeModalButton} addNewReview={this.addNewReview.bind(this)} productName={this.props.product.name} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
+            <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModalButton={closeModalButton} closeModal= {this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} productName={this.props.product.name} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
           </>
         </div>
       </div>
