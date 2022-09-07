@@ -46,9 +46,9 @@ function App() {
 
   return (
     <>
-      <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
-      <QuesAnsWithClickTracking />
+      {/* <ProductOverviewWithClickTracking product={product} productId={productId}/>
+      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/> */}
+      <QuesAnsWithClickTracking product={product} productId={productId}/>
     </>
   )
 }

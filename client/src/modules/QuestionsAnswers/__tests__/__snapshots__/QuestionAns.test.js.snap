@@ -1,5 +1,309 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`add question form matches snapshot 1`] = `
+<div
+  className="qaModalContainer"
+>
+  <button
+    className="closeButton"
+  >
+    X
+  </button>
+  <div
+    className="qaModalTitle"
+  >
+    <h3>
+      Ask Your Question
+    </h3>
+    <h5>
+      About the 
+    </h5>
+  </div>
+  <div
+    className="qaModalBody"
+  >
+    <label>
+      Your Question *
+    </label>
+    <br />
+    <textarea
+      maxLength={1000}
+      name="questionBody"
+      onChange={[Function]}
+      placeholder="Why did you like the product or not?"
+      value=""
+    />
+    <p />
+    <label>
+      What is your nickname ? *
+    </label>
+    <br />
+    <input
+      maxLength={60}
+      name="nickName"
+      onChange={[Function]}
+      placeholder="Example: jackson11!"
+      value=""
+    />
+    <br />
+    <span>
+      For privacy reasons, do not use your full name or email address” will appear.
+    </span>
+    <p />
+    <label>
+      Your email *
+    </label>
+    <br />
+    <input
+      maxLength={60}
+      name="email"
+      onChange={[Function]}
+      value=""
+    />
+    <br />
+    <span>
+      For authentication reasons, you will not be emailed.
+    </span>
+    <p />
+    <br />
+  </div>
+  <div
+    className="qaModalFooter"
+  >
+    <button
+      className="submitButton"
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </div>
+</div>
+`;
+
+exports[`question view matches snapshot 1`] = `
+<div>
+  <h3>
+    Q: 
+    Can I wash it?
+  </h3>
+  <span>
+    Helpful? 
+  </span>
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    Yes
+  </a>
+  <span>
+    (
+    93
+    )
+  </span>
+  <span>
+     | 
+  </span>
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    Add Answer
+  </a>
+  <div>
+    <h4>
+      A: 
+      I've thrown it in the wash and it seems fine
+    </h4>
+    <img
+      src="https://images.unsplash.com/photo-1469504512102-900f29606341?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+      style={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+    <img
+      src="https://images.unsplash.com/photo-1510551310160-589462daf284?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80"
+      style={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+    <div>
+      by: 
+      <span>
+        skilover
+      </span>
+      , 
+      <span>
+        2017-01-04T00:00:00.000Z
+      </span>
+       |   Helpful?  
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Yes
+      </a>
+      <span>
+        (
+        22
+        )
+      </span>
+      <span>
+         | 
+      </span>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Report
+      </a>
+    </div>
+  </div>
+  <div>
+    <h4>
+      A: 
+      It says not to
+    </h4>
+    <div>
+      by: 
+      <span>
+        skilover
+      </span>
+      , 
+      <span>
+        2017-01-04T00:00:00.000Z
+      </span>
+       |   Helpful?  
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Yes
+      </a>
+      <span>
+        (
+        15
+        )
+      </span>
+      <span>
+         | 
+      </span>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Report
+      </a>
+    </div>
+  </div>
+  <br />
+  <span
+    onClick={[Function]}
+  >
+    Load More Answers
+  </span>
+  <br />
+  *******************************************************************************
+</div>
+`;
+
+exports[`question view matches snapshot 2`] = `
+<div
+  className="qaModalContainer"
+>
+  <button
+    className="closeButton"
+  >
+    X
+  </button>
+  <div
+    className="qaModalTitle"
+  >
+    <h3>
+      Submit your Answer
+    </h3>
+    <h5>
+      : 
+      Can I wash it?
+    </h5>
+  </div>
+  <div
+    className="qaModalBody"
+  >
+    <label>
+      Your Answer *
+    </label>
+    <br />
+    <textarea
+      maxLength={1000}
+      name="ansBody"
+      onChange={[Function]}
+      value=""
+    />
+    <p />
+    <br />
+    <label>
+      What is your nickname *
+    </label>
+    <br />
+    <input
+      maxLength={60}
+      name="nickName"
+      onChange={[Function]}
+      placeholder="Example: jack543!"
+      value=""
+    />
+    <br />
+    <span>
+      For privacy reasons, do not use your full name or email address” will appear.
+    </span>
+    <p />
+    <br />
+    <label>
+      Your email *
+    </label>
+    <br />
+    <input
+      maxLength={60}
+      name="email"
+      onChange={[Function]}
+      placeholder="Example: jack@email.com"
+      value=""
+    />
+    <br />
+    <span>
+      For authentication reasons, you will not be emailed.
+    </span>
+    <p />
+    <br />
+    <label>
+      Upload your photos 
+    </label>
+    <input
+      multiple={true}
+      onChange={[Function]}
+      type="file"
+    />
+    <br />
+  </div>
+  <div
+    className="qaModalFooter"
+  >
+    <button
+      className="submitButton"
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </div>
+</div>
+`;
+
 exports[`questions and answers matches snapshot 1`] = `
 <div
   className="qaBackground"
@@ -8,9 +312,13 @@ exports[`questions and answers matches snapshot 1`] = `
     Questions and Answers
   </h1>
   <input
+    onChange={[Function]}
     placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."
+    value=""
   />
-  <button>
+  <button
+    onClick={[Function]}
+  >
     Search
   </button>
   <div>

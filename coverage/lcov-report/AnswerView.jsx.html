@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,20 +100,20 @@
 <a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,25 +133,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react'
 &nbsp;
-const AnswerView = <span class="fstat-no" title="function not covered" >({</span>answer}) =&gt; {
-  const [ansHelpfulness, setAnsHelpfuless] = <span class="cstat-no" title="statement not covered" >useState(answer.helpfulness);</span>
-  const [report, setReport] = <span class="cstat-no" title="statement not covered" >useState('Report');</span>
+const AnswerView = ({answer}) =&gt; {
+  const [ansHelpfulness, setAnsHelpfuless] = useState(answer.helpfulness);
+  const [report, setReport] = useState('Report');
 &nbsp;
-  const handleReport = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setReport('Reported');</span></span>
+  const handleReport = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setReport('Reported');</span>
 &nbsp;
-  const updateAnsHelpfulness = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const updateAnsHelpfulness = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    setAnsHelpfuless(ansHelpfulness + 1);</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return(</span>
+  return(
     &lt;div&gt;
       &lt;h4&gt;A: {answer.body}&lt;/h4&gt;
 &nbsp;
-      {answer.photos.length &gt; 0 ? answer.photos.map(<span class="fstat-no" title="function not covered" >ph</span>oto =&gt; <span class="cstat-no" title="statement not covered" >&lt;img style={{ width: 100, height: 100 }} src={photo}/&gt;)</span> : null}
+      {answer.photos.length &gt; 0 ? answer.photos.map(photo =&gt; &lt;img style={{ width: 100, height: 100 }} src={photo}/&gt;) : null}
 &nbsp;
       &lt;div&gt;
         by:&amp;nbsp;
-        {answer.answerer_name === 'Seller' ? &lt;span style={{fontWeight: 'bold'}}&gt;Seller&lt;/span&gt; : &lt;span&gt;{answer.answerer_name}&lt;/span&gt;}
+        {answer.answerer_name === 'Seller' ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;span style={{fontWeight: 'bold'}}&gt;Seller&lt;/span&gt; </span>: &lt;span&gt;{answer.answerer_name}&lt;/span&gt;}
         ,&amp;nbsp;
         &lt;span&gt;{answer.date}&lt;/span&gt;
         &amp;nbsp;|&amp;nbsp;  Helpful? &amp;nbsp;
@@ -172,7 +172,7 @@ export default AnswerView;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-02T22:37:11.134Z
+                at 2022-09-06T18:55:58.924Z
             </div>
         <script src="prettify.js"></script>
         <script>

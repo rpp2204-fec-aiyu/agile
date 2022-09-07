@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">51.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/20</span>
+                <span class='fraction'>16/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">23.07% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>3/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/18</span>
+                <span class='fraction'>16/28</span>
             </div>
         
             
@@ -121,7 +121,24 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,18 +148,35 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,7 +185,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,12 +223,14 @@ const QuesAns = ({product, productId}) =&gt; {
   const [questionList, setQuestionList] = useState([]);
   const [questionToShow, setQuestionToShow] = useState(2);
   const [showQuesForm, setShowQuesForm] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filtered, setFiltered] = useState([]);
 &nbsp;
   const handleCloseQuesForm = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowQuesForm(false);</span>
   const handleShowQuesForm = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowQuesForm(true);</span>
 &nbsp;
-  const getQuestionList = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >   axios.get(`/questions/${productId}`)</span>
+  const getQuestionList = () =&gt; {
+   axios.get(`/questions/${productId}`)
       .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
 <span class="cstat-no" title="statement not covered" >        console.log('SUCESSFULLY GET BACK THE QUESTIONS LIST ', res.data);</span>
 <span class="cstat-no" title="statement not covered" >        setQuestionList([...res.data.results]);</span>
@@ -208,8 +244,23 @@ const QuesAns = ({product, productId}) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setQuestionToShow(questionList.length);</span>
   }
 &nbsp;
-  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    getQuestionList();</span>
+  const handleChange = <span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+    //let filtered = [];
+<span class="cstat-no" title="statement not covered" >    setSearchTerm(e.target.value);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(" HERE IS WHAT USER SEARCH: ", searchTerm);</span>
+<span class="cstat-no" title="statement not covered" >    if(searchTerm.length &gt;= 2) {</span>
+<span class="cstat-no" title="statement not covered" >      setFiltered(questionList.filter(<span class="fstat-no" title="function not covered" >qu</span>estion =&gt; <span class="cstat-no" title="statement not covered" >question.question_body.includes(searchTerm))</span>);</span>
+<span class="cstat-no" title="statement not covered" >      console.log("here is the result list: ", filtered);</span>
+    }
+&nbsp;
+    //console.log('FILTER', filtered);
+  }
+  const handleSearch = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    setQuestionList(filtered);</span>
+  }
+&nbsp;
+  useEffect(() =&gt; {
+    getQuestionList();
   }, [])
 &nbsp;
 &nbsp;
@@ -217,12 +268,12 @@ const QuesAns = ({product, productId}) =&gt; {
     &lt;div className="qaBackground"&gt;
 &nbsp;
       &lt;h1&gt;Questions and Answers&lt;/h1&gt;
-      &lt;input placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..."/&gt;
-      &lt;button&gt;Search&lt;/button&gt;
+      &lt;input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} /&gt;
+      &lt;button onClick={handleSearch}&gt;Search&lt;/button&gt;
 &nbsp;
       &lt;div&gt;
         {questionList.slice(0, questionToShow).map(<span class="fstat-no" title="function not covered" >qu</span>estion =&gt;
-<span class="cstat-no" title="statement not covered" >          &lt;QuestionView question={question} product={product}/&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;QuestionView key={question.question_id} question={question} product={product}/&gt;</span>
         )}
       &lt;br /&gt;
       &lt;br /&gt;
@@ -244,7 +295,7 @@ export default QuesAns;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-02T22:37:11.134Z
+                at 2022-09-06T18:55:58.924Z
             </div>
         <script src="prettify.js"></script>
         <script>

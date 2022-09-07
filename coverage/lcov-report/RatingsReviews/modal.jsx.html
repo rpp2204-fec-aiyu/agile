@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for QuestionsAnswers/AnswerView.jsx</title>
+    <title>Code coverage report for RatingsReviews/modal.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">QuestionsAnswers</a> AnswerView.jsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">RatingsReviews</a> modal.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>1/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>1/10</span>
             </div>
         
             
@@ -89,28 +89,24 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -119,60 +115,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const React = require('react')
+import ReactDOM from 'react-dom';
 &nbsp;
-const AnswerView = <span class="fstat-no" title="function not covered" >({</span>answer}) =&gt; {
-  const [ansHelpfulness, setAnsHelpfuless] = <span class="cstat-no" title="statement not covered" >useState(answer.helpfulness);</span>
-  const [report, setReport] = <span class="cstat-no" title="statement not covered" >useState('Report');</span>
-&nbsp;
-  const handleReport = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setReport('Reported');</span></span>
-&nbsp;
-  const updateAnsHelpfulness = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setAnsHelpfuless(ansHelpfulness + 1);</span>
+export default class Modal extends React.Component {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {};</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return(</span>
-    &lt;div&gt;
-      &lt;h4&gt;A: {answer.body}&lt;/h4&gt;
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    var isOpen = <span class="cstat-no" title="statement not covered" >this.props.isOpen;</span>
+    var closeModal = <span class="cstat-no" title="statement not covered" >this.props.closeModal;</span>
+    var modalContent = <span class="cstat-no" title="statement not covered" >this.props.modalContent;</span>
+    var renderModal;
+    const modalRoot = <span class="cstat-no" title="statement not covered" >document.getElementById('modal-root');</span>
 &nbsp;
-      {answer.photos.length &gt; 0 ? answer.photos.map(<span class="fstat-no" title="function not covered" >ph</span>oto =&gt; <span class="cstat-no" title="statement not covered" >&lt;img style={{ width: 100, height: 100 }} src={photo}/&gt;)</span> : null}
+<span class="cstat-no" title="statement not covered" >    if (isOpen) {</span>
+<span class="cstat-no" title="statement not covered" >      renderModal = ReactDOM.createPortal(modalContent, modalRoot);</span>
+    }
 &nbsp;
+<span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div&gt;
-        by:&amp;nbsp;
-        {answer.answerer_name === 'Seller' ? &lt;span style={{fontWeight: 'bold'}}&gt;Seller&lt;/span&gt; : &lt;span&gt;{answer.answerer_name}&lt;/span&gt;}
-        ,&amp;nbsp;
-        &lt;span&gt;{answer.date}&lt;/span&gt;
-        &amp;nbsp;|&amp;nbsp;  Helpful? &amp;nbsp;
-        &lt;a href="#" onClick={updateAnsHelpfulness}&gt;Yes&lt;/a&gt;
-        &lt;span&gt;({ansHelpfulness})&lt;/span&gt;
-        &lt;span&gt; | &lt;/span&gt;
-        &lt;a href="#" onClick={handleReport}&gt;{report}&lt;/a&gt;
+        {renderModal}
       &lt;/div&gt;
-&nbsp;
-  &lt;/div&gt;
-  )
-}
-&nbsp;
-export default AnswerView;</pre></td></tr></table></pre>
+    )
+  }
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-06T18:29:11.282Z
+                at 2022-09-06T18:27:52.955Z
             </div>
         <script src="../prettify.js"></script>
         <script>

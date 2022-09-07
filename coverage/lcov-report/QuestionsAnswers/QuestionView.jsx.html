@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">26.31% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/19</span>
+                <span class='fraction'>5/19</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.88% </span>
+                <span class="strong">29.41% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/17</span>
+                <span class='fraction'>5/17</span>
             </div>
         
             
@@ -113,16 +113,17 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -157,6 +158,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,11 +170,11 @@ import React, { useState } from 'react'
 import AddAnsForm from './AddAnsForm.jsx'
 import AnswerView from './AnswerView.jsx'
 &nbsp;
-const QuestionView = <span class="fstat-no" title="function not covered" >({</span>question, product}) =&gt; {
-  const [answerToShow, setAnswerToShow] = <span class="cstat-no" title="statement not covered" >useState(2);</span>
-  const [loadAnsButton, setLoadAnsButton] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
-  const [showAnsForm, setShowAnsForm] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
-  const [quesHelpfulness, setQuesHelpfuless] = <span class="cstat-no" title="statement not covered" >useState(question.question_helpfulness);</span>
+const QuestionView = ({question, product}) =&gt; {
+  const [answerToShow, setAnswerToShow] = useState(2);
+  const [loadAnsButton, setLoadAnsButton] = useState(false);
+  const [showAnsForm, setShowAnsForm] = useState(false);
+  const [quesHelpfulness, setQuesHelpfuless] = useState(question.question_helpfulness);
 &nbsp;
   const handleCloseAnsForm = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowAnsForm(false);</span></span>
   const handleOpenAnsForm = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowAnsForm(true);</span></span>
@@ -201,13 +203,14 @@ const QuestionView = <span class="fstat-no" title="function not covered" >({</sp
       &lt;a href="#" onClick={handleOpenAnsForm}&gt;Add Answer&lt;/a&gt;
 &nbsp;
       {Object.keys(question.answers).slice(0, answerToShow).map(<span class="fstat-no" title="function not covered" >ke</span>y =&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;AnswerView answer={question.answers[key]}/&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;AnswerView key={question.answers[key].id} answer={question.answers[key]}/&gt;</span>
       )}
 &nbsp;
       &lt;br /&gt;
 &nbsp;
       {Object.keys(question.answers).length &gt; 2 ? &lt;span onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {<span class="cstat-no" title="statement not covered" >showMoreAns()}</span>}&gt;{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}&lt;/span&gt; : null}
-&nbsp;
+      &lt;br /&gt;
+      *******************************************************************************
       {showAnsForm &amp;&amp; &lt;AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/&gt;}
     &lt;/div&gt;
   )
@@ -220,7 +223,7 @@ export default QuestionView;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-03T16:57:51.008Z
+                at 2022-09-06T18:29:11.282Z
             </div>
         <script src="../prettify.js"></script>
         <script>

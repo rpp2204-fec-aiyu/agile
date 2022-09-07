@@ -154,6 +154,39 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
     })
 })
 
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  let questionId = req.params.question_id;
+  axios.put(`${BASEURL}/qa/questions/${questionId}/helpful`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  let ansId = req.params.answer_id;
+  axios.put(`${BASEURL}/qa/answers/${ansId}/helpful`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  let ansId = req.params.answer_id;
+  axios.put(`${BASEURL}/qa/answers/${ansId}/report`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
 app.post('/qa/questions', (req, res) => {
   //console.log('HERE IS THE INFO FOR POST QUES:', req.body);
   axios.post(`${BASEURL}/qa/questions`, req.body, { headers: {'Authorization': APIKEY}})

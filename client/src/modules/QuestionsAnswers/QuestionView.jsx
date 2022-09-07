@@ -1,13 +1,12 @@
 //const React = require('react')
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddAnsForm from './AddAnsForm.jsx'
 import AnswerView from './AnswerView.jsx'
 
-const QuestionView = ({question, product}) => {
+const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHelpfulness, reportAnswer}) => {
   const [answerToShow, setAnswerToShow] = useState(2);
   const [loadAnsButton, setLoadAnsButton] = useState(false);
   const [showAnsForm, setShowAnsForm] = useState(false);
-  const [quesHelpfulness, setQuesHelpfuless] = useState(question.question_helpfulness);
 
   const handleCloseAnsForm = () => setShowAnsForm(false);
   const handleOpenAnsForm = () => setShowAnsForm(true);
@@ -22,25 +21,26 @@ const QuestionView = ({question, product}) => {
     }
   }
 
-  const updateQuestionHelpfulness = () => {
-    setQuesHelpfuless(quesHelpfulness + 1);
-  }
-
   return(
     <div>
-      <h3>Q: {question.question_body}</h3>
-      <span>Helpful? </span>
-      <a href="#" onClick={updateQuestionHelpfulness}>Yes</a>
-      <span>({quesHelpfulness})</span>
-      <span>&nbsp;|&nbsp;</span>
-      <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
+
+      <div className="question">
+        <h3>Q: {question.question_body}</h3>
+        <div>
+          <span>Helpful? </span>
+          <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a>
+          <span>({question.question_helpfulness})</span>
+          <span>&nbsp;|&nbsp;</span>
+          <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
+        </div>
+      </div>
 
       {Object.keys(question.answers).slice(0, answerToShow).map(key =>
-        <AnswerView key={question.answers[key].id} answer={question.answers[key]}/>
+        <AnswerView key={question.answers[key].id} answer={question.answers[key]} updateAnsHelpfulness={updateAnsHelpfulness} reportAnswer={reportAnswer}/>
       )}
 
       <br />
-
+      
       {Object.keys(question.answers).length > 2 ? <span onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
       <br />
       *******************************************************************************

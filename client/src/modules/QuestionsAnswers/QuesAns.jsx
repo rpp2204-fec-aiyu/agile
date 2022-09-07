@@ -37,11 +37,59 @@ const QuesAns = ({product, productId}) => {
       setFiltered(questionList.filter(question => question.question_body.includes(searchTerm)));
       console.log("here is the result list: ", filtered);
     }
-
-    //console.log('FILTER', filtered);
   }
   const handleSearch = () => {
     setQuestionList(filtered);
+  }
+
+  const updateQuestionHelpfulness = (id) => {
+    axios.put(`/qa/questions/${id}/helpful`)
+      .then((response) => {
+        console.log('Successfully update question Helpfulness', response);
+        getQuestionList();
+      })
+      .catch((err) => {
+        console.log('Fail to update the question helpfulness', err);
+      })
+  }
+
+  const updateAnsHelpfulness = (id) => {
+    axios.put(`/qa/answers/${id}/helpful`)
+      .then((response) => {
+        console.log('Successfully update answer Helpfulness', response);
+        getQuestionList();
+      })
+      .catch((err) => {
+        console.log('Fail to update the answer helpfulness', err);
+      })
+  }
+
+  const reportAnswer = (id) => {
+    axios.put(`/qa/answers/${id}/report`)
+      .then((response) => {
+        console.log('Sucessfully report the answer', response);
+        getQuestionList();
+      })
+      .catch((err) => {
+        console.log('FAIL TO REPORT THE ANSWER', err);
+      })
+  }
+
+  const addQuestion = (qbody, nickname, email, p_id) => {
+    axios.post('/qa/questions', {
+      body: qbody,
+      name: nickname,
+      email: email,
+      product_id: p_id
+    })
+      .then((result) => {
+        console.log('successfully post a question', result);
+        handleCloseQuesForm();
+        getQuestionList();
+      })
+      .catch((err) => {
+        console.log('FAIL TO POST A QUESTION', err);
+      })
   }
 
   useEffect(() => {
@@ -56,16 +104,17 @@ const QuesAns = ({product, productId}) => {
       <input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
       <button onClick={handleSearch}>Search</button>
 
-      <div>
+      <div className="questions">
         {questionList.slice(0, questionToShow).map(question =>
-          <QuestionView key={question.question_id} question={question} product={product}/>
+          <QuestionView key={question.question_id} question={question} product={product} updateQuestionHelpfulness={updateQuestionHelpfulness} updateAnsHelpfulness={updateAnsHelpfulness} reportAnswer={reportAnswer}/>
         )}
-      <br />
-      <br />
+      </div>
+
+      {/* <br />
+      <br /> */}
       {questionList.length > 2 ? <button onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
       <button onClick={handleShowQuesForm}>ADD A QUESTION +</button>
-      {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm}/>}
-      </div>
+      {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm} addQuestion={addQuestion}/>}
 
     </div>
   )
