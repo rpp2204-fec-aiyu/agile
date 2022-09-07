@@ -14,7 +14,7 @@ export default function ThumbnailContainer(props) {
   }
 
   return (
-    <div>
+    <div data-testid='thumbnailContainerTest'>
       <strong>STYLE > </strong>{title.toUpperCase()}
       <br/>
       <br/>

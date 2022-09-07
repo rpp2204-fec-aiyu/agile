@@ -1,6 +1,6 @@
-/**
- * @jest-environment jsdom
- */
+ /**
+  * @jest-environment jsdom
+  */
 import ReactDOM from 'react-dom'
 import React from 'react';
 import RatingsAndReviews from '../ratingsAndReviews.jsx';
@@ -144,7 +144,7 @@ afterAll(() => {
   // Clean up after all tests are done, preventing this
   // interception layer from affecting irrelevant tests.
   server.close()
-})
+  })
 
 describe.only('RatingsAndReviews', () => {
   it('should render ratingsBreakdown component', () => {

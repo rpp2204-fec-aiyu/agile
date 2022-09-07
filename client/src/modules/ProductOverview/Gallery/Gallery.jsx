@@ -81,8 +81,8 @@ export default function Gallery(props) {
   //width='300' height='200'
 
   return (
-    <div id='gallery'>
-      <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight} />
+    <div id='gallery' data-testid="galleryTest">
+      <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
       {/* key={props.style.style_id}> */}
       <br></br>
       <div className='galleryThumbnailContainer'>
