@@ -4,7 +4,6 @@ import ReviewsList from './reviewsList.jsx';
 import Modal from './modal.jsx';
 import NewReview from './newReview.jsx';
 import SortReview from './sortReviews.jsx';
-import SearchReview from './searchReviews.jsx';
 import RatingsBreakdown from './ratingsBreakdown.jsx';
 import ProductBreakdown from './productBreakdown.jsx';
 
@@ -40,10 +39,6 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   getReviewsPromise(sortOrder) {
-    //if sortOrder is defined
-      //use it for the sort parameter
-    //otherwise
-      //use state
     var sortOrder = sortOrder !== undefined ? sortOrder : this.state.sortOrder;
     return (
       axios.get('http://localhost:3000/reviews', {
@@ -62,7 +57,7 @@ export default class RatingsAndReviews extends React.Component {
     filterList.forEach((ratingNum) => {
       this.setState((prevState) => {
         var newState = {};
-        console.log('prevState.filterBy: ', prevState.filterBy);
+        // console.log('prevState.filterBy: ', prevState.filterBy);
         for (var key in prevState.filterBy) {
           newState[key] = false;
         }
@@ -74,8 +69,8 @@ export default class RatingsAndReviews extends React.Component {
           this.setState({reviews: response.data.results});
           //filter by searchTerm if applicable
           if (this.state.searchTerm.length >= 3) {
-            console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
-            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            // console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
             this.filterReviewsBySearchTerm(this.state.searchTerm);
           }
         })
@@ -83,38 +78,25 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   searchReviews(e) {
-    //purpose:
-      //sets searchKeyword state
-      //iterates through existing reviews state and filters out non-matched reviews
+    //sets searchKeyword state
+    //iterates through existing reviews state and filters out non-matched reviews
 
-    //O: n/a
-    //I: search terms that get updated from searchReviews
-    //C:
-    //E:
-      //must expand and contract reviews state without refreshing the list
-      //changes to the sort and rating filters should not remove the search term filter
-
-    console.log('e.target.value: ', e.target.value);
+    // console.log('e.target.value: ', e.target.value);
 
    //if there's already a searchTerm applied, and the current searchTerm is different/shorter, reset state and refresh reviews before filtering
    if (this.state.searchTerm.length >= 3 && (this.state.searchTerm.length - e.target.value.length > 0)) {
-    console.log('this.state.searchTerm is greater or equal to 3');
-    console.log('this.state.searchTerm.length - e.target.value.length > 0');
-     //update searchTerm state to current event
+    // console.log('this.state.searchTerm is greater or equal to 3');
+    // console.log('this.state.searchTerm.length - e.target.value.length > 0');
      this.setState({searchTerm: e.target.value});
-     //invoke this.applyFilters() to refresh reviews list with the existing fitlers
      this.applyFilters();
    } else if (this.state.searchTerm.length >= 3 && (e.target.value.length - this.state.searchTerm.length > 0)) {
    //if there's already a searchTerm applied, and the current searchTerm is longer, reset state and filter the existing filtered reviews
-     //set searchTerm state to be equal to the event
      this.setState({searchTerm: e.target.value});
      this.filterReviewsBySearchTerm(e.target.value);
-     //filtering by the existing review list
    } else if (e.target.value.length < 3) {
     //if the current searchTerm is less than 3 characters, apply no searchTerm, but set state to current searchTerm
-      //do nothing
       this.setState({searchTerm: e.target.value});
-      console.log('current searchTerm is less than 3 chars so set new state and do nothing');
+      // console.log('current searchTerm is less than 3 chars so set new state and do nothing');
 
     } else if (e.target.value.length === 3) {
       this.setState({searchTerm: e.target.value});
@@ -124,14 +106,12 @@ export default class RatingsAndReviews extends React.Component {
 
   filterReviewsBySearchTerm(searchTerm) {
       var filteredReviewList = this.state.reviews.filter((review) => {
-        // console.log('review: ', review);
-        if (review.summary.indexOf(searchTerm) !== -1 || review.body.indexOf(searchTerm) !== -1) { //if searchTerm is found in a review, add it to filteredReviewList
+        if (review.summary.indexOf(searchTerm) !== -1 || review.body.indexOf(searchTerm) !== -1) {
           return review;
         }
       })
-      console.log('this.state.reviews after searchTerm filtering and ratingNum filtering, if applicable: ', filteredReviewList);
-      console.log('reviews should also be filtered by ratingNums if the followin this.state.filterBy object has true values: ', this.state.filterBy);
       this.setState({reviews: filteredReviewList});
+      // console.log('this.state.reviews after searchTerm filtering and ratingNum filtering, if applicable: ', filteredReviewList);
   }
 
   checkFilters() {
@@ -167,7 +147,6 @@ export default class RatingsAndReviews extends React.Component {
         var newState = {};
         for (var key in prevState.filterBy) {
           if (key === ratingNum.toString()) {
-            //set filterBy.ratingNum to true
             newState[ratingNum] = true;
           } else {
             newState[key] = prevState.filterBy[key];
@@ -183,7 +162,7 @@ export default class RatingsAndReviews extends React.Component {
         .then((response) => {
           this.applyFilterLogic(response.data.results, filterList);
           if (this.state.searchTerm.length >= 3) {
-            console.log('if rating filter exists, refresh reviews and filter by existing in place searchTerm');
+            // console.log('if rating filter exists, refresh reviews and filter by existing in place searchTerm');
             this.filterReviewsBySearchTerm(this.state.searchTerm);
           }
         })
@@ -197,8 +176,8 @@ export default class RatingsAndReviews extends React.Component {
         .then((response) => {
           this.setState({reviews: response.data.results});
           if (this.state.searchTerm.length >= 3) {
-            console.log('if last rating filter is removed, refresh reviews and filter by existing in place searchTerm');
-            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            // console.log('if last rating filter is removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
             this.filterReviewsBySearchTerm(this.state.searchTerm);
           }
         })
@@ -215,14 +194,14 @@ export default class RatingsAndReviews extends React.Component {
 
     //if turnOffAllFilters is true AND filterList is not empty
     if (turnOffAllFilters) {
-      //make a call to this.getReviewsList to refresh the reviews state
+      //refresh the reviews state
       this.getReviewsPromise()
         .then((response) => {
           this.setState({reviews: response.data.results});
           //filter by searchTerm if applicable
           if (this.state.searchTerm.length >= 3) {
-            console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
-            console.log('this.state.searchTerm: ', this.state.searchTerm);
+            // console.log('if all rating filters are removed, refresh reviews and filter by existing in place searchTerm');
+            // console.log('this.state.searchTerm: ', this.state.searchTerm);
             this.filterReviewsBySearchTerm(this.state.searchTerm);
           }
         })
@@ -231,7 +210,6 @@ export default class RatingsAndReviews extends React.Component {
       filterList.forEach((ratingNum) => {
         this.setState((prevState) => {
           var newState = {};
-          console.log('prevState.filterBy2: ', prevState.filterBy);
           for (var key in prevState.filterBy) {
             newState[key] = false;
           }
@@ -249,8 +227,8 @@ export default class RatingsAndReviews extends React.Component {
           if (parseInt(key) === ratingNum) {
             newState[key] = false;
           } else {
-            console.log('key: ', key);
-            console.log('prevState.filterBy[key]: ', prevState.filterBy[key]);
+            // console.log('key: ', key);
+            // console.log('prevState.filterBy[key]: ', prevState.filterBy[key]);
             newState[key] = prevState.filterBy[key];
           }
         }
