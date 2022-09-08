@@ -306,11 +306,19 @@
   position: absolute;
   top: 290px;
   left: 90px;
+  /* font-size: 'fa-3x'; */
+}
+
+#galleryRight {
+  position: absolute;
+  top: 290px;
+  left: 640px;
 }
 
 #galleryMainImage {
   position: relative;
   object-fit: cover;
+  cursor: zoom-in;
   /* height: auto;
   width: auto;
   min-height: 467px;
