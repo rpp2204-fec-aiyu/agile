@@ -146,7 +146,12 @@ export default function Gallery(props) {
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(highlightedThumbnail)} />
+      {highlightedThumbnail === 0 ?
+         null
+         :
+         <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(highlightedThumbnail)} />
+      }
+
       <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(highlightedThumbnail)} />
       <br></br>
 
