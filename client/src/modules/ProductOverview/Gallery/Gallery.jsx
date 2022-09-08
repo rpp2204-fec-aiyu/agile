@@ -8,7 +8,7 @@ export default function Gallery(props) {
   const [imageHeight, setImageHeight] = useState(null)
   const [maxThumbnails, setMaxThumbnails] = useState(0)
   // const [highlighted, setHighlighted] = useState(false)
-  const [clicked, setClicked] = useState(null)
+  const [clicked, setClicked] = useState(0)
 
   let [lowIndex, setLowIndex] = useState(0)
   let [highIndex, setHighIndex] = useState(7)
