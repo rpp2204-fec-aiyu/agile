@@ -47,7 +47,7 @@ export default function Gallery(props) {
 
   getImgSize(galleryPhoto, getImgDimensions)
 
-  function handleClick(i, photo) {
+  function handleThumbnailClick(i, photo) {
 
     // return function handleClick(photo) {
     //   //let img = document.getElementById(`galleryThumbnail${i}`)
@@ -118,11 +118,17 @@ export default function Gallery(props) {
     setHighIndex(highIndex -= 1)
   }
 
+  function handleRightArrow() {
+    let nextThumbnail = document.getElementById(`galleryThumbnail${i + 1}`)
+    setGalleryPhoto(nextThumbnail.url)
+  }
+
 
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
-      <FontAwesomeIcon icon='fa-solid fa-chevron-left' id='galleryLeft' />
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} />
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} />
       {/* key={props.style.style_id}> */}
       <br></br>
 
@@ -134,7 +140,7 @@ export default function Gallery(props) {
 
           if(i >= lowIndex && i < highIndex) {
             return (
-              <div onClick={()=>handleClick(i, photo)} key={i}>
+              <div onClick={()=>handleThumbnailClick(i, photo)} key={i}>
                 {clicked === i ?
                   <img className='galleryThumbnail'
                     id={`galleryThumbnail${i}`}
