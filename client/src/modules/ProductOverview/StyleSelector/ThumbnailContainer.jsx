@@ -25,10 +25,10 @@ export default function ThumbnailContainer(props) {
       <br/>
       <div id='stylesThumbnailContainer'>
       {props.styles.map((style, i)=> (
-        <div onClick={()=>handleClick(style, i)}>
+        <div onClick={()=>handleClick(style, i)} id='checkedStyleDiv'>
           {highlightedThumbnail === i ?
-            <div position='relative'>
-              <FontAwesomeIcon icon="fa-solid fa-circle-check" position='absolute' left='20px' top='20px' />
+            <div>
+              <FontAwesomeIcon icon="fa-solid fa-circle-check" id='styleCheckMark'/>
               <Thumbnail style={style}
                         index={i}
                         key={style.style_id}
