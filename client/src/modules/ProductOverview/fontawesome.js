@@ -6,7 +6,10 @@ import {
   faChevronUp,
   faChevronDown,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faCircleChevronLeft,
+  faCircleChevronRight,
+  faCircleCheck
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -15,5 +18,8 @@ library.add(
   faChevronUp,
   faChevronDown,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faCircleChevronLeft,
+  faCircleChevronRight,
+  faCircleCheck
 )
