@@ -316,14 +316,14 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 30px;
+  top: 10px;
   left: 12px;
-  gap: 15px;
+  gap: 10px;
 }
 
-.galleryThumbnail {
+/* .galleryThumbnail {
   border: 1px solid #000000;
-}
+} */
 
 #featuresList {
   list-style-type: '\2713';
