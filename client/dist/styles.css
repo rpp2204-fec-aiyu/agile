@@ -343,3 +343,13 @@
 #featuresList {
   list-style-type: '\2713';
 }
+
+#checkedStyleDiv {
+  position: relative;
+}
+
+#styleCheckMark {
+  position: absolute;
+  /* top: 3px; */
+  left: 65px;
+}
