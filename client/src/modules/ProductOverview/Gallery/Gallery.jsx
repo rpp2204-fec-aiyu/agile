@@ -48,8 +48,12 @@ export default function Gallery(props) {
   // getImgSize(galleryPhoto, getImgDimensions)
 
   useEffect(() => {
-    //setHighlightedThumbnail(0)
-    setGalleryPhoto(props.style.photos[highlightedThumbnail].url)
+    if(props.style.photos[highlightedThumbnail].url) {
+      setGalleryPhoto(props.style.photos[highlightedThumbnail].url)
+    } else {
+      setGalleryPhoto(props.style.photos[0].url)
+      setHighlightedThumbnail(0)
+    }
   }, [props.style])
 
   function handleThumbnailClick(i, photo) {
