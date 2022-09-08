@@ -122,6 +122,7 @@ export default function Gallery(props) {
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
+      <FontAwesomeIcon icon='fa-solid fa-chevron-left' id='galleryLeft' />
       {/* key={props.style.style_id}> */}
       <br></br>
 
