@@ -156,15 +156,26 @@ export default function Gallery(props) {
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
       {highlightedThumbnail === 0 ?
-         null
-         :
-         <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(highlightedThumbnail)} />
+        null
+        :
+        <FontAwesomeIcon
+          icon='fa-solid fa-circle-chevron-left'
+          id='galleryLeft'
+          cursor={'pointer'}
+          onClick={()=>handleLeftArrow(highlightedThumbnail)}
+        />
       }
 
       {highlightedThumbnail === props.style.photos.length - 1 ?
         null
         :
-        <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(highlightedThumbnail)} />}
+        <FontAwesomeIcon
+          icon='fa-solid fa-circle-chevron-right'
+          id='galleryRight'
+          cursor={'pointer'}
+          onClick={()=>handleRightArrow(highlightedThumbnail)}
+        />
+      }
 
       <br></br>
 
