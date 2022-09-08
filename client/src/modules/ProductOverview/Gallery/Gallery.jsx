@@ -16,36 +16,41 @@ export default function Gallery(props) {
   //let [border, setBorder] = useState('1px solid black')
 
   //let portrait = false;
-  const [clientHeight, setClientHeight] = useState(null)
-  const [clientWidth, setClientWidth] = useState(null)
+  const [clientHeight, setClientHeight] = useState('600')
+  const [clientWidth, setClientWidth] = useState('700')
 
   // let styling = {cursor: 'pointer', objectFit: 'cover'};
 
-  function getImgSize(imgSrc, callback) {
-    const newImg = new Image();
+  // function getImgSize(imgSrc, callback) {
+  //   const newImg = new Image();
 
-    newImg.onload = function() {
-      const height = newImg.height;
-      const width = newImg.width;
-      callback({ width, height })
-    }
+  //   newImg.onload = function() {
+  //     const height = newImg.height;
+  //     const width = newImg.width;
+  //     callback({ width, height })
+  //   }
 
-    newImg.src = imgSrc;
-  }
+  //   newImg.src = imgSrc;
+  // }
 
-  function getImgDimensions({ width, height }) {
-    console.log('width height', width, height)
-    if(height > width) {
-      setClientHeight('600')
-      setClientWidth('700')
-    } else {
-      setClientHeight('600')
-      setClientWidth('700')
-      //console.log('PORTRAIT: ', portrait)
-    }
-  }
+  // function getImgDimensions({ width, height }) {
+  //   console.log('width height', width, height)
+  //   if(height > width) {
+  //     setClientHeight('600')
+  //     setClientWidth('700')
+  //   } else {
+  //     setClientHeight('600')
+  //     setClientWidth('700')
+  //     //console.log('PORTRAIT: ', portrait)
+  //   }
+  // }
 
-  getImgSize(galleryPhoto, getImgDimensions)
+  // getImgSize(galleryPhoto, getImgDimensions)
+
+  useEffect(() => {
+    //setHighlightedThumbnail(0)
+    setGalleryPhoto(props.style.photos[highlightedThumbnail].url)
+  }, [props.style])
 
   function handleThumbnailClick(i, photo) {
 
@@ -75,9 +80,9 @@ export default function Gallery(props) {
     setGalleryPhoto(photo)
   }
 
-  useEffect(() => {
-    setGalleryPhoto(props.style.photos[0].url)
-  },[props.style])
+  // useEffect(() => {
+  //   setGalleryPhoto(props.style.photos[0].url)
+  // },[props.style])
 
   // let img;
   // let height;
@@ -151,10 +156,20 @@ export default function Gallery(props) {
 
   }
 
+  function expandView() {
+    if(clientWidth === '700') {
+      setClientWidth('900')
+      setClientHeight('800')
+    } else {
+      setClientWidth('700')
+      setClientHeight('600')
+    }
+  }
+
 
   return (
     <div id='gallery' data-testid="galleryTest">
-      <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
+      <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight} onClick={expandView}/>
       {highlightedThumbnail === 0 ?
         null
         :
