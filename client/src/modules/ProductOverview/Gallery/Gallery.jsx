@@ -5,15 +5,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function Gallery(props) {
 
   const [galleryPhoto, setGalleryPhoto] = useState(props.style.photos[0].url)
-  //const [imageHeight, setImageHeight] = useState(null)
+  const [imageHeight, setImageHeight] = useState(null)
   const [maxThumbnails, setMaxThumbnails] = useState(0)
+  // const [highlighted, setHighlighted] = useState(false)
+  const [clicked, setClicked] = useState(null)
 
   let [lowIndex, setLowIndex] = useState(0)
   let [highIndex, setHighIndex] = useState(7)
 
+  //let [border, setBorder] = useState('1px solid black')
+
   //let portrait = false;
   const [clientHeight, setClientHeight] = useState(null)
   const [clientWidth, setClientWidth] = useState(null)
+
+  // let styling = {cursor: 'pointer', objectFit: 'cover'};
 
   function getImgSize(imgSrc, callback) {
     const newImg = new Image();
@@ -41,14 +47,31 @@ export default function Gallery(props) {
 
   getImgSize(galleryPhoto, getImgDimensions)
 
+  function handleClick(i, photo) {
 
-  function handleClick(e, photo, i) {
-    //let img = document.getElementById(`galleryThumbnail${i}`)
-    let img = document.getElementById('galleryMainImage')
-    //console.log('url: ', photo)
-    console.log('NATURAL HEIGHT: ',img.naturalHeight)
-    console.log('NATURAL WIDTH: ', img.naturalWidth)
+    // return function handleClick(photo) {
+    //   //let img = document.getElementById(`galleryThumbnail${i}`)
+    //   //let img = document.getElementById('galleryMainImage')
+    //   //console.log('url: ', photo)
+    //   //console.log('NATURAL HEIGHT: ',img.naturalHeight)
+    //   //console.log('NATURAL WIDTH: ', img.naturalWidth)
+    //   // styling = {cursor: 'pointer', objectFit: 'cover', border: '15px solid black'}
 
+    //   //let imageId = `galleryThumbnail${i}`
+    //   //document.getElementById(imageId).style.border = "3px solid black";
+    //   //setBorder('3px solid black')
+
+    //   setGalleryPhoto(photo.url)
+    //   setClicked(clicked === i ? null : i)
+    // }
+
+    setGalleryPhoto(photo.url)
+    setClicked(clicked === i ? null : i)
+
+  }
+
+  function mainImage(e, photo) {
+    e.stopPropagation()
     setGalleryPhoto(photo)
   }
 
@@ -75,14 +98,14 @@ export default function Gallery(props) {
   //   console.log('WIDTH', img.clientWidth)
   // }, [galleryPhoto])
 
-  useEffect(()=> { //TODO: add condition for 6 thumbnails
-    if(clientHeight === '467') {
-      setMaxThumbnails(5)
-    } else {
-      setMaxThumbnails(7)
-    }
-    console.log('MAX THUMBNAILS: ', maxThumbnails)
-  }, [clientHeight])
+  // useEffect(()=> { //TODO: add condition for 6 thumbnails
+  //   if(clientHeight === '467') {
+  //     setMaxThumbnails(5)
+  //   } else {
+  //     setMaxThumbnails(7)
+  //   }
+  //   console.log('MAX THUMBNAILS: ', maxThumbnails)
+  // }, [clientHeight])
   //width='300' height='200'
 
   function handleDownArrow() {
@@ -103,19 +126,39 @@ export default function Gallery(props) {
       <br></br>
 
       <div className='galleryThumbnailContainer'>
-      {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/> }
+        {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/> }
 
       {/* <i class='fa-solid fa-angle-up'></i> */}
         {props.style.photos.map((photo, i) => {
-          console.log(i)
+
           if(i >= lowIndex && i < highIndex) {
             return (
-            <img className='galleryThumbnail' id={`galleryThumbnail${i}`} key={i} src={photo.thumbnail_url} onClick={(e)=>handleClick(e, photo.url, i)} style={{cursor: 'pointer', objectFit: 'cover'}} width='60' height='60' ></img>
+              <div onClick={()=>handleClick(i, photo)} key={i}>
+                {clicked === i ?
+                  <img className='galleryThumbnail'
+                    id={`galleryThumbnail${i}`}
+                    //key={i}
+                    src={photo.thumbnail_url}
+                    //onClick={()=>mainImage(photo)}
+                    style={{cursor: 'pointer', objectFit: 'cover', border: '3px solid black'}}
+                    width='60' height='60'
+                  /> :
+                  <img className='galleryThumbnail'
+                    id={`galleryThumbnail${i}`}
+                    //key={i}
+                    src={photo.thumbnail_url}
+                    //onClick={()=>click(i)(photo)}
+                    style={{cursor: 'pointer', objectFit: 'cover', border: '1px solid black'}}
+                    width='60' height='60'
+                  />
+                }
+
+              </div>
             )
-            // i++;
+
           }
         })}
-        {highIndex === props.style.photos.length - 1 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
+        {highIndex === props.style.photos.length - 1 ? <></> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
 
       </div>
     </div>
