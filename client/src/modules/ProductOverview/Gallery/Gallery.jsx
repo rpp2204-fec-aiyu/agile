@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import '../fontawesome.js'
 
 export default function Gallery(props) {
 
   const [galleryPhoto, setGalleryPhoto] = useState(props.style.photos[0].url)
   //const [imageHeight, setImageHeight] = useState(null)
   const [maxThumbnails, setMaxThumbnails] = useState(0)
+
+  let [lowIndex, setLowIndex] = useState(0)
+  let [highIndex, setHighIndex] = useState(7)
 
   //let portrait = false;
   const [clientHeight, setClientHeight] = useState(null)
@@ -80,20 +85,36 @@ export default function Gallery(props) {
   }, [clientHeight])
   //width='300' height='200'
 
+  function handleDownArrow() {
+    setLowIndex(lowIndex += 1)
+    setHighIndex(highIndex += 1)
+  }
+
+  function handleUpArrow() {
+    setLowIndex(lowIndex -= 1)
+    setHighIndex(highIndex -= 1)
+  }
+
+
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
       {/* key={props.style.style_id}> */}
       <br></br>
+
       <div className='galleryThumbnailContainer'>
+      <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/>
+      {/* <i class='fa-solid fa-angle-up'></i> */}
         {props.style.photos.map((photo, i) => {
-          if(i < maxThumbnails) {
+          console.log(i)
+          if(i >= lowIndex && i < highIndex) {
             return (
             <img className='galleryThumbnail' id={`galleryThumbnail${i}`} key={i} src={photo.thumbnail_url} onClick={(e)=>handleClick(e, photo.url, i)} style={{cursor: 'pointer', objectFit: 'cover'}} width='60' height='60' ></img>
             )
             // i++;
           }
         })}
+      <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow}/>
       </div>
     </div>
   )
