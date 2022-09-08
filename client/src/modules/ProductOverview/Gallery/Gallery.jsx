@@ -119,9 +119,18 @@ export default function Gallery(props) {
   }
 
   function handleLeftArrow(i) {
-    let nextThumbnail = document.getElementById(`galleryThumbnail${i - 1}`)
-    setGalleryPhoto(nextThumbnail.dataset.photourl)
-    setHighlightedThumbnail(highlightedThumbnail - 1)
+    if(i - 1 < lowIndex) {
+      setLowIndex(lowIndex - 1)
+      setHighIndex(highIndex - 1)
+      i -= 1
+      setGalleryPhoto(props.style.photos[i].url)
+      setHighlightedThumbnail(highlightedThumbnail - 1)
+
+    } else {
+      let nextThumbnail = document.getElementById(`galleryThumbnail${i - 1}`)
+      setGalleryPhoto(nextThumbnail.dataset.photourl)
+      setHighlightedThumbnail(highlightedThumbnail - 1)
+    }
   }
 
   function handleRightArrow(i) {
