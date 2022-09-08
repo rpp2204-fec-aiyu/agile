@@ -302,6 +302,12 @@
   position: relative;
 }
 
+#galleryLeft {
+  position: absolute;
+  top: 290px;
+  left: 90px;
+}
+
 #galleryMainImage {
   position: relative;
   object-fit: cover;
