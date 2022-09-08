@@ -24,23 +24,23 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
   return(
     <div>
 
-      <div className="question">
-        <h3>Q: {question.question_body}</h3>
-        <div>
-          <span>Helpful? </span>
-          <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a>
-          <span>({question.question_helpfulness})</span>
-          <span>&nbsp;|&nbsp;</span>
-          <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
-        </div>
+
+      <h3>Q: {question.question_body}</h3>
+      <div>
+        <span>Helpful? </span>
+        <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a>
+        <span>({question.question_helpfulness})</span>
+        <span>&nbsp;|&nbsp;</span>
+        <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
       </div>
+
 
       {Object.keys(question.answers).slice(0, answerToShow).map(key =>
         <AnswerView key={question.answers[key].id} answer={question.answers[key]} updateAnsHelpfulness={updateAnsHelpfulness} reportAnswer={reportAnswer}/>
       )}
 
       <br />
-      
+
       {Object.keys(question.answers).length > 2 ? <span onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
       <br />
       *******************************************************************************

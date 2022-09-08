@@ -100,22 +100,25 @@ const QuesAns = ({product, productId}) => {
   return(
     <div className="qaBackground">
 
-      <h1>Questions and Answers</h1>
-      <input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
-      <button onClick={handleSearch}>Search</button>
+      <h1 className="qatitle">Questions and Answers</h1>
+      <div className="searchBar">
+        <input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+
 
       <div className="questions">
         {questionList.slice(0, questionToShow).map(question =>
           <QuestionView key={question.question_id} question={question} product={product} updateQuestionHelpfulness={updateQuestionHelpfulness} updateAnsHelpfulness={updateAnsHelpfulness} reportAnswer={reportAnswer}/>
         )}
-      </div>
+
 
       {/* <br />
       <br /> */}
       {questionList.length > 2 ? <button onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
       <button onClick={handleShowQuesForm}>ADD A QUESTION +</button>
       {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm} addQuestion={addQuestion}/>}
-
+      </div>
     </div>
   )
 }
