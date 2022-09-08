@@ -79,10 +79,10 @@ export default function Gallery(props) {
 
   }
 
-  function mainImage(e, photo) {
-    e.stopPropagation()
-    setGalleryPhoto(photo)
-  }
+  // function mainImage(e, photo) {
+  //   e.stopPropagation()
+  //   setGalleryPhoto(photo)
+  // }
 
   // useEffect(() => {
   //   setGalleryPhoto(props.style.photos[0].url)
@@ -199,7 +199,7 @@ export default function Gallery(props) {
       <br></br>
 
       <div className='galleryThumbnailContainer'>
-        {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/> }
+        {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'} fontSize='25px'/> }
 
         {props.style.photos.map((photo, i) => {
 
@@ -212,7 +212,7 @@ export default function Gallery(props) {
                     id={`galleryThumbnail${i}`}
                     data-photourl={photo.url}
                     src={photo.thumbnail_url}
-                    style={{cursor: 'pointer', objectFit: 'cover', boxShadow: '3px 3px'}}
+                    style={{cursor: 'pointer', objectFit: 'cover', boxShadow: '3px 3px orange'}}
                     width='60' height='60'
                   /> :
                   <img className='galleryThumbnail'
@@ -229,7 +229,7 @@ export default function Gallery(props) {
 
           }
         })}
-        {highIndex === props.style.photos.length ? <></> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
+        {highIndex === props.style.photos.length ? <></> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'} fontSize='25px'/> }
 
       </div>
     </div>
