@@ -140,7 +140,7 @@ export default function Gallery(props) {
                     //key={i}
                     src={photo.thumbnail_url}
                     //onClick={()=>mainImage(photo)}
-                    style={{cursor: 'pointer', objectFit: 'cover', border: '3px solid black'}}
+                    style={{cursor: 'pointer', objectFit: 'cover', boxShadow: '3px 3px'}}
                     width='60' height='60'
                   /> :
                   <img className='galleryThumbnail'
