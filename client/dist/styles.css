@@ -306,13 +306,14 @@
   position: absolute;
   top: 290px;
   left: 90px;
-  /* font-size: 'fa-3x'; */
+  font-size: 40px;
 }
 
 #galleryRight {
   position: absolute;
   top: 290px;
   left: 640px;
+  font-size: 40px
 }
 
 #galleryMainImage {
