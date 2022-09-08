@@ -161,7 +161,11 @@ export default function Gallery(props) {
          <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(highlightedThumbnail)} />
       }
 
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(highlightedThumbnail)} />
+      {highlightedThumbnail === props.style.photos.length - 1 ?
+        null
+        :
+        <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(highlightedThumbnail)} />}
+
       <br></br>
 
       <div className='galleryThumbnailContainer'>
