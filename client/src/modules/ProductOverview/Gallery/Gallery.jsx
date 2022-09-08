@@ -103,7 +103,8 @@ export default function Gallery(props) {
       <br></br>
 
       <div className='galleryThumbnailContainer'>
-      <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/>
+      {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/> }
+
       {/* <i class='fa-solid fa-angle-up'></i> */}
         {props.style.photos.map((photo, i) => {
           console.log(i)
@@ -114,7 +115,8 @@ export default function Gallery(props) {
             // i++;
           }
         })}
-      <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow}/>
+        {highIndex === props.style.photos.length - 1 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
+
       </div>
     </div>
   )
