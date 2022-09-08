@@ -8,10 +8,10 @@ export default function Gallery(props) {
   const [imageHeight, setImageHeight] = useState(null)
   const [maxThumbnails, setMaxThumbnails] = useState(0)
   // const [highlighted, setHighlighted] = useState(false)
-  const [clicked, setClicked] = useState(0)
+  const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
 
-  let [lowIndex, setLowIndex] = useState(0)
-  let [highIndex, setHighIndex] = useState(7)
+  const [lowIndex, setLowIndex] = useState(0)
+  const [highIndex, setHighIndex] = useState(7)
 
   //let [border, setBorder] = useState('1px solid black')
 
@@ -66,7 +66,7 @@ export default function Gallery(props) {
     // }
 
     setGalleryPhoto(photo.url)
-    setClicked(clicked === i ? null : i)
+    setHighlightedThumbnail(highlightedThumbnail === i ? null : i)
 
   }
 
@@ -109,33 +109,45 @@ export default function Gallery(props) {
   //width='300' height='200'
 
   function handleDownArrow() {
-    setLowIndex(lowIndex += 1)
-    setHighIndex(highIndex += 1)
+    setLowIndex(lowIndex + 1)
+    setHighIndex(highIndex + 1)
   }
 
   function handleUpArrow() {
-    setLowIndex(lowIndex -= 1)
-    setHighIndex(highIndex -= 1)
+    setLowIndex(lowIndex - 1)
+    setHighIndex(highIndex - 1)
   }
 
   function handleLeftArrow(i) {
     let nextThumbnail = document.getElementById(`galleryThumbnail${i - 1}`)
     setGalleryPhoto(nextThumbnail.dataset.photourl)
-    setClicked(clicked - 1)
+    setHighlightedThumbnail(highlightedThumbnail - 1)
   }
 
   function handleRightArrow(i) {
-    let nextThumbnail = document.getElementById(`galleryThumbnail${i + 1}`)
-    setGalleryPhoto(nextThumbnail.dataset.photourl)
-    setClicked(clicked + 1)
+    if(i + 1 >= highIndex) {
+      setLowIndex(lowIndex + 1)
+      setHighIndex(highIndex + 1)
+      i += 1
+      //console.log('HIGH INDEX: ', highIndex)
+      //let nextThumbnail = document.getElementById(`galleryThumbnail${highIndex}`)
+      //setGalleryPhoto(nextThumbnail.dataset.photourl)
+      setGalleryPhoto(props.style.photos[i].url)
+      setHighlightedThumbnail(highlightedThumbnail + 1)
+    } else {
+      let nextThumbnail = document.getElementById(`galleryThumbnail${i + 1}`)
+      setGalleryPhoto(nextThumbnail.dataset.photourl)
+      setHighlightedThumbnail(highlightedThumbnail + 1)
+    }
+
   }
 
 
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(clicked)} />
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(clicked)} />
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(highlightedThumbnail)} />
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(highlightedThumbnail)} />
       <br></br>
 
       <div className='galleryThumbnailContainer'>
@@ -147,7 +159,7 @@ export default function Gallery(props) {
             return (
               <div onClick={()=>handleThumbnailClick(i, photo)} key={i}>
 
-                {clicked === i ?
+                {highlightedThumbnail === i ?
                   <img className='galleryThumbnail'
                     id={`galleryThumbnail${i}`}
                     data-photourl={photo.url}
@@ -169,7 +181,7 @@ export default function Gallery(props) {
 
           }
         })}
-        {highIndex === props.style.photos.length - 1 ? <></> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
+        {highIndex === props.style.photos.length ? <></> : <FontAwesomeIcon icon='fa-solid fa-chevron-down' onClick={handleDownArrow} cursor={'pointer'}/> }
 
       </div>
     </div>
