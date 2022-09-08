@@ -1,6 +1,6 @@
-/**
- * @jest-environment jsdom
- */
+ /**
+  * @jest-environment jsdom
+  */
 import ReactDOM from 'react-dom'
 import React from 'react';
 import RatingsAndReviews from '../ratingsAndReviews.jsx';
@@ -144,7 +144,7 @@ afterAll(() => {
   // Clean up after all tests are done, preventing this
   // interception layer from affecting irrelevant tests.
   server.close()
-})
+  })
 
 describe.only('RatingsAndReviews', () => {
   it('should render ratingsBreakdown component', () => {
@@ -221,3 +221,20 @@ describe.only('RatingsAndReviews', () => {
   //   // expect(screen.getAllByRole('option')[3]).toBeInTheDocument();
   // })
 })
+
+//keyword search tests
+/*
+if keyword search is less than 3, no search should be applied
+
+if keyword search is 3 chars or more, search term should be applied
+
+if keyword search is 3 chars or more, then is less than 3, all reviews should re-render
+
+if sort is applied when a search term is filtering, sort should sort by applied filter
+
+if keyword search and rating filter should work together
+
+if a keyword search is applied, and a rating filter is turned off after being enabled, keyword search should not change
+*/
+
+//Changing the sort order will always refresh the reviews list.

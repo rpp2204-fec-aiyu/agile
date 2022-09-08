@@ -53,7 +53,7 @@ export default function ProductOverview({ product, productId }) {
   if(!style) return null
 
   return (
-    <div>
+    <div data-testid="productOverviewTest">
       <div style={{display: 'flex'}}>
         <Gallery style={style} />
         <div style={{marginLeft: '30px', color: '#25383C'}}>
