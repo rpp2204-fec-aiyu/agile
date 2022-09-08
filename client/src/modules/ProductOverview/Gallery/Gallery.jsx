@@ -118,43 +118,47 @@ export default function Gallery(props) {
     setHighIndex(highIndex -= 1)
   }
 
-  function handleRightArrow() {
+  function handleLeftArrow(i) {
+    let nextThumbnail = document.getElementById(`galleryThumbnail${i - 1}`)
+    setGalleryPhoto(nextThumbnail.dataset.photourl)
+    setClicked(clicked - 1)
+  }
+
+  function handleRightArrow(i) {
     let nextThumbnail = document.getElementById(`galleryThumbnail${i + 1}`)
-    setGalleryPhoto(nextThumbnail.url)
+    setGalleryPhoto(nextThumbnail.dataset.photourl)
+    setClicked(clicked + 1)
   }
 
 
   return (
     <div id='gallery' data-testid="galleryTest">
       <img id='galleryMainImage' src={galleryPhoto} width={clientWidth} height={clientHeight}  />
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} />
-      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} />
-      {/* key={props.style.style_id}> */}
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-left' id='galleryLeft' cursor={'pointer'} onClick={()=>handleLeftArrow(clicked)} />
+      <FontAwesomeIcon icon='fa-solid fa-circle-chevron-right' id='galleryRight' cursor={'pointer'} onClick={()=>handleRightArrow(clicked)} />
       <br></br>
 
       <div className='galleryThumbnailContainer'>
         {lowIndex === 0 ? <div><br/></div> : <FontAwesomeIcon icon='fa-solid fa-chevron-up' onClick={handleUpArrow} cursor={'pointer'}/> }
 
-      {/* <i class='fa-solid fa-angle-up'></i> */}
         {props.style.photos.map((photo, i) => {
 
           if(i >= lowIndex && i < highIndex) {
             return (
               <div onClick={()=>handleThumbnailClick(i, photo)} key={i}>
+
                 {clicked === i ?
                   <img className='galleryThumbnail'
                     id={`galleryThumbnail${i}`}
-                    //key={i}
+                    data-photourl={photo.url}
                     src={photo.thumbnail_url}
-                    //onClick={()=>mainImage(photo)}
                     style={{cursor: 'pointer', objectFit: 'cover', boxShadow: '3px 3px'}}
                     width='60' height='60'
                   /> :
                   <img className='galleryThumbnail'
                     id={`galleryThumbnail${i}`}
-                    //key={i}
+                    data-photourl={photo.url}
                     src={photo.thumbnail_url}
-                    //onClick={()=>click(i)(photo)}
                     style={{cursor: 'pointer', objectFit: 'cover', border: '1px solid black'}}
                     width='60' height='60'
                   />
