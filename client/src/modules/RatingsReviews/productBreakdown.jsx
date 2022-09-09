@@ -28,16 +28,13 @@ export default class ProductBreakdown extends React.Component {
       var qualityBreakdown =
         <div className='qualityBreakdown'>
           <div className='characteristic-title'>Quality</div>
-          <div className="side left">
-            <div>Poor</div>
-          </div>
-          <div className='middle'>
+          <div className='middleBar'>
             <div className='characteristic-container'>
-              <div className='quality-pointer' style={{width: this.calculatePointerPosition(quality.value)}}> &#9660;</div>
+              <div className='quality-pointer' style={{ width: this.calculatePointerPosition(quality.value) }}> &#9660;
+              </div>
+              <div className="bottomLeft">Poor</div>
+              <div className="bottomRight">Perfect</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Perfect</div>
           </div>
         </div>
     }
@@ -45,16 +42,12 @@ export default class ProductBreakdown extends React.Component {
       var sizeBreakdown =
         <div className='sizeBreakdown'>
           <div className='characteristic-title'>Size</div>
-          <div className="side left">
-            <div>Too small</div>
-          </div>
-          <div className='middle'>
-          <div className='characteristic-container'>
-              <div className='size-pointer' style={{width: this.calculatePointerPosition(size.value)}}> &#9660;</div>
+          <div className='middleBar'>
+            <div className='characteristic-container'>
+              <div className='size-pointer' style={{ width: this.calculatePointerPosition(size.value) }}> &#9660;</div>
+              <div className="bottomLeft">Too small</div>
+              <div className="bottomRight">Too big</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Too big</div>
           </div>
         </div>
     }
@@ -62,16 +55,12 @@ export default class ProductBreakdown extends React.Component {
       var widthBreakdown =
         <div className='widthBreakdown'>
           <div className='characteristic-title'>Width</div>
-          <div className="side left">
-            <div>Too narrow</div>
-          </div>
-          <div className='middle'>
-          <div className='characteristic-container'>
-              <div className='width-pointer' style={{width: this.calculatePointerPosition(width.value)}}> &#9660;</div>
+          <div className='middleBar'>
+            <div className='characteristic-container'>
+              <div className='width-pointer' style={{ width: this.calculatePointerPosition(width.value) }}> &#9660;</div>
+              <div className="bottomLeft">Too narrow</div>
+              <div className="bottomRight">Too wide</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Too wide</div>
           </div>
         </div>
     }
@@ -79,16 +68,12 @@ export default class ProductBreakdown extends React.Component {
       var comfortBreakdown =
         <div className='comfortBreakdown'>
           <div className='characteristic-title'>Comfort</div>
-          <div className="side left">
-            <div>Uncomfortable</div>
-          </div>
-          <div className='middle'>
+          <div className='middleBar'>
           <div className='characteristic-container'>
               <div className='comfort-pointer' style={{width: this.calculatePointerPosition(comfort.value)}}> &#9660;</div>
+              <div className="bottomLeft">Uncomfortable</div>
+              <div className="bottomRight">Perfect</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Perfect</div>
           </div>
         </div>
     }
@@ -96,16 +81,12 @@ export default class ProductBreakdown extends React.Component {
       var fitBreakdown =
         <div className='fitBreakdown'>
           <div className='characteristic-title'>Fit</div>
-          <div className="side left">
-            <div>Runs tight</div>
-          </div>
-          <div className='middle'>
-          <div className='characteristic-container'>
-              <div className='fit-pointer' style={{width: this.calculatePointerPosition(fit.value)}}> &#9660;</div>
+          <div className='middleBar'>
+            <div className='characteristic-container'>
+              <div className='fit-pointer' style={{ width: this.calculatePointerPosition(fit.value) }}> &#9660;</div>
+              <div className="bottomLeft">Runs tight</div>
+              <div className="bottomRight">Runs long</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Runs long</div>
           </div>
         </div>
     }
@@ -113,16 +94,12 @@ export default class ProductBreakdown extends React.Component {
       var lengthBreakdown =
         <div className='lengthBreakdown'>
           <div className='characteristic-title'>Length</div>
-          <div className="side left">
-            <div>Runs short</div>
-          </div>
-          <div className='middle'>
+          <div className='middleBar'>
           <div className='characteristic-container'>
               <div className='length-pointer' style={{width: this.calculatePointerPosition(length.value)}}> &#9660;</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Runs long</div>
+            <div className="bottomLeft">Runs short</div>
+            <div className="bottomRight">Runs long</div>
           </div>
         </div>
     }

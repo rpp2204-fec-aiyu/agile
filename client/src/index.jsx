@@ -45,11 +45,11 @@ function App() {
   const QuesAnsWithClickTracking = WithClickTracking(QuesAns)
 
   if(!productId) return null
-
+  console.log('product: ', product);
   return (
     <>
       <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
+      <RatingsAndReviewsWithClickTracking product_id={productId} productName={product.name}/>
       <QuesAnsWithClickTracking product={product} productId={productId}/>
     </>
   )
