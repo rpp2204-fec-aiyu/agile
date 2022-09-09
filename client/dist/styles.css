@@ -410,6 +410,11 @@
 }
 
 /*PRODUCT OVERVIEW*/
+#ProductOverview {
+  display: flex;
+  justify-content: center;
+}
+
 #productTitle {
   font-size: 33px;
   color: #25383C;
