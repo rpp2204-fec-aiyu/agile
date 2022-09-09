@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './fontawesome.js'
 import axios from 'axios'
 import Category from './ProductInfo/Category.jsx'
 import Title from './ProductInfo/Title.jsx'
@@ -53,10 +54,10 @@ export default function ProductOverview({ product, productId }) {
   if(!style) return null
 
   return (
-    <div>
+    <div data-testid="productOverviewTest" style={{marginLeft: '300px', marginTop: '25px', marginBottom: '30px'}}> {/* increases surrounding margins to approx centering */}
       <div style={{display: 'flex'}}>
         <Gallery style={style} />
-        <div style={{marginLeft: '30px', color: '#25383C'}}>
+        <div style={{marginLeft: '60px', color: '#25383C'}}>
           <StarRating reviews={reviews}/>
           <br/>
           <Category category={category} />
