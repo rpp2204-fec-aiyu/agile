@@ -54,7 +54,7 @@ export default function ProductOverview({ product, productId }) {
   if(!style) return null
 
   return (
-    <div data-testid="productOverviewTest" style={{marginLeft: '300px', marginTop: '25px', marginBottom: '30px'}}>
+    <div data-testid="productOverviewTest" style={{marginLeft: '300px', marginTop: '25px', marginBottom: '30px'}}> {/* increases surrounding margins to approx centering */}
       <div style={{display: 'flex'}}>
         <Gallery style={style} />
         <div style={{marginLeft: '60px', color: '#25383C'}}>
