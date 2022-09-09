@@ -175,17 +175,18 @@ export default class Review extends React.Component {
         <span>
           {this.generateStarsFromRating(this.props.review.rating)}
           <div className='reviewDate'>
+            {this.props.review.reviewer_name}
+            {', '}
             {this.formatDate(this.props.review.date)}
           </div>
-          <span className='reviewSummary'><b>{this.props.review.summary}</b>
-          </span>
+          <div className='reviewSummary'><h3>{this.props.review.summary}</h3>
+          </div>
           {reviewBody}
           <div className='photos'>
             {photos}
           </div>
         </span>
         {recommendation}
-        <p className='reviewUserName'>{this.props.review.reviewer_name}</p>
         {response}
         <div className='reviewHelpfulness'>
           Helpful? Yes(

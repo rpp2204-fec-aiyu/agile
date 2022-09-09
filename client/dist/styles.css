@@ -98,7 +98,8 @@
 }
 
 .characteristic-title {
- float: left;
+ clear: both;
+ padding-top: 10px;
 }
 
 .bottomLeft {
@@ -110,7 +111,7 @@
 }
 
 .middleBar {
-  width: 70%;
+  width: 81%;
   margin-top: 10px;
 }
 
@@ -284,6 +285,59 @@
   padding: 5px;
   width: 75px;
   height: 75px;
+}
+
+.review {
+  margin: 25px;
+}
+
+.reviewResponse {
+  background-color: f1f1f1;
+}
+
+.reviewRecommendation {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#reviewListSearch {
+  margin-left: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.reviewSummary {
+  clear: both;
+  padding-top: 1px;
+}
+
+.rating {
+  float: left;
+}
+
+.reviewDate {
+  float: right;
+}
+
+#reviewListSort {
+  margin-left: 25px;
+}
+
+#moreReviewsButton {
+  margin-left: 25px;
+}
+
+#addReviewButton {
+  margin-left: 10px;
+}
+
+.reviewHelpfulness {
+  border-bottom: 2px solid rgb(105, 105, 105);
+  padding-bottom: 10px;
+}
+
+#characteristicsSummary {
+  margin-top: 50px;
 }
 
 .review-photo-modal img {
