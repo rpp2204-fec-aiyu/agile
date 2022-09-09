@@ -28,16 +28,13 @@ export default class ProductBreakdown extends React.Component {
       var qualityBreakdown =
         <div className='qualityBreakdown'>
           <div className='characteristic-title'>Quality</div>
-          <div className="side left">
-            <div>Poor</div>
-          </div>
-          <div className='middle'>
+          <div className='middleBar'>
             <div className='characteristic-container'>
-              <div className='quality-pointer' style={{width: this.calculatePointerPosition(quality.value)}}> &#9660;</div>
+              <div className='quality-pointer' style={{ width: this.calculatePointerPosition(quality.value) }}> &#9660;
+              </div>
+              <div className="bottomLeft">Poor</div>
+              <div className="bottomRight">Perfect</div>
             </div>
-          </div>
-          <div className="side right">
-            <div>Perfect</div>
           </div>
         </div>
     }
@@ -129,11 +126,11 @@ export default class ProductBreakdown extends React.Component {
     return (
       <div id='characteristicsSummary'>
         {qualityBreakdown}
-        {sizeBreakdown}
+        {/* {sizeBreakdown}
         {lengthBreakdown}
         {widthBreakdown}
         {comfortBreakdown}
-        {fitBreakdown}
+        {fitBreakdown} */}
       </div>
     )
   }

@@ -127,6 +127,11 @@ export default class RatingsBreakdown extends React.Component {
     }
   }
 
+  calculateRatingsBar(ratingNum) {
+    var width = ratingNum / this.getCountOfRatings() * 100;
+    return width.toString() + '%'
+  }
+
   getRatingsBreakdown() {
     var ratings = this.props.ratings;
     var counter = 6;
@@ -139,7 +144,7 @@ export default class RatingsBreakdown extends React.Component {
           </div>
           <div className='middle'>
             <div className='bar-container'>
-              <div className={`bar-${counter}`}></div>
+              <div className={`bar-${counter}`} style={{ width: this.calculateRatingsBar(ratings[counter]) }}></div>
             </div>
           </div>
           <div className='side right'>

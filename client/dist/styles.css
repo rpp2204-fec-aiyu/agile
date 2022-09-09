@@ -43,6 +43,7 @@
   align-self: start;
   position: absolute;
   margin-top: 350px;
+  width: 40%;
 }
 
 #reviewsList {
@@ -91,6 +92,28 @@
   /* box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6); */
 }
 
+.characteristic-container {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.characteristic-title {
+ float: left;
+}
+
+.bottomLeft {
+  float: left;
+}
+
+.bottomRight {
+  float: right;
+}
+
+.middleBar {
+  width: 70%;
+  margin-top: 10px;
+}
+
 .side {
   float: left;
   width: 12%;
@@ -106,9 +129,9 @@
 /* The bar container */
 .characteristic-container {
   width: 100%;
-  background-color: grey;
-  text-align: center;
-  color: white;
+  background-color: #f1f1f1;
+  text-align: right;
+  color: black;
   height: 16px;
 }
 
