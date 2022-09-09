@@ -14,7 +14,7 @@ import { setupServer } from 'msw/node'
 
 const server = setupServer(
   // Describe the requests to mock.
-  rest.get('http://localhost:3000/reviews', (req, res, ctx) => {
+  rest.get('/reviews', (req, res, ctx) => {
     return res(
       ctx.json({
         "product": 71697,
@@ -98,7 +98,7 @@ const server = setupServer(
       }),
     )
   }),
-  rest.get('http://localhost:3000/reviews/meta', (req, res, ctx) => {
+  rest.get('/reviews/meta', (req, res, ctx) => {
     return res(
       ctx.json({
           "product_id": "71697",

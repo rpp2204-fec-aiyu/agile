@@ -23,7 +23,7 @@ export default class RatingsAndReviews extends React.Component {
     if (sortOrder === undefined) {
       sortOrder = this.state.sortOrder;
     }
-    axios.get('http://localhost:3000/reviews', {
+    axios.get('/reviews', {
       params: {
         product_id: this.props.product_id,
         sort: sortOrder,
@@ -41,7 +41,7 @@ export default class RatingsAndReviews extends React.Component {
   getReviewsPromise(sortOrder) {
     var sortOrder = sortOrder !== undefined ? sortOrder : this.state.sortOrder;
     return (
-      axios.get('http://localhost:3000/reviews', {
+      axios.get('/reviews', {
         params: {
           product_id: this.props.product_id,
           sort: sortOrder,
@@ -259,7 +259,7 @@ export default class RatingsAndReviews extends React.Component {
   }
 
   getReviewMetaData(review_id) {
-    axios.get('http://localhost:3000/reviews/meta', {
+    axios.get('/reviews/meta', {
       params: {product_id: this.props.product_id}
     })
       .then((response) => {
@@ -326,7 +326,7 @@ export default class RatingsAndReviews extends React.Component {
 
     console.log('requestBody: ', requestBody);
 
-    axios.post('http://localhost:3000/reviews', {
+    axios.post('/reviews', {
       data: {
         'product_id': this.props.product_id,
         'rating': rating,
