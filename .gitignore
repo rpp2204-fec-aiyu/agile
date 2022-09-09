@@ -3,3 +3,4 @@ node_modules
 bundle.js
 getUniqueCategories.js
 productList.js
+coverage
