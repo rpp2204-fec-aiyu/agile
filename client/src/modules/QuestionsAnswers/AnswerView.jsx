@@ -1,31 +1,27 @@
 import React, { useState } from 'react'
 
-const AnswerView = ({answer}) => {
-  const [ansHelpfulness, setAnsHelpfuless] = useState(answer.helpfulness);
+const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
   const [report, setReport] = useState('Report');
 
   const handleReport = () => setReport('Reported');
 
-  const updateAnsHelpfulness = () => {
-    setAnsHelpfuless(ansHelpfulness + 1);
-  }
-
   return(
     <div>
-      <h4>A: {answer.body}</h4>
+      <span className="ansBody">{answer.body}</span>
 
-      {answer.photos.length > 0 ? answer.photos.map(photo => <img style={{ width: 100, height: 100 }} src={photo}/>) : null}
 
-      <div>
+      {answer.photos.length > 0 ? answer.photos.map(photo => <img className="ansImage" src={photo}/>) : null}
+
+      <div className="ansdetails">
         by:&nbsp;
         {answer.answerer_name === 'Seller' ? <span style={{fontWeight: 'bold'}}>Seller</span> : <span>{answer.answerer_name}</span>}
         ,&nbsp;
         <span>{answer.date}</span>
         &nbsp;|&nbsp;  Helpful? &nbsp;
-        <a href="#" onClick={updateAnsHelpfulness}>Yes</a>
-        <span>({ansHelpfulness})</span>
+        <a href="#" onClick={() => {updateAnsHelpfulness(answer.id)}}>Yes</a>
+        <span>({answer.helpfulness})</span>
         <span> | </span>
-        <a href="#" onClick={handleReport}>{report}</a>
+        <a href="#" onClick={() => {reportAnswer(answer.id)}}>Report</a>
       </div>
 
   </div>
