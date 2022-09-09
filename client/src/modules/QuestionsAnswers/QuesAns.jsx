@@ -100,10 +100,10 @@ const QuesAns = ({product, productId}) => {
   return(
     <div className="qaBackground">
 
-      <h1 className="qatitle">Questions and Answers</h1>
-      <div className="searchBar">
-        <input value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
-        <button onClick={handleSearch}>Search</button>
+      <span className="qatitle">Questions and Answers</span>
+      <div>
+        <input className="searchBox" value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
+        <button className="searchButton" onClick={handleSearch}>Search</button>
       </div>
 
 

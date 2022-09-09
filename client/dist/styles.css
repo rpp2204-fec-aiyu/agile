@@ -150,9 +150,9 @@
   }
 }
 
+/**************************************/
 
-/* Q&A add question form styling */
-
+/* Q&A add answer and question forms styling */
 .qaBackground {
   /* display: grid;
   flex-direction: column;
@@ -182,29 +182,64 @@
   align-items: flex-start;
 }
 
+/* QA Question View */
 .qatitle {
-
+  margin-right: 455px;
+  font-size: larger;
+  padding: 20px;
 }
 
-.searchBar {
-
+.searchBox {
+  width: 530px;
+  padding: 15px;
 }
-/* .question {
+
+.searchButton {
+  padding: 15px;
+}
+
+.question {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: space-between;
-  justify-content: space-between;
-  align-items: center;
-} */
-
-.questions {
-  display: flex;
-  flex-direction: column;
+  margin-top: -6%;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: flex-end;
 }
 
+/* QA Answer View */
+.answerview {
+  margin-left: 25px;
+  margin-top: -39px;
+}
+
+.ansviewPhotos {
+  display: inline-flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ansBody {
+  display: block;
+  padding: 18px 0px;
+}
+
+.a-answer {
+  display: block;
+  padding: 18px 0px 0px;
+}
+
+.loadAnsButton {
+  margin-left: 25px;
+  font-weight: bold;
+}
+
+.ansImage {
+  width: 100px;
+  height: 100px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
 /**************************************/
 
 .review-photo-modal {
