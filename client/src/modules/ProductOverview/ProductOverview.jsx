@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './fontawesome.js'
 import axios from 'axios'
 import Category from './ProductInfo/Category.jsx'
 import Title from './ProductInfo/Title.jsx'
