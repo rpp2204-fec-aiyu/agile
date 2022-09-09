@@ -50,7 +50,7 @@ function App() {
     <>
       <ProductOverviewWithClickTracking product={product} productId={productId}/>
       <RatingsAndReviewsWithClickTracking product_id={productId} product={product}/>
-      <QuesAnsWithClickTracking />
+      <QuesAnsWithClickTracking product={product} productId={productId}/>
     </>
   )
 }

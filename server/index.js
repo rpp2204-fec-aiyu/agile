@@ -126,15 +126,77 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     .catch((err) => { throw err; });
 })
 
-app.get('/questions', (req , res) => {
-  return getQuestionsList()
-    .then((result) => {
-      res.status(200).send(result);
-      //console.log('GOT BACK THE LIST', result);
+app.get('/questions/:product_id', (req , res) => {
+  let id = req.params.product_id;
+  //console.log('HERE ARE THE CURRENT ID:', id);
+  axios.get(`${BASEURL}/qa/questions?product_id=${id}&count=50`, {
+    headers: {
+      'Authorization': APIKEY
+    }
+  })
+    .then(result => {
+      res.status(200).send(result.data);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    })
+})
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  let questionId = req.params.question_id;
+  console.log('HERE IS THE QUESTION_ID: ', questionId);
+  console.log('HERE ARE THE INFO FOR POST ANS:', req.body);
+  axios.post(`${BASEURL}/qa/questions/${questionId}/answers`, req.body, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(201).send('Created');
     })
     .catch((err) => {
       res.status(500).send(err);
-      //console.log('FAIL TO GET THE LIST', err);
+    })
+})
+
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  let questionId = req.params.question_id;
+  axios.put(`${BASEURL}/qa/questions/${questionId}/helpful`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  let ansId = req.params.answer_id;
+  axios.put(`${BASEURL}/qa/answers/${ansId}/helpful`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  let ansId = req.params.answer_id;
+  axios.put(`${BASEURL}/qa/answers/${ansId}/report`, {}, {headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      res.status(204).send('success');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.post('/qa/questions', (req, res) => {
+  //console.log('HERE IS THE INFO FOR POST QUES:', req.body);
+  axios.post(`${BASEURL}/qa/questions`, req.body, { headers: {'Authorization': APIKEY}})
+    .then((response) => {
+      //console.log('HERE IS THE RESPONSE:', response)
+      res.status(201).send('Created');
+    })
+    .catch((err) => {
+      res.status(500).send(err);
     })
 })
 
