@@ -441,7 +441,7 @@
 #galleryRight {
   position: absolute;
   top: 290px;
-  left: 640px;
+  right: 50px;
   font-size: 40px
 }
 
