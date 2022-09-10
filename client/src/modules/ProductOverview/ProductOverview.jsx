@@ -71,7 +71,6 @@ export default function ProductOverview({ product, productId }) {
           <br/>
 
           <Cart style={style} setStyle={setStyle} />
-          <MyOutfitButton />
         </div>
         <br></br>
 
