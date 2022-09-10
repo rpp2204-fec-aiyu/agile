@@ -433,6 +433,7 @@
 
 #galleryLeft {
   position: absolute;
+  color:rgba(0, 140, 186, 0.9);
   top: 290px;
   left: 90px;
   font-size: 40px;
@@ -440,6 +441,9 @@
 
 #galleryRight {
   position: absolute;
+  color:rgba(0, 140, 186, 0.9);
+  /* border-color: rgb(14, 184, 226); */
+  /* border-radius: 50%; */
   top: 290px;
   right: 50px;
   font-size: 40px
@@ -483,3 +487,4 @@
   left: 65px;
   font-size: 22px;
 }
+
