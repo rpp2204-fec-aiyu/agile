@@ -22,8 +22,8 @@ export default class MyOutfitButton extends React.Component {
     return (
       <div>
         {this.state.isClicked ?
-        <button onClick={this.handleClick}>&#9733;</button> :
-        <button onClick={this.handleClick}>&#9734;</button> }
+        <button onClick={this.handleClick} style={{margin: '3px', height: '50px', width: '50px', fontSize: '20px'}}>&#9733;</button> :
+        <button onClick={this.handleClick} style={{margin: '3px', height: '50px', width: '50px', fontSize: '20px'}}>&#9734;</button> }
       </div>
 
     )

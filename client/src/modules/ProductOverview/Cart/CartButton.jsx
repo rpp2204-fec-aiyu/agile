@@ -19,7 +19,7 @@ export default function CartButton(props) {
   if((props.size && props.size !== 'selectsize') && props.quantitySelection) {
 
     return (
-      <button onClick={addItemToCart}>Add to Cart +</button>
+      <button onClick={addItemToCart} style={{margin: '3px', height: '50px', width: '150px', color: '#25383C', fontSize: '20px'}}>Add to Cart +</button>
     )
   }
 
