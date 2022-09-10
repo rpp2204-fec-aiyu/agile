@@ -15,8 +15,8 @@ export default function Size(props) {
     )
   } else {
     return (
-      <label>Size:
-        <select id='sizeSelector' onChange={(e)=>props.handleSizeQuantity(
+
+        <select id='sizeSelector' style={{margin: '3px', width: '150px', height: '50px', textAlign: 'center', fontSize: '20px', color: '#25383C'}} onChange={(e)=>props.handleSizeQuantity(
             {
               size: e.target.value,
               quantity: e.target.selectedOptions[0].dataset.quantity,
@@ -31,7 +31,7 @@ export default function Size(props) {
 
         </select>
 
-      </label>
+
     )
   }
 

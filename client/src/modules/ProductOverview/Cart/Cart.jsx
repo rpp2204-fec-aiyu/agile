@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Size from './Size.jsx'
 import Quantity from './Quantity.jsx'
 import CartButton from './CartButton.jsx'
+import MyOutfitButton from '../ProductInfo/MyOutfitButton.jsx'
 
 export default function Cart(props) {
 
@@ -21,11 +22,12 @@ export default function Cart(props) {
   }, [size, quantity, quantitySelection, skuId])
 
   return (
-    <>
+    <div style={{display: 'flex', flexWrap: 'wrap', width: '320px'}}>
       <Size style={props.style} setStyle={props.setStyle} handleSizeQuantity={handleSizeQuantity}/>
       <Quantity quantity={quantity} size={size} setQuantitySelection={setQuantitySelection}/>
       <CartButton style={props.style} size={size} quantitySelection={quantitySelection} skuId={skuId} />
-    </>
+      <MyOutfitButton />
+    </div>
   )
 
 }
