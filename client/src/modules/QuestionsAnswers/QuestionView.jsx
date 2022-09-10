@@ -26,10 +26,17 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
       <h3>Q: {question.question_body}</h3>
       <div className="question">
         <span>Helpful? </span>
-        <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a>
+        <button onClick={() => {updateQuestionHelpfulness(question.question_id)}} className="addAnsButton">
+          <u>Yes</u>
+        </button>
+        {/* <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a> */}
         <span>({question.question_helpfulness})</span>
         <span>&nbsp;|&nbsp;</span>
-        <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
+        {/* <a href="#" onClick={handleOpenAnsForm}>Add Answer</a> */}
+        <button onClick={handleOpenAnsForm} className="addAnsButton">
+          <u>Add Answer</u>
+        </button>
+        {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
       </div>
 
       <span className="a-answer">A: </span>
@@ -43,7 +50,7 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
       {Object.keys(question.answers).length > 2 ? <span className="loadAnsButton" onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
       <br />
       *******************************************************************************
-      {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
+
     </div>
   )
 }

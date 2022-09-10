@@ -11,6 +11,8 @@ const AddAnsForm = ({onHide, product, question}) => {
   const [photos, setPhotos] = useState([]);
   const [formError, setFormError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [countPhoto, setCountPhoto] = useState(0);
+  const [savePhoto, setSavePhoto] = useState([]);
 
   const handleChange = (e) => {
     setAnsFormValues({
@@ -20,8 +22,23 @@ const AddAnsForm = ({onHide, product, question}) => {
   };
 
   const multiplePhotosChange = (e) => {
-    setPhotos(e.target.files);
-    console.log('IMAGES:', e.target.files);
+    const [file] = event.target.files;
+    const fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      console.log('e.target: ', e.target);
+      console.log('e.target.result: ', e.target.result);
+      console.log('e.target.result.data: ', e.target.result.data);
+
+      photos.push(e.target.result);
+      setCountPhoto(countPhoto + 1);
+      console.log('HERE ARE ARRAY OF PHOTOS:', photos);
+      setSavePhoto(photos);
+      setPhotos(photos);
+    }
+    fileReader.readAsDataURL(file);
+    console.log('IMAGES:', [file]);
+    //setPhotos(e.target.files);
   }
 
   const handleSubmit = () => {
@@ -54,10 +71,12 @@ const AddAnsForm = ({onHide, product, question}) => {
   useEffect(() => {
     if(Object.keys(formError).length === 0 && isSubmit) {
       axios.post(`/qa/questions/${question.question_id}/answers`, {
-        body: ansFormValues.ansBody,
-        name: ansFormValues.nickName,
-        email: ansFormValues.email,
-        photos: photos
+        data: {
+          body: ansFormValues.ansBody,
+          name: ansFormValues.nickName,
+          email: ansFormValues.email,
+          rawPhotos: photos
+        }
       })
         .then((result) => {
           console.log('successfully post answer for question', result);
@@ -114,11 +133,11 @@ const AddAnsForm = ({onHide, product, question}) => {
           <p>{formError.email}</p>
 
         <br />
-        <label>Upload your photos </label>
-          <input
-          type="file"
-          multiple
-          onChange={multiplePhotosChange}/>
+        <label>Upload your photos {photos.length} </label>
+          {photos.length < 5 && <input type="file" accept='image/*' onChange={multiplePhotosChange}/>}
+          {photos.map((photo, index) => {
+            <img src={photos[index]}/>
+          })}
           <br />
       </div>
 

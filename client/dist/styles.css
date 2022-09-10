@@ -173,7 +173,7 @@
   height: 450px;
   /* padding: 25px; */
   margin: 0px 25px;
-  top: 5%;
+  top: 240%;
   position: absolute;
   border-radius: 12px;
   background-color: white;
@@ -183,6 +183,16 @@
   padding: 40px;
   /* flex-wrap: wrap; */
   align-items: flex-start;
+}
+
+.addAnsButton {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.qaButton {
+  padding: 15px;
 }
 
 /* QA Question View */
