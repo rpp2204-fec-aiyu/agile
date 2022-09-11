@@ -157,7 +157,7 @@ export default function Gallery(props) {
 
           }
         })}
-        {highIndex === props.style.photos.length ?
+        {highIndex >= props.style.photos.length ?
           <></>
           :
           <FontAwesomeIcon
