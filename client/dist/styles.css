@@ -185,6 +185,7 @@
 
 #reviewsQuarterStars {
   align-self: center;
+  float: left
 }
 
 .single-star-container {
