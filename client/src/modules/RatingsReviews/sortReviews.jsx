@@ -13,7 +13,7 @@ export default class SortReview extends React.Component {
   render() {
     return (
         <form onChange={this.handleSortChange.bind(this)}>
-          <select>
+          <select id='sortReview'>
             <option selected value='relevant'>Relevant</option>
             <option value='helpful'>Helpful</option>
             <option value='newest'>Newest</option>
