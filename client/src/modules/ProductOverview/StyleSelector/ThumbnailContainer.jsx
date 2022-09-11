@@ -25,22 +25,18 @@ export default function ThumbnailContainer(props) {
       <br/>
       <div id='stylesThumbnailContainer'>
       {props.styles.map((style, i)=> (
-        <div onClick={()=>handleClick(style, i)} id='checkedStyleDiv'>
+        <div onClick={()=>handleClick(style, i)} id='checkedStyleDiv' key={style.style_id}>
           {highlightedThumbnail === i ?
             <div>
               <FontAwesomeIcon icon="fa-solid fa-circle-check" id='styleCheckMark'/>
               <Thumbnail style={style}
                         index={i}
-                        key={style.style_id}
-                        //handleClick={handleClick}
                         src={style.photos[0].thumbnail_url}
               />
             </div>
             :
             <Thumbnail style={style}
                       index={i}
-                      key={style.style_id}
-                      //handleClick={handleClick}
                       src={style.photos[0].thumbnail_url}
             />
           }
