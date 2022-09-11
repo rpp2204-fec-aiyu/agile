@@ -15,11 +15,11 @@ export default function Quantity(props) {
   //must select size for quantity dropdown to be enabled
   if(props.size === 'selectsize' || props.size === null) {
     return (
-      <label>Quantity:
-        <select disabled>
+
+        <select disabled style={{margin: '3px', width: '150px', height: '50px', textAlign: 'center', fontSize: '20px', color: '#25383C'}}>
           <option>-</option>
         </select>
-      </label>
+
     )
   } else {
 
@@ -32,14 +32,14 @@ export default function Quantity(props) {
     }
 
     return (
-      <label>Quantity:
-        <select id='quantitySelector' onChange={e=>getQuantitySelection(e)}>
+
+        <select id='quantitySelector' style={{margin: '3px', width: '150px', height: '50px', textAlign: 'center', fontSize: '20px', color: '#25383C'}} onChange={e=>getQuantitySelection(e)}>
           {Array.from(new Array(limit), (x, i) => i + 1).map((quantity, i) => (
             <option key={i}>{quantity}</option>
           ))}
         </select>
 
-      </label>
+
     )
   }
 }
