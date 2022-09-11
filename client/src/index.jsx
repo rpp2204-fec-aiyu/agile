@@ -10,6 +10,8 @@ import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
 
 function App() {
 
+  const url = new URL(window.location.href);
+
   const getCurrentProduct = () => {
     /* products.data[<index>]
     * 0: Camo Onesie Jacket     id: 71697
@@ -28,24 +30,27 @@ function App() {
   const [productId, setProductId] = useState(null)
 
   useEffect(() => {
-
     getCurrentProduct()
       .then(product => {
         setProduct(product)
         setProductId(product.id)
-        window.location.hash = `!${product.id}`
       })
       .catch(err => {
         console.log(err)
       })
   }, [])
 
+  useEffect(() => {
+    url.searchParams.set('product_id', productId);
+    window.history.replaceState(null, null, url);
+  }, [productId])
+
   const ProductOverviewWithClickTracking = WithClickTracking(ProductOverview)
   const RatingsAndReviewsWithClickTracking = WithClickTracking(RatingsAndReviews)
   const QuesAnsWithClickTracking = WithClickTracking(QuesAns)
 
   if(!productId) return null
-  console.log('product: ', product);
+
   return (
     <>
       <ProductOverviewWithClickTracking product={product} productId={productId}/>
