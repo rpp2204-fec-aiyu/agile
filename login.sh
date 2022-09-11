@@ -1,0 +1,1 @@
+ssh -i '/Users/morganharrison/Dev/HackReactor/agile/aiyu.pem' ubuntu@ec2-54-193-102-2.us-west-1.compute.amazonaws.com

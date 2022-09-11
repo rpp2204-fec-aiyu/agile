@@ -1,4 +1,5 @@
 const React = require('react')
+import starImg from '../../../assets/star.png';
 
 export default class RatingsBreakdown extends React.Component {
   constructor(props) {
@@ -90,26 +91,56 @@ export default class RatingsBreakdown extends React.Component {
     return average;
   }
 
-  generateStarsFromRating() {
+  // <div id='averageStarRating'>
+  //       {[...Array(5)].map((star, index) => {
+  //         index += 1;
+  //         return (
+  //           <button
+  //             key={index}
+  //             className={`starButton ${index <= average ? 'on' : 'off'}`}
+  //             type="button"
+  //             key={index}
+  //             >
+  //             &#9733;
+  //           </button>
+  //         );
+  //       })}
+  //     </div>
+
+
+  generateStarWidths() {
     var average = this.calculateAvgRating(true);
-    var stars =
-    <div id='averageStarRating'>
-        {[...Array(5)].map((star, index) => {
-          index += 1;
-          return (
-            <button
-              key={index}
-              className={`starButton ${index <= average ? 'on' : 'off'}`}
-              type="button"
-              key={index}
-              >
-              <span>&#9733;
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    return stars;
+    var widthsOfStars = [...Array(5)].map((rating, index) => {
+      if (average > 1) {
+        average = average - 1;
+        return 1;
+      } else if (average > 0) {
+        var roundedDec = average;
+        average = average - average;
+        return roundedDec
+      } else {
+        return 0;
+      }
+    })
+    return widthsOfStars;
+  }
+
+  generateStarsFromRating() {
+    var arrayOfWidths = this.generateStarWidths();
+    console.log('arrayOfWidths: ', arrayOfWidths);
+    return (
+    <div id='reviewsQuarterStars'>
+      {arrayOfWidths.map((width, index) => {
+        return (
+        <div className='single-star-container' key={index}>
+          <div className='single-star-fill' style={{'width': (width * 31).toString() + 'px'}}>
+            <img className='single-star-outline' src={starImg}></img>
+          </div>
+        </div>
+        )
+      })}
+    </div>
+    )
   }
 
   handleRatingFilterClick(e) {
