@@ -60,16 +60,18 @@ export default function StarRating(props) {
     var arrayOfWidths = generateStarWidths();
     console.log('arrayOfWidths: ', arrayOfWidths);
     return (
-    <div id='reviewsQuarterStars'>
+    <div id='overviewQuarterStars'>
+
       {arrayOfWidths.map((width, index) => {
         return (
-        <div className='single-star-container' key={index}>
-          <div className='single-star-fill' style={{'width': (width * 31).toString() + 'px'}}>
-            <img className='single-star-outline' src={starImg}></img>
+        <div className='single-star-container-overview' key={index}>
+          <div className='single-star-fill-overview' style={{'width': (width * 21).toString() + 'px'}}>
+            <img className='single-star-outline-overview' src={starImg}></img>
           </div>
         </div>
         )
       })}
+
     </div>
     )
   }
