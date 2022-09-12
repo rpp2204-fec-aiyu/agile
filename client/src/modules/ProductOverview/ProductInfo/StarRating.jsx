@@ -77,7 +77,7 @@ export default function StarRating(props) {
   return (
     <div>
       {generateStarsFromRating()}
-      <a href='#ratingsAndReviews'><small>Read all {ratings.ratingsTotal} reviews</small></a>
+      <a href='#ratingsAndReviews'><small>Read all {ratings.totalReviews} reviews</small></a>
     </div>
   )
     // (
