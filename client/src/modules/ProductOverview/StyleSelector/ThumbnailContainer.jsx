@@ -15,7 +15,8 @@ export default function ThumbnailContainer(props) {
 
     props.setPrice(style.original_price)
     props.setSalePrice(style.sale_price)
-    setHighlightedThumbnail(highlightedThumbnail === index ? null : index)
+
+    setHighlightedThumbnail(index)
   }
 
   return (
