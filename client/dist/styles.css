@@ -546,6 +546,27 @@
   display: inline-block;
 }
 
+#zoomModalContainer {
+  width: 1000px;
+  height: 1000px;
+  /* padding: 25px;*/
+  margin: 0px 25px;
+  top: 5%;
+  position: absolute;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column; */
+
+  /* flex-wrap: wrap; */
+  /* align-items: flex-start; */
+  overflow: hidden;
+
+}
+
 /* #ratingsAndReviews {
   display: grid;
   grid-template-columns: 35% 65%;
