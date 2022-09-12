@@ -555,10 +555,11 @@
   position: absolute;
   border-radius: 12px;
   background-color: white;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  box-shadow: rgb(0 0 0 / 85%) 0px 5px 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
   /* flex-direction: column; */
 
   /* flex-wrap: wrap; */
