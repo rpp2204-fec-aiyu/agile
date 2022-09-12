@@ -25,7 +25,6 @@ export default function Gallery(props) {
 
   function handleThumbnailClick(i, photo) {
     setGalleryPhoto(photo.url)
-    //setHighlightedThumbnail(highlightedThumbnail === i ? null : i)
     setHighlightedThumbnail(i)
   }
 
