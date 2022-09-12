@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Zoom from './Zoom.jsx'
 // import '../fontawesome.js'
 
 export default function Gallery(props) {
@@ -168,6 +169,7 @@ export default function Gallery(props) {
         }
 
       </div>
+      <Zoom galleryPhoto={galleryPhoto} />
     </div>
   )
 
