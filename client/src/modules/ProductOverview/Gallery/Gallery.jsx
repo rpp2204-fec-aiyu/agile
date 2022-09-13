@@ -19,6 +19,20 @@ export default function Gallery(props) {
   const [galleryContainerHeight, setGalleryContainerHeight] = useState('600px')
 
 
+
+  // useEffect(() => {
+  //   let gallery = document.getElementById('gallery')
+  //   gallery.addEventListener('onmousemove', e => {
+  //     let mousePosX = (e.pageX/parseInt(galleryContainerWidth)) * 100;
+  //     console.log('MOUSEPOSX: ', mousePosX)
+  //     gallery.style.backgroundPositionX = mousePosX + '%'
+  //     let mousePosY = (e.pageY/parseInt(galleryContainerHeight)) * 100;
+  //     gallery.style.backgroundPositionY = mousePosY + '%'
+
+  //   })
+  // }, [])
+
+
   useEffect(() => {
     if(props.style.photos[highlightedThumbnail].url) {
       setGalleryPhoto(props.style.photos[highlightedThumbnail].url)
@@ -83,6 +97,28 @@ export default function Gallery(props) {
       setIsZoom(true)
 
       let gallery = document.getElementById('gallery')
+      let galleryImg = document.getElementById('galleryMainImage')
+
+      gallery.style.background = `url(${galleryPhoto}) no-repeat`// 0 0 fixed`
+      gallery.style.height = 'auto'
+      gallery.style.left= '0'
+      gallery.style.minHeight= '800px'
+      gallery.style.minWidth= '900px'
+      //gallery.style.position = 'fixed'
+      gallery.style.top= '0'
+      gallery.style.width= '100%'
+      //gallery.style.objectFit = 'cover'
+      gallery.addEventListener('mousemove', e => {
+        let mousePosX = (e.pageX/parseInt(galleryContainerWidth)) * 100;
+        console.log('MOUSEPOSX: ', mousePosX)
+        gallery.style.backgroundPositionX = mousePosX + '%'
+        let mousePosY = (e.pageY/parseInt(galleryContainerHeight)) * 100;
+        gallery.style.backgroundPositionY = mousePosY + '%'
+      })
+
+      gallery.addEventListener('click', e => {
+        setIsZoom(false)
+      })
 
       //gallery.style = {overflow: 'hidden'}
       //gallery.style = {width: '900px', height: '800px'}
@@ -101,13 +137,19 @@ export default function Gallery(props) {
 
   return (
     <div id='gallery' data-testid="galleryTest" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
-      <img
-        id='galleryMainImage'
-        src={galleryPhoto}
-        width={clientWidth}
-        height={clientHeight}
-        onClick={expandView}
-      />
+
+      {isZoom ? null
+      :
+        <img
+          id='galleryMainImage'
+          src={galleryPhoto}
+          width={clientWidth}
+          height={clientHeight}
+          onClick={expandView}
+        />
+      }
+
+
       {highlightedThumbnail === 0 ?
         null
         :
