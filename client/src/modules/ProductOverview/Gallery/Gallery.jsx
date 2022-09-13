@@ -7,12 +7,16 @@ export default function Gallery(props) {
 
   const [galleryPhoto, setGalleryPhoto] = useState(props.style.photos[0].url)
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
+  const [isZoom, setIsZoom] = useState(false)
 
   const [lowIndex, setLowIndex] = useState(0)
   const [highIndex, setHighIndex] = useState(7)
 
   const [clientHeight, setClientHeight] = useState('600')
   const [clientWidth, setClientWidth] = useState('700')
+
+  const [galleryContainerWidth, setGalleryContainerWidth] = useState('700px')
+  const [galleryContainerHeight, setGalleryContainerHeight] = useState('600px')
 
 
   useEffect(() => {
@@ -69,18 +73,34 @@ export default function Gallery(props) {
   }
 
   function expandView() {
+
     if(clientWidth === '700') {
       setClientWidth('900')
       setClientHeight('800')
+      setGalleryContainerHeight('800px')
+      setGalleryContainerWidth('900px')
+    } else if (clientWidth === '900') {
+      setIsZoom(true)
+
+      let gallery = document.getElementById('gallery')
+
+      //gallery.style = {overflow: 'hidden'}
+      //gallery.style = {width: '900px', height: '800px'}
+      setClientWidth((parseInt(clientWidth) * 2.5).toString())
+      setClientHeight((parseInt(clientHeight) * 2.5).toString())
     } else {
+      setIsZoom(false)
       setClientWidth('700')
       setClientHeight('600')
+      setGalleryContainerHeight('600px')
+      setGalleryContainerWidth('700px')
     }
   }
 
 
+
   return (
-    <div id='gallery' data-testid="galleryTest">
+    <div id='gallery' data-testid="galleryTest" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
       <img
         id='galleryMainImage'
         src={galleryPhoto}
@@ -169,7 +189,7 @@ export default function Gallery(props) {
         }
 
       </div>
-      <Zoom galleryPhoto={galleryPhoto} />
+      {/* {isZoom ? <Zoom galleryPhoto={galleryPhoto} /> : null} */}
     </div>
   )
 
