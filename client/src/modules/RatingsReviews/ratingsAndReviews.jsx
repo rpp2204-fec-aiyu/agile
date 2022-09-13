@@ -367,7 +367,7 @@ export default class RatingsAndReviews extends React.Component {
     return (
       <div id='ratingsAndReviews'>
         <div id='ratingsAndReviewsHeader'>
-        <h2>RATINGS &amp; REVIEWS</h2>
+        <p><b>RATINGS &amp; REVIEWS</b></p>
         </div>
         <>
           <RatingsBreakdown ratings={this.state.productRatings} recommendations={this.state.productRecommendations}  applyFilters={this.applyFilters.bind(this)} removeFilters={this.removeFilters.bind(this)} filterBy={this.state.filterBy}/>
