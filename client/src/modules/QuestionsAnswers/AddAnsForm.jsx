@@ -135,15 +135,14 @@ const AddAnsForm = ({onHide, product, question}) => {
         <br />
         <label>Upload your photos {photos.length} </label>
           {photos.length < 5 && <input type="file" accept='image/*' onChange={multiplePhotosChange}/>}
-          {photos.map((photo, index) => {
-            <img src={photos[index]}/>
-          })}
           <br />
+          {photos.map(photo => <img className="ansFormPhoto" src={photo} />)}
       </div>
 
       <div className="qaModalFooter">
         <button className="submitButton" onClick={handleSubmit}>Submit</button>
       </div>
+      <br />
 
     </div>
   )
