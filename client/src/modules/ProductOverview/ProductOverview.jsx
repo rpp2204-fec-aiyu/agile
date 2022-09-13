@@ -38,6 +38,10 @@ export default function ProductOverview({ product, productId }) {
 
   const [hideInfo, setHideInfo] = useState(false)
 
+  const [styleTitle, setStyleTitle] = useState('')
+  const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
+
+
   useEffect(()=> {
 
     getCurrentProductData(id)
@@ -48,6 +52,7 @@ export default function ProductOverview({ product, productId }) {
 
         setStyles(data.styles)
         setStyle(data.styles[0])
+        setStyleTitle(data.styles[0].name)
         setSalePrice(data.styles[0].sale_price)
       })
 
@@ -70,7 +75,16 @@ export default function ProductOverview({ product, productId }) {
             <Price price={price} salePrice={salePrice} />
             <br />
 
-            <StyleSelector styles={styles} style={style} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+            <StyleSelector
+              styles={styles}
+              style={style}
+              setStyle={setStyle}
+              styleTitle={styleTitle}
+              setStyleTitle={setStyleTitle}
+              setPrice={setPrice}
+              setSalePrice={setSalePrice}
+              highlightedThumbnail={highlightedThumbnail}
+              setHighlightedThumbnail={setHighlightedThumbnail}/>
             <br/>
 
             <Cart style={style} setStyle={setStyle} />

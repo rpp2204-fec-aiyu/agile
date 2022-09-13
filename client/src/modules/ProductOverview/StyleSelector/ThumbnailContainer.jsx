@@ -4,30 +4,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function ThumbnailContainer(props) {
 
-  const [title, setTitle] = useState(props.styles[0].name)
-  const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
+
+  //const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
 
 
 
   function handleClick(style, index) {
-    setTitle(style.name)
+    //setTitle(style.name)
+    props.setStyleTitle(style.name)
     props.setStyle(style)
 
     props.setPrice(style.original_price)
     props.setSalePrice(style.sale_price)
 
-    setHighlightedThumbnail(index)
+    props.setHighlightedThumbnail(index)
   }
 
   return (
     <div data-testid='thumbnailContainerTest'>
-      <strong>STYLE > </strong>{title.toUpperCase()}
+      <strong>STYLE > </strong>{props.styleTitle.toUpperCase()}
       <br/>
       <br/>
       <div id='stylesThumbnailContainer'>
       {props.styles.map((style, i)=> (
         <div onClick={()=>handleClick(style, i)} id='checkedStyleDiv' key={style.style_id}>
-          {highlightedThumbnail === i ?
+          {props.highlightedThumbnail === i ?
             <div>
               <FontAwesomeIcon icon="fa-solid fa-circle-check" id='styleCheckMark'/>
               <Thumbnail style={style}
