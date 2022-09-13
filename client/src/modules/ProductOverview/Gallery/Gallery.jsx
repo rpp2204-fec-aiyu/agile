@@ -7,7 +7,7 @@ export default function Gallery(props) {
 
   const [galleryPhoto, setGalleryPhoto] = useState(props.style.photos[0].url)
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
-  const [isZoom, setIsZoom] = useState(false)
+  //const [isZoom, setIsZoom] = useState(false)
 
   const [lowIndex, setLowIndex] = useState(0)
   const [highIndex, setHighIndex] = useState(7)
@@ -18,6 +18,7 @@ export default function Gallery(props) {
   const [galleryContainerWidth, setGalleryContainerWidth] = useState('700px')
   const [galleryContainerHeight, setGalleryContainerHeight] = useState('600px')
 
+  const [isExpanded, setIsExpanded] = useState(false)
 
 
   // useEffect(() => {
@@ -87,45 +88,35 @@ export default function Gallery(props) {
   }
 
   function expandView() {
-
+    let mainImg = document.getElementById('galleryMainImage')
+    let gallery = document.getElementById('gallery')
+    let galleryLeft = document.getElementById('galleryLeft')
+    let galleryRight = document.getElementById('galleryRight')
+    let thumbnailContainer = document.getElementsByClassName('galleryThumbnailContainer')[0]
     if(clientWidth === '700') {
-      setClientWidth('900')
+      props.setHideInfo(true)
+      setIsExpanded(true)
+      setClientWidth('1500')
       setClientHeight('800')
+      setGalleryContainerWidth('1500px')
       setGalleryContainerHeight('800px')
-      setGalleryContainerWidth('900px')
-    } else if (clientWidth === '900') {
-      setIsZoom(true)
-
-      let gallery = document.getElementById('gallery')
-      let galleryImg = document.getElementById('galleryMainImage')
-
-      gallery.style.background = `url(${galleryPhoto}) no-repeat`// 0 0 fixed`
-      gallery.style.height = 'auto'
-      gallery.style.left= '0'
-      gallery.style.minHeight= '800px'
-      gallery.style.minWidth= '900px'
-      //gallery.style.position = 'fixed'
-      gallery.style.top= '0'
-      gallery.style.width= '100%'
-      //gallery.style.objectFit = 'cover'
-      gallery.addEventListener('mousemove', e => {
-        let mousePosX = (e.pageX/parseInt(galleryContainerWidth)) * 100;
-        console.log('MOUSEPOSX: ', mousePosX)
-        gallery.style.backgroundPositionX = mousePosX + '%'
-        let mousePosY = (e.pageY/parseInt(galleryContainerHeight)) * 100;
-        gallery.style.backgroundPositionY = mousePosY + '%'
-      })
-
-      gallery.addEventListener('click', e => {
-        setIsZoom(false)
-      })
-
-      //gallery.style = {overflow: 'hidden'}
-      //gallery.style = {width: '900px', height: '800px'}
-      setClientWidth((parseInt(clientWidth) * 2.5).toString())
-      setClientHeight((parseInt(clientHeight) * 2.5).toString())
-    } else {
-      setIsZoom(false)
+      gallery.style.backgroundColor = 'gray'
+      mainImg.style.objectFit = 'cover';
+      gallery.style.zIndex = '10'
+      //if(galleryLeft) galleryLeft.style.top = '700px'//(galleryContainerHeight / 2)  + 'px'
+      //if(galleryRight) galleryRight.style.top = '700px' //(galleryContainerHeight / 2) + 'px'
+      thumbnailContainer.style.zIndex = '10'
+      thumbnailContainer.style.top  = '50px'
+      thumbnailContainer.style.gap = '20px'
+    }
+    else {
+      props.setHideInfo(false)
+      setIsExpanded(false)
+      mainImg.style.objectFit = 'cover';
+      thumbnailContainer.style.top  = '10px'
+      thumbnailContainer.style.gap = '10px'
+      //if(galleryLeft) galleryLeft.style.top = '290px'
+      //if(galleryRight) galleryRight.style.top = '290px'
       setClientWidth('700')
       setClientHeight('600')
       setGalleryContainerHeight('600px')
@@ -138,8 +129,6 @@ export default function Gallery(props) {
   return (
     <div id='gallery' data-testid="galleryTest" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
 
-      {isZoom ? null
-      :
         <img
           id='galleryMainImage'
           src={galleryPhoto}
@@ -147,7 +136,6 @@ export default function Gallery(props) {
           height={clientHeight}
           onClick={expandView}
         />
-      }
 
 
       {highlightedThumbnail === 0 ?
@@ -157,6 +145,7 @@ export default function Gallery(props) {
           icon='fa-solid fa-circle-chevron-left'
           id='galleryLeft'
           cursor={'pointer'}
+          style= {isExpanded ? {top: '380px'} : {top: '290px'}}
           onClick={()=>handleLeftArrow(highlightedThumbnail)}
         />
       }
@@ -167,6 +156,7 @@ export default function Gallery(props) {
         <FontAwesomeIcon
           icon='fa-solid fa-circle-chevron-right'
           id='galleryRight'
+          style= {isExpanded ? {top: '380px'} : {top: '290px'}}
           cursor={'pointer'}
           onClick={()=>handleRightArrow(highlightedThumbnail)}
         />

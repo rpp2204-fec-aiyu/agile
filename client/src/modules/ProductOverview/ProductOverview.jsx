@@ -36,6 +36,8 @@ export default function ProductOverview({ product, productId }) {
   const [style, setStyle] = useState(null)
   const [salePrice, setSalePrice] = useState(null)
 
+  const [hideInfo, setHideInfo] = useState(false)
+
   useEffect(()=> {
 
     getCurrentProductData(id)
@@ -56,22 +58,24 @@ export default function ProductOverview({ product, productId }) {
   return (
     <div data-testid="productOverviewTest" style={{marginTop: '25px', marginBottom: '30px'}}> {/* increases surrounding margins to approx centering */}
       <div id='upper' style={{display: 'flex'}}>
-        <Gallery style={style} />
-        <div style={{marginLeft: '60px', color: '#25383C'}}>
-          <StarRating reviews={reviews}/>
-          <br/>
-          <Category category={category} />
+        <Gallery style={style} setHideInfo={setHideInfo} />
+        {hideInfo ? null :
+          <div style={{marginLeft: '60px', color: '#25383C'}}>
+            <StarRating reviews={reviews}/>
+            <br/>
+            <Category category={category} />
 
-          <Title title={title} />
-          <br />
-          <Price price={price} salePrice={salePrice} />
-          <br />
+            <Title title={title} />
+            <br />
+            <Price price={price} salePrice={salePrice} />
+            <br />
 
-          <StyleSelector styles={styles} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
-          <br/>
+            <StyleSelector styles={styles} style={style} setStyle={setStyle} setPrice={setPrice} setSalePrice={setSalePrice} />
+            <br/>
 
-          <Cart style={style} setStyle={setStyle} />
-        </div>
+            <Cart style={style} setStyle={setStyle} />
+          </div>
+         }
         <br></br>
 
       </div>
