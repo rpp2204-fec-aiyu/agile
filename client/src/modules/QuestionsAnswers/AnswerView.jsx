@@ -10,7 +10,7 @@ const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
       <span className="ansBody">{answer.body}</span>
 
 
-      {answer.photos.length > 0 ? answer.photos.map(photo => <img className="ansImage" src={photo}/>) : null}
+      {answer.photos.length > 0 ? answer.photos.map(photo => <img className="ansImage" alt="answerviewphoto" src={photo}/>) : null}
 
       <div className="ansdetails">
         by:&nbsp;
