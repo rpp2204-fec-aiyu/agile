@@ -12,26 +12,65 @@ export default function Gallery(props) {
   const [lowIndex, setLowIndex] = useState(0)
   const [highIndex, setHighIndex] = useState(7)
 
-  const [clientHeight, setClientHeight] = useState('600')
   const [clientWidth, setClientWidth] = useState('700')
+  const [clientHeight, setClientHeight] = useState('600')
 
   const [galleryContainerWidth, setGalleryContainerWidth] = useState('700px')
   const [galleryContainerHeight, setGalleryContainerHeight] = useState('600px')
 
+  const [naturalWidth, setNaturalWidth] = useState(0)
+  const [naturalHeight, setNaturalHeight] = useState(0)
+  const [isPortrait, setIsPortrait] = useState(false)
+
   const [isExpanded, setIsExpanded] = useState(false)
 
+  function getImgSize(imgSrc, callback) {
+    const newImg = new Image();
 
-  // useEffect(() => {
-  //   let gallery = document.getElementById('gallery')
-  //   gallery.addEventListener('onmousemove', e => {
-  //     let mousePosX = (e.pageX/parseInt(galleryContainerWidth)) * 100;
-  //     console.log('MOUSEPOSX: ', mousePosX)
-  //     gallery.style.backgroundPositionX = mousePosX + '%'
-  //     let mousePosY = (e.pageY/parseInt(galleryContainerHeight)) * 100;
-  //     gallery.style.backgroundPositionY = mousePosY + '%'
+    newImg.onload = function() {
+      const height = newImg.height;
+      const width = newImg.width;
+      callback({ width, height })
+    }
 
-  //   })
-  // }, [])
+    newImg.src = imgSrc;
+  }
+
+  function getImgDimensions({ width, height }) {
+    setNaturalWidth(width)
+    setNaturalHeight(height)
+    if(height > width) {
+      setIsPortrait(true)
+      // setClientWidth('700')
+      // setClientHeight('900')
+      // setGalleryContainerWidth('700px')
+      // setGalleryContainerHeight('900px')
+    } else {
+      setIsPortrait(false)
+      // setClientWidth('700')
+      // setClientHeight('600')
+      // setGalleryContainerWidth('700px')
+      // setGalleryContainerHeight('600px')
+    }
+  }
+
+  //getImgSize(galleryPhoto, getImgDimensions)
+
+  useEffect(() => {
+    let mainImg = document.getElementById('galleryMainImage')
+    getImgSize(galleryPhoto, getImgDimensions)
+    if(naturalHeight > naturalWidth) {
+      // setClientWidth('700')
+      // setClientHeight('900')
+      // setGalleryContainerWidth('700px')
+      // setGalleryContainerHeight('900px')
+      mainImg.style.objectFit = 'contain';
+      setIsPortrait(true)
+    } else {
+      mainImg.style.objectFit = 'cover';
+      setIsPortrait(false)
+    }
+  })
 
 
   useEffect(() => {
@@ -93,19 +132,31 @@ export default function Gallery(props) {
     let galleryLeft = document.getElementById('galleryLeft')
     let galleryRight = document.getElementById('galleryRight')
     let thumbnailContainer = document.getElementsByClassName('galleryThumbnailContainer')[0]
-    if(clientWidth === '700') {
+    if(!isExpanded) {
+
       props.setHideInfo(true)
       setIsExpanded(true)
       setClientWidth('1500')
       setClientHeight('800')
       setGalleryContainerWidth('1500px')
       setGalleryContainerHeight('800px')
+
+      if(isPortrait) {
+        // setClientWidth('710')
+        // setClientHeight('900')
+        // setGalleryContainerWidth('710px')
+        // setGalleryContainerHeight('900px')
+        mainImg.style.objectFit = 'contain';
+      }
+      else {
+        mainImg.style.objectFit = 'cover';
+      }
       gallery.style.backgroundColor = 'gray'
-      mainImg.style.objectFit = 'cover';
-      gallery.style.zIndex = '10'
+
+      //gallery.style.zIndex = '10'
       //if(galleryLeft) galleryLeft.style.top = '700px'//(galleryContainerHeight / 2)  + 'px'
       //if(galleryRight) galleryRight.style.top = '700px' //(galleryContainerHeight / 2) + 'px'
-      thumbnailContainer.style.zIndex = '10'
+      //thumbnailContainer.style.zIndex = '10'
       thumbnailContainer.style.top  = '50px'
       thumbnailContainer.style.gap = '20px'
     }
@@ -115,6 +166,7 @@ export default function Gallery(props) {
       mainImg.style.objectFit = 'cover';
       thumbnailContainer.style.top  = '10px'
       thumbnailContainer.style.gap = '10px'
+      gallery.style.backgroundColor = 'lightgray'
       //if(galleryLeft) galleryLeft.style.top = '290px'
       //if(galleryRight) galleryRight.style.top = '290px'
       setClientWidth('700')
@@ -127,7 +179,7 @@ export default function Gallery(props) {
 
 
   return (
-    <div id='gallery' data-testid="galleryTest" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
+    <div id='gallery' data-testid="galleryTest" style={{backgroundColor: 'lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
 
         <img
           id='galleryMainImage'
