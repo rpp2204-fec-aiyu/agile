@@ -361,13 +361,13 @@ export default class RatingsAndReviews extends React.Component {
       </button>
 
     if (this.state.reviews.length - this.state.reviewsToRender >= 1) {
-      var moreReviewsButton = <button id="moreReviewsButton" onClick={this.loadMoreReviews.bind(this)}>MORE REVIEWS</button>
+      var moreReviewsButton = <button id="moreReviewsButton" onClick={this.loadMoreReviews.bind(this)}>More Reviews</button>
     }
 
     return (
       <div id='ratingsAndReviews'>
         <div id='ratingsAndReviewsHeader'>
-        <h2>RATINGS &amp; REVIEWS</h2>
+        <p><b>RATINGS &amp; REVIEWS</b></p>
         </div>
         <>
           <RatingsBreakdown ratings={this.state.productRatings} recommendations={this.state.productRecommendations}  applyFilters={this.applyFilters.bind(this)} removeFilters={this.removeFilters.bind(this)} filterBy={this.state.filterBy}/>
@@ -377,14 +377,14 @@ export default class RatingsAndReviews extends React.Component {
         </div>
         <div id='reviewsList'>
           <div id='reviewListSearch'>
-            <input type='search' onChange={this.searchReviews.bind(this)} placeholder="Search reviews"></input>
+            <input id='searchReviews' type='search' onChange={this.searchReviews.bind(this)} placeholder="Search reviews"></input>
           </div>
           <div id='reviewListSort'>
             <SortReview sortReviews={this.sortReviews.bind(this)} />
           </div>
           <ReviewsList reviewsList={this.state.reviews} reviewsToRender={this.state.reviewsToRender} getReviewsList={this.getReviewsList.bind(this)} />
           {moreReviewsButton}
-          <button id="addReviewButton" onClick={this.onAddReviewButtonClick.bind(this)}>ADD A REVIEW +</button>
+          <button id="addReviewButton" onClick={this.onAddReviewButtonClick.bind(this)}>Add a Review +</button>
           <>
             <Modal isOpen={this.state.modalIsOpen} modalContent={<NewReview closeModalButton={closeModalButton} closeModal= {this.closeModal.bind(this)} addNewReview={this.addNewReview.bind(this)} productName={this.props.productName} productSizeMetaData={this.state.productSizeMetaData} productQualityMetaData={this.state.productQualityMetaData} productComfortMetaData={this.state.productComfortMetaData} productWidthMetaData={this.state.productWidthMetaData} productLengthMetaData={this.state.productLengthMetaData} productFitMetaData={this.state.productFitMetaData} />} />
           </>

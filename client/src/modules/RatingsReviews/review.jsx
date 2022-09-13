@@ -1,7 +1,7 @@
 const React = require('react')
-import Stars from './stars.jsx';
 const axios = require('axios');
 import Modal from './modal.jsx';
+import starImg from '../../../assets/star.png';
 
 export default class Review extends React.Component {
   constructor(props) {
@@ -38,24 +38,37 @@ export default class Review extends React.Component {
     }
   }
 
+  generateStarWidths(roundedRating) {
+    var widthsOfStars = [...Array(5)].map((rating, index) => {
+      if (roundedRating > 1) {
+        roundedRating = roundedRating - 1;
+        return 1;
+      } else if (roundedRating > 0) {
+        var roundedDec = roundedRating;
+        roundedRating = roundedRating - roundedRating;
+        return roundedDec
+      } else {
+        return 0;
+      }
+    })
+    return widthsOfStars;
+  }
+
   generateStarsFromRating(rating) {
-    var stars =
-    <div className='rating'>
-        {[...Array(5)].map((star, index) => {
-          index += 1;
+    var arrayOfWidths = this.generateStarWidths(rating);
+    return (
+      <div id='reviewsQuarterStars'>
+        {arrayOfWidths.map((width, index) => {
           return (
-            <button
-              className={`starButton ${index <= rating ? 'on' : 'off'}`}
-              type="button"
-              key={index}
-              >
-              <span>&#9733;
-              </span>
-            </button>
-          );
+          <div className='single-review-star-container' key={index}>
+            <div className='single-review-star-fill' style={{'width': (width * 18.6).toString() + 'px'}}>
+              <img className='single-review-star-outline' src={starImg}></img>
+            </div>
+          </div>
+          )
         })}
       </div>
-    return stars;
+    )
   }
 
   addToHelpfulNessCount() {

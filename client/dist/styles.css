@@ -5,6 +5,12 @@
   justify-content: space-around;
 }
 
+#RatingsAndReviews {
+    display: flex;
+    justify-content: center;
+    color: #25383C;
+}
+
 #ratingsAndReviewsHeader {
   grid-column-start: 1;
   grid-row-start: 1;
@@ -15,6 +21,7 @@
   grid-column-start: 1;
   grid-row-start: 2;
   align-self: start;
+  min-width: 350px;
 }
 
 #productBreakdown {
@@ -24,6 +31,8 @@
   position: absolute;
   margin-top: 380px;
   width: 40%;
+  min-width: 365px;
+  max-width: 375px;
 }
 
 #reviewsList {
@@ -31,6 +40,7 @@
   grid-row-start: 2;
   grid-row-end: 4;
   overflow: auto;
+  min-width: 475px;
 }
 
 #ratingsSummary {
@@ -56,7 +66,7 @@
 }
 
 .on {
-  color: yellow;
+  color: #fada5e;
 }
 
 .off {
@@ -83,10 +93,12 @@
 
 .bottomLeft {
   float: left;
+  font-size: 14px;
 }
 
 .bottomRight {
   float: right;
+  font-size: 14px;
 }
 
 .middleBar {
@@ -128,19 +140,20 @@
 }
 
 /* The bar container */
-.bar-container {
+.bar-container:hover  {
   width: 100%;
   background-color: #f1f1f1;
   text-align: center;
   color: white;
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 /* Individual bars */
-.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
-.bar-4 {width: 30%; height: 18px; background-color: #04AA6D;}
-.bar-3 {width: 10%; height: 18px; background-color: #04AA6D;}
-.bar-2 {width: 4%; height: 18px; background-color: #04AA6D;}
-.bar-1 {width: 15%; height: 18px; background-color: #04AA6D;}
+.bar-5 {height: 18px; background-color: #04AA6D;}
+.bar-4 {height: 18px; background-color: #04AA6D;}
+.bar-3 {height: 18px; background-color: #04AA6D;}
+.bar-2 {height: 18px; background-color: #04AA6D;}
+.bar-1 {height: 18px; background-color: #04AA6D;}
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
@@ -151,6 +164,47 @@
   .right {
     display: none;
   }
+}
+
+.single-star-outline {
+  height: 36px;
+  width: 31px;
+}
+
+.single-star-fill {
+  position: relative;
+  display: inline-block;
+  height: 36px;
+  background-color: #fada5e;
+}
+
+.single-review-star-outline {
+  height: 21.6px;
+  width: 18.6px;
+}
+
+.single-review-star-fill {
+  position: relative;
+  display: inline-block;
+  height: 21.6px;
+  background-color: #fada5e;
+}
+
+.single-review-star-container {
+  height: 21.6px;
+  width: 18.6px;
+  display: inline-block;
+}
+
+#reviewsQuarterStars {
+  align-self: center;
+  float: left
+}
+
+.single-star-container {
+  height: 36px;
+  width: 31px;
+  display: inline-block;
 }
 
 /**************************************/
@@ -395,19 +449,44 @@
 
 #moreReviewsButton {
   margin-left: 25px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  color: rgb(37, 56, 60);
+  background-color: white;
+}
+
+#searchReviews {
+  margin: 3px;
+  width: 250px;
+  font-size: 16px;
+  color: rgb(37, 56, 60);
+  background-color: white;
+}
+
+#sortReview {
+  margin: 3px;
+  text-align: center;
+  font-size: 16px;
+  color: rgb(37, 56, 60);
+  background-color: white;
 }
 
 #addReviewButton {
   margin-left: 10px;
+  margin: 3px;
+  width: 159px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  color: rgb(37, 56, 60);
+  background-color: white;
 }
 
 .reviewHelpfulness {
   border-bottom: 2px solid rgb(105, 105, 105);
   padding-bottom: 10px;
-}
-
-#characteristicsSummary {
-  margin-top: 50px;
 }
 
 .review-photo-modal img {
@@ -511,3 +590,16 @@
   font-size: 22px;
 }
 
+/* #ratingsAndReviews {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: 5% 300px 300px;
+  justify-items: center;
+} */
+
+/* #productBreakdown {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  align-self: start;
+  width: 40%;
+} */
