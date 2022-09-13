@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import AddAnsForm from './AddAnsForm.jsx'
 import AnswerView from './AnswerView.jsx'
 
-const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHelpfulness, reportAnswer}) => {
+const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHelpfulness, reportAnswer, addAns}) => {
+  //handleOpenAnsForm, showAnsForm, handleCloseAnsForm
   const [answerToShow, setAnswerToShow] = useState(2);
   const [loadAnsButton, setLoadAnsButton] = useState(false);
   const [showAnsForm, setShowAnsForm] = useState(false);
@@ -33,10 +34,10 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
         <span>({question.question_helpfulness})</span>
         <span>&nbsp;|&nbsp;</span>
         {/* <a href="#" onClick={handleOpenAnsForm}>Add Answer</a> */}
-        <button onClick={handleOpenAnsForm} className="addAnsButton">
+        <button onClick={() => {handleOpenAnsForm()}} className="addAnsButton">
           <u>Add Answer</u>
         </button>
-        {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
+        {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question} addAns={addAns}/>}
       </div>
 
       <span className="a-answer">A: </span>

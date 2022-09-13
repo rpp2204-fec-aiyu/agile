@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const AddAnsForm = ({onHide, product, question}) => {
+const AddAnsForm = ({onHide, product, question, addAns}) => {
   const [ansFormValues, setAnsFormValues] = useState({
     ansBody: "",
     nickName: "",
@@ -70,27 +70,29 @@ const AddAnsForm = ({onHide, product, question}) => {
 
   useEffect(() => {
     if(Object.keys(formError).length === 0 && isSubmit) {
-      axios.post(`/qa/questions/${question.question_id}/answers`, {
-        data: {
-          body: ansFormValues.ansBody,
-          name: ansFormValues.nickName,
-          email: ansFormValues.email,
-          rawPhotos: photos
-        }
-      })
-        .then((result) => {
-          console.log('successfully post answer for question', result);
-          onHide();
-        })
-        .catch((err) => {
-          console.log('Fail to post an answer for question', err);
-        })
+      onHide();
+      addAns(ansFormValues.ansBody, ansFormValues.nickName, ansFormValues.email, photos, question.question_id);
+      // axios.post(`/qa/questions/${question.question_id}/answers`, {
+      //   data: {
+      //     body: ansFormValues.ansBody,
+      //     name: ansFormValues.nickName,
+      //     email: ansFormValues.email,
+      //     rawPhotos: photos
+      //   }
+      // })
+      //   .then((result) => {
+      //     console.log('successfully post answer for question', result);
+      //     onHide();
+      //   })
+      //   .catch((err) => {
+      //     console.log('Fail to post an answer for question', err);
+      //   })
     }
   }, [formError]);
 
   return(
     <div className="qaModalContainer">
-      <button className="closeButton" onClick={onHide}>X</button>
+      <button className="closeButton" onClick={() => {onHide()}}>X</button>
       <div className="qaModalTitle">
         <h3>Submit your Answer</h3>
         <h5>{product.name}: {question.question_body}</h5>
@@ -140,7 +142,7 @@ const AddAnsForm = ({onHide, product, question}) => {
       </div>
 
       <div className="qaModalFooter">
-        <button className="submitButton" onClick={handleSubmit}>Submit</button>
+        <button className="submitButton" onClick={() => {handleSubmit()}}>Submit</button>
       </div>
       <br />
 

@@ -17,11 +17,13 @@ const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
         {answer.answerer_name === 'Seller' ? <span style={{fontWeight: 'bold'}}>Seller</span> : <span>{answer.answerer_name}</span>}
         ,&nbsp;
         <span>{answer.date}</span>
-        &nbsp;|&nbsp;  Helpful? &nbsp;
-        <a href="#" onClick={() => {updateAnsHelpfulness(answer.id)}}>Yes</a>
+        &nbsp;|&nbsp;  Helpful?
+        {/* <a href="#" onClick={() => {updateAnsHelpfulness(answer.id)}}>Yes</a> */}
+        <button onClick={() => {updateAnsHelpfulness(answer.id)}} className="addAnsButton"><u>Yes</u></button>
         <span>({answer.helpfulness})</span>
         <span> | </span>
-        <a href="#" onClick={() => {reportAnswer(answer.id)}}>Report</a>
+        {/* <a href="#" onClick={() => {reportAnswer(answer.id)}}>Report</a> */}
+        <button onClick={() => {reportAnswer(answer.id)}} className="addAnsButton"><u>Report</u></button>
       </div>
 
   </div>
