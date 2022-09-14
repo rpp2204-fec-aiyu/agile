@@ -223,12 +223,17 @@
 }
 
 .qaModalContainer {
-  width: 500px;
-  height: 450px;
+  /* width: 500px;
+  height: 450px; */
+  top: 100px;
+  /* bottom: 50px; */
+  /* left: 50px; */
+  /* right: 50px; */
   /* padding: 25px; */
   margin: 0px 25px;
-  top: 5%;
-  position: absolute;
+  /* top: 240%; */
+  overflow: auto;
+  position: fixed;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
@@ -237,6 +242,30 @@
   padding: 40px;
   /* flex-wrap: wrap; */
   align-items: flex-start;
+}
+
+.addAnsButton {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.qaButton {
+  padding: 15px;
+  margin: 3px;
+  font-size: 15px;
+  color: rgb;
+  color: rgb(37, 56,60);
+  background: white;
+  font-weight: 550;
+}
+
+.ansFormPhoto {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 75px;
+  height: 75px;
 }
 
 /* QA Question View */
@@ -253,6 +282,12 @@
 
 .searchButton {
   padding: 15px;
+  margin: 3px;
+  font-size: 15px;
+  color: rgb;
+  color: rgb(37, 56,60);
+  background: white;
+  font-weight: 550;
 }
 
 .question {

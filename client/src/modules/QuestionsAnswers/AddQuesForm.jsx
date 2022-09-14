@@ -104,12 +104,12 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
         <br />
         <span>For authentication reasons, you will not be emailed.</span>
         <p>{formError.email}</p>
-        <br />
       </div>
 
       <div className="qaModalFooter">
         <button className="submitButton" onClick={handleSubmit}>Submit</button>
       </div>
+      <br />
 
     </div>
   )

@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import AddAnsForm from './AddAnsForm.jsx'
 import AnswerView from './AnswerView.jsx'
 
-const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHelpfulness, reportAnswer}) => {
+const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHelpfulness, reportAnswer, addAns}) => {
+  //handleOpenAnsForm, showAnsForm, handleCloseAnsForm
   const [answerToShow, setAnswerToShow] = useState(2);
   const [loadAnsButton, setLoadAnsButton] = useState(false);
   const [showAnsForm, setShowAnsForm] = useState(false);
@@ -26,10 +27,17 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
       <h3>Q: {question.question_body}</h3>
       <div className="question">
         <span>Helpful? </span>
-        <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a>
+        <button onClick={() => {updateQuestionHelpfulness(question.question_id)}} className="addAnsButton">
+          <u>Yes</u>
+        </button>
+        {/* <a href="#" onClick={() => {updateQuestionHelpfulness(question.question_id)}}>Yes</a> */}
         <span>({question.question_helpfulness})</span>
         <span>&nbsp;|&nbsp;</span>
-        <a href="#" onClick={handleOpenAnsForm}>Add Answer</a>
+        {/* <a href="#" onClick={handleOpenAnsForm}>Add Answer</a> */}
+        <button onClick={() => {handleOpenAnsForm()}} className="addAnsButton">
+          <u>Add Answer</u>
+        </button>
+        {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question} addAns={addAns}/>}
       </div>
 
       <span className="a-answer">A: </span>
@@ -43,7 +51,7 @@ const QuestionView = ({question, product, updateQuestionHelpfulness, updateAnsHe
       {Object.keys(question.answers).length > 2 ? <span className="loadAnsButton" onClick={() => {showMoreAns()}}>{loadAnsButton ? 'Collapse answers' : 'Load More Answers'}</span> : null}
       <br />
       *******************************************************************************
-      {showAnsForm && <AddAnsForm onHide={handleCloseAnsForm}  product={product} question={question}/>}
+
     </div>
   )
 }
