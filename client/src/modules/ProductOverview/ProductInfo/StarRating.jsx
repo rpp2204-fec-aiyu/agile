@@ -1,4 +1,5 @@
 import React from 'react'
+import starImg from '../../../../assets/star.png';
 
 export default function StarRating(props) {
 
@@ -17,28 +18,70 @@ export default function StarRating(props) {
   }
 
   let roundedAvg = roundToQuarter(avg)
+  console.log('ROUNDED AVG', roundedAvg)
 
-  function generateStarsFromRating(rating) {
-    var stars =
-    <div className='rating'>
-        {[...Array(5)].map((star, index) => {
-          index += 1;
-          return (
-            <button
-              className={`starButton ${index <= rating ? 'on' : 'off'}`}
-              type="button"
-              key={index}
-              >
-              <span>&#9733;
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    return stars;
+  // function generateStarsFromRating(rating) {
+  //   var stars =
+  //   <div className='rating'>
+  //       {[...Array(5)].map((star, index) => {
+  //         index += 1;
+  //         return (
+  //           <button
+  //             className={`starButton ${index <= rating ? 'on' : 'off'}`}
+  //             type="button"
+  //             key={index}
+  //             >
+  //             <span>&#9733;
+  //             </span>
+  //           </button>
+  //         );
+  //       })}
+  //     </div>
+  //   return stars;
+  // }
+
+  function generateStarWidths() {
+    var widthsOfStars = [...Array(5)].map((rating, index) => {
+      if (roundedAvg > 1) {
+        roundedAvg = roundedAvg - 1;
+        return 1;
+      } else if (roundedAvg > 0) {
+        var roundedDec = roundedAvg;
+        roundedAvg = roundedAvg - roundedAvg;
+        return roundedDec
+      } else {
+        return 0;
+      }
+    })
+    return widthsOfStars;
   }
 
-  return generateStarsFromRating(roundedAvg)
+  function generateStarsFromRating() {
+    var arrayOfWidths = generateStarWidths();
+    console.log('arrayOfWidths: ', arrayOfWidths);
+    return (
+    <div id='overviewQuarterStars'>
+
+      {arrayOfWidths.map((width, index) => {
+        return (
+        <div className='single-star-container-overview' key={index}>
+          <div className='single-star-fill-overview' style={{'width': (width * 21).toString() + 'px'}}>
+            <img className='single-star-outline-overview' src={starImg}></img>
+          </div>
+        </div>
+        )
+      })}
+
+    </div>
+    )
+  }
+
+  return (
+    <div>
+      {generateStarsFromRating()}
+      <a href='#ratingsAndReviews'><small>Read all {ratings.totalReviews} reviews</small></a>
+    </div>
+  )
     // (
     // <div style={{display: 'flex', height: '20px'}}>
     //   {[...Array(5)].map(star => {

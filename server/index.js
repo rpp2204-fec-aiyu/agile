@@ -142,16 +142,20 @@ app.get('/questions/:product_id', (req , res) => {
     })
 })
 
-app.post('/qa/questions/:question_id/answers', (req, res) => {
+app.post('/qa/questions/:question_id/answers', (req, res, next) => {
   let questionId = req.params.question_id;
   console.log('HERE IS THE QUESTION_ID: ', questionId);
   console.log('HERE ARE THE INFO FOR POST ANS:', req.body);
-  axios.post(`${BASEURL}/qa/questions/${questionId}/answers`, req.body, {headers: {'Authorization': APIKEY}})
-    .then((response) => {
-      res.status(201).send('Created');
-    })
-    .catch((err) => {
-      res.status(500).send(err);
+  createPhotoURL(req, res, next)
+    .then(() => {
+      //console.log('AFter formarteed', req.body.data);
+      axios.post(`${BASEURL}/qa/questions/${questionId}/answers`, req.body.data, {headers: {'Authorization': APIKEY}})
+        .then((response) => {
+          res.status(201).send('Created');
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        })
     })
 })
 

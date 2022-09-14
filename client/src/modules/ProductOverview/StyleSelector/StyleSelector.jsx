@@ -6,7 +6,15 @@ export default function StyleSelector(props) {
 
   return (
     <>
-      <ThumbnailContainer styles={props.styles} setStyle={props.setStyle} setPrice={props.setPrice} setSalePrice={props.setSalePrice}/>
+      <ThumbnailContainer
+        styles={props.styles}
+        setStyle={props.setStyle}
+        setStyleTitle={props.setStyleTitle}
+        styleTitle={props.styleTitle}
+        setPrice={props.setPrice}
+        setSalePrice={props.setSalePrice}
+        highlightedThumbnail={props.highlightedThumbnail}
+        setHighlightedThumbnail={props.setHighlightedThumbnail}/>
     </>
   )
 
