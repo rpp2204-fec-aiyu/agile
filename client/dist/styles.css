@@ -543,6 +543,9 @@
 
 #gallery {
   position: relative;
+  /* width: 900px; */
+  /* height: 800px; */
+  overflow: hidden;
 }
 
 #galleryLeft {
@@ -600,6 +603,24 @@
   /* top: 3px; */
   left: 65px;
   font-size: 22px;
+}
+
+.single-star-outline-overview {
+  height: 26px;
+  width: 21px;
+}
+
+.single-star-fill-overview {
+  position: relative;
+  display: inline-block;
+  height: 26px;
+  background-color: #fada5e;
+}
+
+.single-star-container-overview {
+  height: 26px;
+  width: 21px;
+  display: inline-block;
 }
 
 /* #ratingsAndReviews {
