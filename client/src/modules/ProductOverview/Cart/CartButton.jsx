@@ -4,6 +4,8 @@ import axios from 'axios'
 
 export default function CartButton(props) {
 
+  console.log('CARTBUTTON QS: ', props.quantitySelection)
+
   function addItemToCart() {
     axios.post('/cart', {
       sku_id: props.skuId

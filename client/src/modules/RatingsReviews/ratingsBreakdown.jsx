@@ -190,7 +190,6 @@ export default class RatingsBreakdown extends React.Component {
   generateFiltersMessage() {
     var filtersObj = this.props.filterBy;
     var filtersApplied = '';
-
     for (var key in filtersObj) {
       if (filtersObj[key]) {
         if (filtersApplied.length === 0) {
@@ -208,6 +207,17 @@ export default class RatingsBreakdown extends React.Component {
   }
 
   render() {
+    if (!this.props.recommendations.true) {
+      var doesRecommend = 0;
+    }
+    if (!this.props.recommendations.true) {
+      var doesNotRecommend = 0;
+    }
+
+    var doesRecommend = parseInt(this.props.recommendations.true);
+    var doesNotRecommend = parseInt(this.props.recommendations.false);
+    var percentRecommends = doesRecommend / (doesRecommend + doesNotRecommend) * 100;
+
     var filtersObj = this.state.filterBy;
     console.log('this.props.filterBy: ', this.props.filterBy);
     var removeFiltersButton;
@@ -224,6 +234,9 @@ export default class RatingsBreakdown extends React.Component {
         <div id='ratingsSummary'>
           <h1 id='averageNumRating'>{this.calculateAvgRating()}</h1>
           {this.generateStarsFromRating()}
+        </div>
+        <div id='productRecommendation'>
+          {`${Math.round(percentRecommends)}% of reviewers recommend this product`}
         </div>
         {filtersMessage}
         {removeFiltersButton}
