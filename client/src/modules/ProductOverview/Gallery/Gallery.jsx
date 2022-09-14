@@ -23,6 +23,7 @@ export default function Gallery(props) {
   const [isPortrait, setIsPortrait] = useState(false)
 
   const [isExpanded, setIsExpanded] = useState(false)
+  //const [isZoomed, setIsZoomed] = useState(false)
 
   function getImgSize(imgSrc, callback) {
     const newImg = new Image();
@@ -132,54 +133,98 @@ export default function Gallery(props) {
     let galleryLeft = document.getElementById('galleryLeft')
     let galleryRight = document.getElementById('galleryRight')
     let thumbnailContainer = document.getElementsByClassName('galleryThumbnailContainer')[0]
-    if(!isExpanded) {
 
-      props.setHideInfo(true)
-      setIsExpanded(true)
-      setClientWidth('1500')
-      setClientHeight('800')
-      setGalleryContainerWidth('1500px')
-      setGalleryContainerHeight('800px')
 
-      if(isPortrait) {
-        // setClientWidth('710')
-        // setClientHeight('900')
-        // setGalleryContainerWidth('710px')
-        // setGalleryContainerHeight('900px')
-        mainImg.style.objectFit = 'contain';
+
+    // if(isZoomed) {
+    //   setIsZoomed(false)
+
+
+
+    //   gallery.style.objectFit = 'cover'
+    //   setClientWidth('3750')
+    //   setClientHeight('2000')
+
+
+    //   let dragging = false;
+    // let previousX;
+    // let previousY;
+    // gallery.addEventListener('mousedown', (e) => {
+    //   e.preventDefault()
+    //   previousX = e.clientX;
+    //   previousY = e.clientY;
+    //   dragging = true
+    // })
+
+    // gallery.addEventListener('mouseup', e => {
+    //   dragging = false;
+    // })
+
+    // gallery.addEventListener('mousemove', e => {
+    //   if(dragging) {
+    //     e.preventDefault()
+    //     // let directionX = (previousX + e.clientX) > 0 ? 1 : -1
+    //     // let directionY = (previousY + e.clientY) > 0 ? 1 : -1
+    //     previousX = e.clientX;
+    //     previousY = e.clientY;
+    //   }
+    // })
+
+    // gallery.addEventListener('mouseleave', e => {
+    //   dragging = false;
+    // })
+
+
+    // } else {
+
+      if(!isExpanded) {
+
+        props.setHideInfo(true)
+        setIsExpanded(true)
+        //setIsZoomed(true)
+        setClientWidth('1500')
+        //setClientWidth('auto')
+        setClientHeight('800')
+        setGalleryContainerWidth('1500px')
+        //setGalleryContainerWidth('auto')
+        setGalleryContainerHeight('800px')
+
+        if(isPortrait) {
+          mainImg.style.objectFit = 'contain';
+        }
+        else {
+          mainImg.style.objectFit = 'cover';
+        }
+        gallery.style.backgroundColor = 'gray'
+        thumbnailContainer.style.top  = '50px'
+        thumbnailContainer.style.gap = '20px'
       }
       else {
+        props.setHideInfo(false)
+        setIsExpanded(false)
         mainImg.style.objectFit = 'cover';
+        thumbnailContainer.style.top  = '10px'
+        thumbnailContainer.style.gap = '10px'
+        gallery.style.backgroundColor = 'lightgray'
+        setClientWidth('700')
+        setClientHeight('600')
+        setGalleryContainerHeight('600px')
+        setGalleryContainerWidth('700px')
       }
-      gallery.style.backgroundColor = 'gray'
-
-      //gallery.style.zIndex = '10'
-      //if(galleryLeft) galleryLeft.style.top = '700px'//(galleryContainerHeight / 2)  + 'px'
-      //if(galleryRight) galleryRight.style.top = '700px' //(galleryContainerHeight / 2) + 'px'
-      //thumbnailContainer.style.zIndex = '10'
-      thumbnailContainer.style.top  = '50px'
-      thumbnailContainer.style.gap = '20px'
-    }
-    else {
-      props.setHideInfo(false)
-      setIsExpanded(false)
-      mainImg.style.objectFit = 'cover';
-      thumbnailContainer.style.top  = '10px'
-      thumbnailContainer.style.gap = '10px'
-      gallery.style.backgroundColor = 'lightgray'
-      //if(galleryLeft) galleryLeft.style.top = '290px'
-      //if(galleryRight) galleryRight.style.top = '290px'
-      setClientWidth('700')
-      setClientHeight('600')
-      setGalleryContainerHeight('600px')
-      setGalleryContainerWidth('700px')
-    }
+  // }
   }
 
 
 
   return (
-    <div id='gallery' data-testid="galleryTest" style={{backgroundColor: 'lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center', width: galleryContainerWidth, height: galleryContainerHeight}} >
+    <div id='gallery'
+         data-testid="galleryTest"
+         style={{backgroundColor: 'lightgray',
+           display: 'flex',
+           alignItems: 'center',
+           justifyContent: 'center',
+           width: galleryContainerWidth,
+           height: galleryContainerHeight}} >
 
         <img
           id='galleryMainImage'
