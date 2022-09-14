@@ -1,4 +1,5 @@
 require('dotenv').config();
+const compression = require('compression');
 const PORT = process.env.PORT
 const APIKEY = process.env.APIKEY
 const BASEURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
@@ -11,6 +12,7 @@ const app = express();
 
 const path = require('path')
 
+app.use(compression());
 app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json({limit : '1000kb'}))
@@ -64,7 +66,7 @@ app.get('/productOverview/:product_id', (req, res) => {
 
 app.post('/cart', (req, res) => {
   let skuId = req.body
-  console.log(req.body)
+  // console.log(req.body)
   axios.post(`${BASEURL}/cart`, skuId, {headers: {Authorization: APIKEY}})
     .then(results => {
       res.status(201).send(results.data)
@@ -75,7 +77,6 @@ app.post('/cart', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  console.log('req.query: ', req.query);
   axios.get(`${BASEURL}/reviews`, {
     headers: {'Authorization': APIKEY},
     params: req.query
