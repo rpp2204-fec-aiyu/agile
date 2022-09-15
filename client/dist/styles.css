@@ -636,3 +636,22 @@
   align-self: start;
   width: 40%;
 } */
+
+
+/**************App*******************/
+#light {
+  background-color: #ccc;
+}
+
+#dark {
+  background-color: dimgray;
+}
+
+body {
+  margin: 0;
+}
+
+.appTitle {
+  margin: 0;
+}
+
