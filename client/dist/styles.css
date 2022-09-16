@@ -1,7 +1,18 @@
+#Ea {
+  display: flex;
+  justify-content: center;
+}
+
+#o {
+  display: flex;
+  justify-content: center;
+  color: #25383C;
+}
+
 #ratingsAndReviews {
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 5% 300px 300px 50;
+  grid-template-rows: 5% 300px 300px;
   justify-content: space-around;
 }
 
