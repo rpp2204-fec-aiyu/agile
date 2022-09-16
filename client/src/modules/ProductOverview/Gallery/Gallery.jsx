@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Zoom from './Zoom.jsx'
-// import '../fontawesome.js'
 
 export default function Gallery(props) {
 
@@ -41,29 +40,15 @@ export default function Gallery(props) {
     setNaturalHeight(height)
     if(height > width) {
       setIsPortrait(true)
-      // setClientWidth('700')
-      // setClientHeight('900')
-      // setGalleryContainerWidth('700px')
-      // setGalleryContainerHeight('900px')
     } else {
       setIsPortrait(false)
-      // setClientWidth('700')
-      // setClientHeight('600')
-      // setGalleryContainerWidth('700px')
-      // setGalleryContainerHeight('600px')
     }
   }
-
-  //getImgSize(galleryPhoto, getImgDimensions)
 
   useEffect(() => {
     let mainImg = document.getElementById('galleryMainImage')
     getImgSize(galleryPhoto, getImgDimensions)
     if(naturalHeight > naturalWidth) {
-      // setClientWidth('700')
-      // setClientHeight('900')
-      // setGalleryContainerWidth('700px')
-      // setGalleryContainerHeight('900px')
       mainImg.style.objectFit = 'contain';
       setIsPortrait(true)
     } else {
@@ -126,8 +111,8 @@ export default function Gallery(props) {
     }
   }
 
-  if(document.getElementById('zoomContainer')) {
-    let zoom = document.getElementById('zoomContainer')
+  if(document.getElementById('zoomView')) {
+    let zoom = document.getElementById('zoomView')
     zoom.addEventListener('mousemove', e => {
       let mousePosX = (e.pageX / window.innerWidth) * 100
       zoom.style.backgroundPositionX = mousePosX + '%'
@@ -143,95 +128,47 @@ export default function Gallery(props) {
     let galleryRight = document.getElementById('galleryRight')
     let thumbnailContainer = document.getElementsByClassName('galleryThumbnailContainer')[0]
 
+    if(!isExpanded && !isZoomed) {
 
+      props.setHideInfo(true)
+      setIsExpanded(true)
+      setClientWidth('1500')
+      setClientHeight('800')
+      setGalleryContainerWidth('1500px')
+      setGalleryContainerHeight('800px')
 
-    // if(isZoomed) {
-    //   setIsZoomed(false)
-
-
-
-    //   gallery.style.objectFit = 'cover'
-    //   setClientWidth('3750')
-    //   setClientHeight('2000')
-
-
-    //   let dragging = false;
-    // let previousX;
-    // let previousY;
-    // gallery.addEventListener('mousedown', (e) => {
-    //   e.preventDefault()
-    //   previousX = e.clientX;
-    //   previousY = e.clientY;
-    //   dragging = true
-    // })
-
-    // gallery.addEventListener('mouseup', e => {
-    //   dragging = false;
-    // })
-
-    // gallery.addEventListener('mousemove', e => {
-    //   if(dragging) {
-    //     e.preventDefault()
-    //     // let directionX = (previousX + e.clientX) > 0 ? 1 : -1
-    //     // let directionY = (previousY + e.clientY) > 0 ? 1 : -1
-    //     previousX = e.clientX;
-    //     previousY = e.clientY;
-    //   }
-    // })
-
-    // gallery.addEventListener('mouseleave', e => {
-    //   dragging = false;
-    // })
-
-
-    // } else {
-
-      if(!isExpanded && !isZoomed) {
-
-        props.setHideInfo(true)
-        setIsExpanded(true)
-        //setIsZoomed(true)
-        setClientWidth('1500')
-        //setClientWidth('auto')
-        setClientHeight('800')
-        setGalleryContainerWidth('1500px')
-        //setGalleryContainerWidth('auto')
-        setGalleryContainerHeight('800px')
-
-        if(isPortrait) {
-          mainImg.style.objectFit = 'contain';
-        }
-        else {
-          mainImg.style.objectFit = 'cover';
-        }
-        gallery.style.backgroundColor = 'gray'
-        thumbnailContainer.style.top  = '50px'
-        thumbnailContainer.style.gap = '20px'
-      } else if (isExpanded && !isZoomed) {
-        setIsExpanded(false)
-        setIsZoomed(true)
+      if(isPortrait) {
+        mainImg.style.objectFit = 'contain';
       }
       else {
-        setIsZoomed(false)
-        props.setHideInfo(false)
-
         mainImg.style.objectFit = 'cover';
-        thumbnailContainer.style.top  = '10px'
-        thumbnailContainer.style.gap = '10px'
-        gallery.style.backgroundColor = 'lightgray'
-        setClientWidth('700')
-        setClientHeight('600')
-        setGalleryContainerHeight('600px')
-        setGalleryContainerWidth('700px')
       }
-  // }
-  }
+      gallery.style.backgroundColor = 'gray'
+      thumbnailContainer.style.top  = '50px'
+      thumbnailContainer.style.gap = '20px'
+    } else if (isExpanded && !isZoomed) {
+      setIsExpanded(false)
+      setIsZoomed(true)
+    }
+    else {
+      setIsZoomed(false)
+      props.setHideInfo(false)
+
+      mainImg.style.objectFit = 'cover';
+      thumbnailContainer.style.top  = '10px'
+      thumbnailContainer.style.gap = '10px'
+      gallery.style.backgroundColor = 'lightgray'
+      setClientWidth('700')
+      setClientHeight('600')
+      setGalleryContainerHeight('600px')
+      setGalleryContainerWidth('700px')
+    }
+}
 
 
 
   return (
-    // <div >style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    <div>
+
     <div id='gallery'
          data-testid="galleryTest"
          style={{backgroundColor: 'lightgray',
@@ -242,7 +179,16 @@ export default function Gallery(props) {
          width: galleryContainerWidth,
          height: galleryContainerHeight}} >
 
-    {isZoomed ? <Zoom expandView={expandView} galleryPhoto={galleryPhoto} naturalWidth={naturalWidth} naturalHeight={naturalHeight} style={{top: '25px'}} /> : null}
+        {isZoomed ?
+          <Zoom
+            expandView={expandView}
+            galleryPhoto={galleryPhoto}
+            naturalWidth={naturalWidth}
+            naturalHeight={naturalHeight} />
+            :
+            null
+        }
+
 
         <img
           id='galleryMainImage'
@@ -337,8 +283,5 @@ export default function Gallery(props) {
 
       </div>
     </div>
-
-    </div>
   )
-
 }
