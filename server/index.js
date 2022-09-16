@@ -2,6 +2,7 @@ require('dotenv').config();
 const compression = require('compression');
 const PORT = process.env.PORT
 const APIKEY = process.env.APIKEY
+const env = process.env.NODE_ENV
 const BASEURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
 const {getProductId, getQuestionsList} = require('./helper/questionAPI.js')
 const axios = require('axios')
@@ -17,6 +18,7 @@ app.use(express.static(__dirname + '/../client/dist'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json({limit : '1000kb'}))
 
+console.log('node environment is: ', env);
 // app.get('/:product_id', (req, res) => {
 //   res.send('testing')
 // })
