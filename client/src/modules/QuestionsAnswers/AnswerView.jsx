@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Moment from 'moment';
 
 const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
   const [report, setReport] = useState('Report');
@@ -16,7 +17,7 @@ const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
         by:&nbsp;
         {answer.answerer_name === 'Seller' ? <span style={{fontWeight: 'bold'}}>Seller</span> : <span>{answer.answerer_name}</span>}
         ,&nbsp;
-        <span>{answer.date}</span>
+        <span>{Moment(answer.date).format('MMM DD, YYYY')}</span>
         &nbsp;|&nbsp;  Helpful?
         {/* <a href="#" onClick={() => {updateAnsHelpfulness(answer.id)}}>Yes</a> */}
         <button onClick={() => {updateAnsHelpfulness(answer.id)}} className="addAnsButton"><u>Yes</u></button>

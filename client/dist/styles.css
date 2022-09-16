@@ -1,7 +1,18 @@
+#Ea {
+  display: flex;
+  justify-content: center;
+}
+
+#o {
+  display: flex;
+  justify-content: center;
+  color: #25383C;
+}
+
 #ratingsAndReviews {
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 5% 300px 300px 50;
+  grid-template-rows: 5% 300px 300px;
   justify-content: space-around;
 }
 
@@ -250,13 +261,21 @@
   background-color: transparent;
 }
 
+#light .qaButton {
+  background-color: #EEEEEE;
+  color: rgb(37, 56,60);
+}
+
+#dark .qaButton {
+  background-color:#333333;
+  color: white;
+}
+
 .qaButton {
   padding: 15px;
   margin: 3px;
   font-size: 15px;
-  color: rgb;
-  color: rgb(37, 56,60);
-  background: white;
+  /* background: white; */
   font-weight: 550;
 }
 
@@ -636,3 +655,22 @@
   align-self: start;
   width: 40%;
 } */
+
+
+/**************App*******************/
+#light {
+  background-color: #ddd;
+}
+
+#dark {
+  background-color: #424242ba;
+}
+
+body {
+  margin: 0;
+}
+
+.appTitle {
+  margin: 0;
+}
+
