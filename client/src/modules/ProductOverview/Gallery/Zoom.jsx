@@ -16,7 +16,9 @@ export default function Zoom(props) {
   return (
     <div id='zoomContainer'
          onClick={props.expandView}
+         cursor='pointer'
          style={{
+          cursor: 'zoom-out',
            border: '3px solid black',
            //objectFit: 'cover',
            backgroundRepeat: 'no-repeat',
