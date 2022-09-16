@@ -22,7 +22,7 @@ function App() {
     */
     return axios.get('/products')
       .then(products => {
-        return products.data[0]
+        return products.data[4]
       })
   }
 
