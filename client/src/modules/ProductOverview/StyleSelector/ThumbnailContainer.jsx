@@ -4,13 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function ThumbnailContainer(props) {
 
-
-  //const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
-
-
-
   function handleClick(style, index) {
-    //setTitle(style.name)
     props.setStyleTitle(style.name)
     props.setStyle(style)
 
