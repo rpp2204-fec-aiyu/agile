@@ -7,7 +7,6 @@ export default function Gallery(props) {
 
   const [galleryPhoto, setGalleryPhoto] = useState(props.style.photos[0].url)
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
-  //const [isZoom, setIsZoom] = useState(false)
 
   const [lowIndex, setLowIndex] = useState(0)
   const [highIndex, setHighIndex] = useState(7)
@@ -23,7 +22,7 @@ export default function Gallery(props) {
   const [isPortrait, setIsPortrait] = useState(false)
 
   const [isExpanded, setIsExpanded] = useState(false)
-  //const [isZoomed, setIsZoomed] = useState(false)
+  const [isZoomed, setIsZoomed] = useState(false)
 
   function getImgSize(imgSrc, callback) {
     const newImg = new Image();
@@ -187,7 +186,7 @@ export default function Gallery(props) {
 
     // } else {
 
-      if(!isExpanded) {
+      if(!isExpanded && !isZoomed) {
 
         props.setHideInfo(true)
         setIsExpanded(true)
@@ -208,10 +207,14 @@ export default function Gallery(props) {
         gallery.style.backgroundColor = 'gray'
         thumbnailContainer.style.top  = '50px'
         thumbnailContainer.style.gap = '20px'
+      } else if (isExpanded && !isZoomed) {
+        setIsExpanded(false)
+        setIsZoomed(true)
       }
       else {
+        setIsZoomed(false)
         props.setHideInfo(false)
-        setIsExpanded(false)
+
         mainImg.style.objectFit = 'cover';
         thumbnailContainer.style.top  = '10px'
         thumbnailContainer.style.gap = '10px'
@@ -232,11 +235,14 @@ export default function Gallery(props) {
     <div id='gallery'
          data-testid="galleryTest"
          style={{backgroundColor: 'lightgray',
-           display: 'flex',
-           alignItems: 'center',
-           justifyContent: 'center',
-           width: galleryContainerWidth,
-           height: galleryContainerHeight}} >
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'center',
+         position: 'relative',
+         width: galleryContainerWidth,
+         height: galleryContainerHeight}} >
+
+    {isZoomed ? <Zoom expandView={expandView} galleryPhoto={galleryPhoto} naturalWidth={naturalWidth} naturalHeight={naturalHeight} style={{top: '25px'}} /> : null}
 
         <img
           id='galleryMainImage'
@@ -330,11 +336,8 @@ export default function Gallery(props) {
         }
 
       </div>
+    </div>
 
-    </div>
-    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    <Zoom galleryPhoto={galleryPhoto} naturalWidth={naturalWidth} naturalHeight={naturalHeight} />
-    </div>
     </div>
   )
 
