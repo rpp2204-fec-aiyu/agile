@@ -227,6 +227,7 @@ export default function Gallery(props) {
 
 
   return (
+    // <div >style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
     <div>
     <div id='gallery'
          data-testid="galleryTest"
@@ -331,7 +332,9 @@ export default function Gallery(props) {
       </div>
 
     </div>
-    <Zoom galleryPhoto={galleryPhoto} />
+    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+    <Zoom galleryPhoto={galleryPhoto} naturalWidth={naturalWidth} naturalHeight={naturalHeight} />
+    </div>
     </div>
   )
 
