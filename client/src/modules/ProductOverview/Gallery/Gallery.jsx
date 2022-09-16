@@ -131,7 +131,7 @@ export default function Gallery(props) {
     zoom.addEventListener('mousemove', e => {
       let mousePosX = (e.pageX / window.innerWidth) * 100
       zoom.style.backgroundPositionX = mousePosX + '%'
-      let mousePosY = (e.pageY / window.innerWidth) * 100
+      let mousePosY = (e.pageY / window.innerHeight) * 100
       zoom.style.backgroundPositionY = mousePosY + '%'
     })
   }
