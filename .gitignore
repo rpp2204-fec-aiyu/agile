@@ -6,3 +6,4 @@ getUniqueCategories.js
 productList.js
 coverage
 *.pem
+login.sh
