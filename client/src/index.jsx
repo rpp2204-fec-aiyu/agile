@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import '../dist/styles.css';
+import ReactSwitch from 'react-switch';
 
 import WithClickTracking from './WithClickTracking.jsx'
 import ProductOverview from './modules/ProductOverview/ProductOverview.jsx'
 import RatingsAndReviews from './modules/RatingsReviews/ratingsAndReviews.jsx'
 import QuesAns from './modules/QuestionsAnswers/QuesAns.jsx'
+
+export const ThemeContext = createContext(null);
 
 function App() {
 
@@ -22,12 +25,18 @@ function App() {
     */
     return axios.get('/products')
       .then(products => {
-        return products.data[0]
+        return products.data[4]
       })
   }
 
   const [product, setProduct] = useState(null)
   const [productId, setProductId] = useState(null)
+
+  const [theme, setTheme] = useState('light')
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  }
 
   useEffect(() => {
     getCurrentProduct()
@@ -53,9 +62,20 @@ function App() {
 
   return (
     <>
-      <ProductOverviewWithClickTracking product={product} productId={productId}/>
-      <RatingsAndReviewsWithClickTracking product_id={productId} productName={product.name}/>
-      <QuesAnsWithClickTracking product={product} productId={productId}/>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
+      <div className="appBackground" id={theme}>
+
+        <h3 className="appTitle">Company Name</h3>
+        <div className="themeSwitch">
+          <ReactSwitch onChange={toggleTheme} checked={theme ==="dark"}/>
+        </div>
+
+        <ProductOverviewWithClickTracking product={product} productId={productId}/>
+        <RatingsAndReviewsWithClickTracking product_id={productId} productName={product.name}/>
+        <QuesAnsWithClickTracking product={product} productId={productId}/>
+
+      </div>
+    </ThemeContext.Provider>
     </>
   )
 }
