@@ -127,6 +127,16 @@ export default function Gallery(props) {
     }
   }
 
+  if(document.getElementById('zoomContainer')) {
+    let zoom = document.getElementById('zoomContainer')
+    zoom.addEventListener('mousemove', e => {
+      let mousePosX = (e.pageX / window.innerWidth) * 100
+      zoom.style.backgroundPositionX = mousePosX + '%'
+      let mousePosY = (e.pageY / window.innerWidth) * 100
+      zoom.style.backgroundPositionY = mousePosY + '%'
+    })
+  }
+
   function expandView() {
     let mainImg = document.getElementById('galleryMainImage')
     let gallery = document.getElementById('gallery')
@@ -217,6 +227,7 @@ export default function Gallery(props) {
 
 
   return (
+    <div>
     <div id='gallery'
          data-testid="galleryTest"
          style={{backgroundColor: 'lightgray',
@@ -318,7 +329,9 @@ export default function Gallery(props) {
         }
 
       </div>
-      {/* {isZoom ? <Zoom galleryPhoto={galleryPhoto} /> : null} */}
+
+    </div>
+    <Zoom galleryPhoto={galleryPhoto} />
     </div>
   )
 
