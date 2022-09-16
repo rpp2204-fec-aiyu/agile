@@ -70,7 +70,7 @@ function App() {
           <ReactSwitch onChange={toggleTheme} checked={theme ==="dark"}/>
         </div>
 
-        <ProductOverviewWithClickTracking product={product} productId={productId}/>
+        <ProductOverviewWithClickTracking product={product} productId={productId} setProductId={setProductId} setProduct={setProduct}/>
         <RatingsAndReviewsWithClickTracking product_id={productId} productName={product.name}/>
         <QuesAnsWithClickTracking product={product} productId={productId}/>
 

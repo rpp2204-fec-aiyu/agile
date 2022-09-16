@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Zoom from './Zoom.jsx'
+import no_image_availabe from '../../../../assets/No_image_available.svg.png'
 
 export default function Gallery(props) {
 
@@ -44,6 +45,12 @@ export default function Gallery(props) {
       setIsPortrait(false)
     }
   }
+
+  useEffect(() => {
+    if(props.style.photos.length === 0) {
+      setGalleryPhoto(no_image_availabe)
+    }
+  }, [])
 
   useEffect(() => {
     let mainImg = document.getElementById('galleryMainImage')

@@ -11,8 +11,9 @@ import StyleSelector from './StyleSelector/StyleSelector.jsx'
 import Cart from './Cart/Cart.jsx'
 
 import Gallery from './Gallery/Gallery.jsx'
+import MiniRelatedProducts from './MiniRelatedProducts.jsx'
 
-export default function ProductOverview({ product, productId }) {
+export default function ProductOverview({ product, productId, setProductId, setProduct }) {
 
   function getCurrentProductData(id) {
     return axios.get(`/productOverview/${id}`) //orchestrates endpoint
@@ -41,6 +42,8 @@ export default function ProductOverview({ product, productId }) {
   const [styleTitle, setStyleTitle] = useState('')
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
 
+  const [relatedProducts, setRelatedProducts] = useState([])
+
 
   useEffect(()=> {
 
@@ -49,7 +52,7 @@ export default function ProductOverview({ product, productId }) {
         console.log("STYLES FROM GET REQ: ", data)
         setFeatures(data.features)
         setReviews(Object.entries(data.reviews))
-
+        setRelatedProducts(data.related)
         setStyles(data.styles)
         setStyle(data.styles[0])
         setStyleTitle(data.styles[0].name)
@@ -58,7 +61,12 @@ export default function ProductOverview({ product, productId }) {
 
   }, [])
 
-  if(!style) return null
+  //CHECK RELATED PRODUCTS
+  useEffect(() => {
+    console.log('RELATED PRODUCTS',relatedProducts)
+  }, [relatedProducts])
+
+  if(!style || !relatedProducts) return null
 
   return (
     <div data-testid="productOverviewTest" style={{marginTop: '25px', marginBottom: '30px'}}> {/* increases surrounding margins to approx centering */}
@@ -94,6 +102,7 @@ export default function ProductOverview({ product, productId }) {
 
       </div>
       <Overview slogan={slogan} description={description} features={features} />
+      <MiniRelatedProducts relatedProducts={relatedProducts} setProductId={setProductId} setProduct={setProduct}/>
     </div>
   )
 

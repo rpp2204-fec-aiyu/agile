@@ -43,6 +43,17 @@ app.get('/products', (req, res) => {
     })
 })
 
+app.get('/relatedProducts/:product_id', (req, res) => {
+  let id = req.params.product_id
+  axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}})
+    .then(results => {
+      res.send(results.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 app.get('/productOverview/:product_id', (req, res) => {
   let id = req.params.product_id
   const productInfo = {};
@@ -50,12 +61,14 @@ app.get('/productOverview/:product_id', (req, res) => {
   idRequest = axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}});
   stylesRequest = axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
   reviewsRequest = axios.get(`${BASEURL}/reviews/meta`, {headers: {'Authorization': APIKEY}, params: {product_id: id}})
+  relatedRequest = axios.get(`${BASEURL}/products/${id}/related`, {headers: {'Authorization': APIKEY}})
 
-  Promise.all([idRequest, stylesRequest, reviewsRequest])
+  Promise.all([idRequest, stylesRequest, reviewsRequest, relatedRequest])
     .then(results => {
       productInfo.features = results[0].data.features
       productInfo.styles = results[1].data.results
       productInfo.reviews = results[2].data.ratings
+      productInfo.related = results[3].data
       return productInfo
     })
     .then(productInfo => {
