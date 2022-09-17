@@ -266,6 +266,11 @@
 /**************************************/
 
 /* Q&A add answer and question forms styling */
+.inputBox {
+  width: 471px;
+  height: 182px;
+}
+
 #light .qaBackground{
   color: #25383C;
 }
@@ -367,9 +372,6 @@
   padding: 20px;
   /* color: #25383C; */
   font-weight: bold;
-}
-#dark .searchBox {
-  color: #e2e2e2;
 }
 
 .searchBox {

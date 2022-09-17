@@ -3,8 +3,16 @@ import Moment from 'moment';
 
 const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
   const [report, setReport] = useState('Report');
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleReport = () => setReport('Reported');
+
+  const checkIsClicked = (a_id) => {
+    if(isClicked === false) {
+      updateAnsHelpfulness(a_id);
+      setIsClicked(true);
+    }
+  }
 
   return(
     <div>
@@ -19,11 +27,9 @@ const AnswerView = ({answer, updateAnsHelpfulness, reportAnswer}) => {
         ,&nbsp;
         <span>{Moment(answer.date).format('MMM DD, YYYY')}</span>
         &nbsp;|&nbsp;  Helpful?
-        {/* <a href="#" onClick={() => {updateAnsHelpfulness(answer.id)}}>Yes</a> */}
-        <button onClick={() => {updateAnsHelpfulness(answer.id)}} className="addAnsButton"><u>Yes</u></button>
+        <button onClick={() => {checkIsClicked(answer.id)}} className="addAnsButton"><u>Yes</u></button>
         <span>({answer.helpfulness})</span>
         <span> | </span>
-        {/* <a href="#" onClick={() => {reportAnswer(answer.id)}}>Report</a> */}
         <button onClick={() => {reportAnswer(answer.id)}} className="addAnsButton"><u>Report</u></button>
       </div>
 
