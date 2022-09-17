@@ -1,13 +1,10 @@
 const path = require('path')
-// const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
   entry: './client/src/index.jsx',
   output: {
     path: path.resolve(__dirname + '/client/dist'),
     filename: 'bundle.js'
-
   },
   module: {
     rules: [

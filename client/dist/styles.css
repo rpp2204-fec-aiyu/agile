@@ -1,7 +1,18 @@
+#Ea {
+  display: flex;
+  justify-content: center;
+}
+
+#o {
+  display: flex;
+  justify-content: center;
+  color: #25383C;
+}
+
 #ratingsAndReviews {
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 5% 300px 300px 50;
+  grid-template-rows: 5% 300px 300px;
   justify-content: space-around;
 }
 
@@ -257,6 +268,7 @@
 }
 
 .qaBackground {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-items: start;
@@ -338,6 +350,10 @@
 }
 
 /* QA Question View */
+.qaBottomButtons {
+  margin-right: 190px;
+}
+
 .qatitle {
   margin-right: 455px;
   font-size: larger;
@@ -365,6 +381,11 @@
   margin: 3px;
   font-size: 15px;
   font-weight: 550;
+}
+
+.questions {
+  height: 750px;
+  overflow-y: scroll;
 }
 
 .question {

@@ -20,26 +20,6 @@ export default function StarRating(props) {
   let roundedAvg = roundToQuarter(avg)
   console.log('ROUNDED AVG', roundedAvg)
 
-  // function generateStarsFromRating(rating) {
-  //   var stars =
-  //   <div className='rating'>
-  //       {[...Array(5)].map((star, index) => {
-  //         index += 1;
-  //         return (
-  //           <button
-  //             className={`starButton ${index <= rating ? 'on' : 'off'}`}
-  //             type="button"
-  //             key={index}
-  //             >
-  //             <span>&#9733;
-  //             </span>
-  //           </button>
-  //         );
-  //       })}
-  //     </div>
-  //   return stars;
-  // }
-
   function generateStarWidths() {
     var widthsOfStars = [...Array(5)].map((rating, index) => {
       if (roundedAvg > 1) {
@@ -82,12 +62,4 @@ export default function StarRating(props) {
       <a href='#ratingsAndReviews'><small>Read all {ratings.totalReviews} reviews</small></a>
     </div>
   )
-    // (
-    // <div style={{display: 'flex', height: '20px'}}>
-    //   {[...Array(5)].map(star => {
-    //     return (<div>&#9733;</div>)
-    //   })}
-    // </div>
-    // )
-
 }

@@ -4,8 +4,10 @@
   "description": "Team Objective Deliver a fully functional web application that meets the specifications and requirements outlined by project stakeholders. Work together on a single code base by dividing up the work among team members but working collaboratively to produce a single front end application. Integrate your front end with the existing API for the product, and demonstrate your working application at the end of the project timeline.",
   "main": "index.js",
   "scripts": {
-    "client-dev": "webpack build --watch",
+    "build": "webpack --config webpack.prod.js",
+    "client-dev": "webpack build --watch --config webpack.dev.js",
     "server-dev": "nodemon server/index.js",
+    "server-prod": "NODE_ENV=production server/index.js",
     "test": "jest"
   },
   "repository": {
@@ -34,7 +36,8 @@
     "react-test-renderer": "^18.2.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.10.0",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
