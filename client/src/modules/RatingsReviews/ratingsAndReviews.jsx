@@ -21,7 +21,6 @@ export default class RatingsAndReviews extends React.Component {
 
   getReviewsList(sortOrder) {
     if (sortOrder === undefined) {
-      console.log('this.state.sortOrder: ', this.state.sortOrder);
       sortOrder = this.state.sortOrder;
     }
     axios.get('/reviews', {
