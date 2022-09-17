@@ -106,7 +106,7 @@ const AddAnsForm = ({onHide, product, question, addAns}) => {
           name="ansBody"
           value={ansFormValues.ansBody}
           onChange={handleChange}/>
-          <p>{formError.ansBody}</p>
+          <p className="errorWarning">{formError.ansBody}</p>
           <br />
 
         <label>What is your nickname *</label>
@@ -119,7 +119,7 @@ const AddAnsForm = ({onHide, product, question, addAns}) => {
           onChange={handleChange}/>
           <br />
           <span>For privacy reasons, do not use your full name or email address” will appear.</span>
-          <p>{formError.nickName}</p>
+          <p className="errorWarning">{formError.nickName}</p>
           <br />
 
         <label>Your email *</label>
@@ -132,7 +132,7 @@ const AddAnsForm = ({onHide, product, question, addAns}) => {
           onChange={handleChange}/>
           <br />
           <span>For authentication reasons, you will not be emailed.</span>
-          <p>{formError.email}</p>
+          <p className="errorWarning">{formError.email}</p>
 
         <br />
         <label>Upload your photos {photos.length} </label>

@@ -65,7 +65,7 @@ function App() {
     <ThemeContext.Provider value={{theme, toggleTheme}}>
       <div className="appBackground" id={theme}>
 
-        <h3 className="appTitle">Company Name</h3>
+        <h3 className="appTitle">Boba Zone</h3>
         <div className="themeSwitch">
           <ReactSwitch onChange={toggleTheme} checked={theme ==="dark"}/>
         </div>
@@ -74,6 +74,7 @@ function App() {
         <RatingsAndReviewsWithClickTracking product_id={productId} productName={product.name}/>
         <QuesAnsWithClickTracking product={product} productId={productId}/>
 
+        <div className="appBottom"> </div>
       </div>
     </ThemeContext.Provider>
     </>

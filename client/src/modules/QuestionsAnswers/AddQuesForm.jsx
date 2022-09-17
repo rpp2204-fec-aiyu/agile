@@ -80,7 +80,7 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
         value={quesFormValues.questionBody}
         placeholder="Why did you like the product or not?"
         onChange={handleChange}/>
-        <p>{formError.questionBody}</p>
+        <p className="errorWarning">{formError.questionBody}</p>
 
         <label>What is your nickname ? *</label>
         <br />
@@ -92,7 +92,7 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
         onChange={handleChange}/>
         <br />
         <span>For privacy reasons, do not use your full name or email address” will appear.</span>
-        <p>{formError.nickName}</p>
+        <p className="errorWarning">{formError.nickName}</p>
 
         <label>Your email *</label>
         <br />
@@ -103,7 +103,7 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
         onChange={handleChange}/>
         <br />
         <span>For authentication reasons, you will not be emailed.</span>
-        <p>{formError.email}</p>
+        <p className="errorWarning">{formError.email}</p>
       </div>
 
       <div className="qaModalFooter">

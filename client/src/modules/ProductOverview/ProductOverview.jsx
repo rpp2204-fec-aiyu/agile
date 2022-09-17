@@ -65,7 +65,7 @@ export default function ProductOverview({ product, productId }) {
       <div id='upper' style={{display: 'flex'}}>
         <Gallery style={style} setHideInfo={setHideInfo} />
         {hideInfo ? null :
-          <div style={{marginLeft: '60px', color: '#25383C'}}>
+          <div className="reviewRight" style={{marginLeft: '60px'}}>
             <StarRating reviews={reviews}/>
             <br/>
             <Category category={category} />
