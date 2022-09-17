@@ -8,12 +8,7 @@ const QuesAns = ({product, productId}) => {
   const [questionList, setQuestionList] = useState([]);
   const [questionToShow, setQuestionToShow] = useState(2);
   const [showQuesForm, setShowQuesForm] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState("");
   const [filtered, setFiltered] = useState([]);
-  // const [showAnsForm, setShowAnsForm] = useState(false);
-
-  // const handleCloseAnsForm = () => setShowAnsForm(false);
-  // const handleOpenAnsForm = () => setShowAnsForm(true);
 
   const handleCloseQuesForm = () => setShowQuesForm(false);
   const handleShowQuesForm = () => setShowQuesForm(true);
@@ -114,9 +109,7 @@ const QuesAns = ({product, productId}) => {
     })
       .then((result) => {
         console.log('successfully post answer for question', result);
-        //handleCloseAnsForm();
         getQuestionList();
-        // onHide();
       })
       .catch((err) => {
         console.log('Fail to post an answer for question', err);
@@ -133,7 +126,6 @@ const QuesAns = ({product, productId}) => {
 
       <span className="qatitle">Questions and Answers</span>
       <div>
-        {/* <input className="searchBox" type="search" value={searchTerm} placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} /> */}
         <input className="searchBox" type="search" placeholder="HAVE A QUESTIONS? SEARCH FOR ANSWERS..." onChange={handleChange} />
         <button className="searchButton" onClick={handleSearch}>Search</button>
       </div>
@@ -143,8 +135,6 @@ const QuesAns = ({product, productId}) => {
         {questionList.slice(0, questionToShow).map(question =>
           <QuestionView key={question.question_id} question={question} product={product} updateQuestionHelpfulness={updateQuestionHelpfulness} updateAnsHelpfulness={updateAnsHelpfulness} reportAnswer={reportAnswer} addAns={addAns}/>
         )}
-      {/* <br />
-      <br /> */}
       </div>
       <div className="qaBottomButtons">
         {questionList.length > 2 ? <button className="qaButton" onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
@@ -156,4 +146,3 @@ const QuesAns = ({product, productId}) => {
 }
 
 export default QuesAns;
-//module.exports = QuesAns;

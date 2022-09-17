@@ -27,19 +27,6 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
   useEffect(() => {
     if(Object.keys(formError).length === 0 && isSubmit) {
       addQuestion(quesFormValues.questionBody, quesFormValues.nickName, quesFormValues.email, product.id);
-      // axios.post('/qa/questions', {
-      //   body: quesFormValues.questionBody,
-      //   name: quesFormValues.nickName,
-      //   email: quesFormValues.email,
-      //   product_id: product.id
-      // })
-      //   .then((result) => {
-      //     console.log('successfully post a question', result);
-      //     onHide();
-      //   })
-      //   .catch((err) => {
-      //     console.log('FAIL TO POST A QUESTION', err);
-      //   })
     }
   }, [formError]);
 
@@ -75,6 +62,7 @@ const AddQuesForm = ({product, onHide, addQuestion}) => {
         <label>Your Question *</label>
         <br />
         <textarea
+        className="inputBox"
         maxLength={1000}
         name="questionBody"
         value={quesFormValues.questionBody}

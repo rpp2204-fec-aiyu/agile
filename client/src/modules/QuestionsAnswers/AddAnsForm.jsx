@@ -72,21 +72,6 @@ const AddAnsForm = ({onHide, product, question, addAns}) => {
     if(Object.keys(formError).length === 0 && isSubmit) {
       onHide();
       addAns(ansFormValues.ansBody, ansFormValues.nickName, ansFormValues.email, photos, question.question_id);
-      // axios.post(`/qa/questions/${question.question_id}/answers`, {
-      //   data: {
-      //     body: ansFormValues.ansBody,
-      //     name: ansFormValues.nickName,
-      //     email: ansFormValues.email,
-      //     rawPhotos: photos
-      //   }
-      // })
-      //   .then((result) => {
-      //     console.log('successfully post answer for question', result);
-      //     onHide();
-      //   })
-      //   .catch((err) => {
-      //     console.log('Fail to post an answer for question', err);
-      //   })
     }
   }, [formError]);
 
@@ -102,6 +87,7 @@ const AddAnsForm = ({onHide, product, question, addAns}) => {
         <label>Your Answer *</label>
           <br />
           <textarea
+          className="inputBox"
           maxLength={1000}
           name="ansBody"
           value={ansFormValues.ansBody}
