@@ -10,7 +10,6 @@ export default class Review extends React.Component {
   }
 
   expandModal(photoNum) {
-    // console.log('photoNum: ', photoNum);
     if (photoNum === 1) {
       this.setState({photo1ModalIsOpen: true});
     } else if (photoNum === 2) {
@@ -130,7 +129,6 @@ export default class Review extends React.Component {
   }
 
   render() {
-    // console.log('this.props.review: ', this.props.review);
     var helpfulnessCount = this.props.helpfulness;
     var reviewBody;
     var recommendation;

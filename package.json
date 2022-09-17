@@ -7,7 +7,6 @@
     "build": "webpack --config webpack.prod.js",
     "client-dev": "webpack build --watch --config webpack.dev.js",
     "server-dev": "nodemon server/index.js",
-    "server-prod": "NODE_ENV=production server/index.js",
     "test": "jest"
   },
   "repository": {
