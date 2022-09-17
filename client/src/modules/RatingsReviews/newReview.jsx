@@ -13,17 +13,13 @@ export default class NewReview extends React.Component {
 
   getStarCount(rating) {
     this.setState({'rating': rating})
-    console.log('this.state.rating: ', this.state.rating);
   }
 
   captureRecommendInput(event) {
-    console.log('event.target.value: ', event.target.value);
     this.setState({recommends: event.target.value});
   }
 
   captureSizeInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.size: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -33,8 +29,6 @@ export default class NewReview extends React.Component {
   }
 
   captureWidthInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.width: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -44,8 +38,6 @@ export default class NewReview extends React.Component {
   }
 
   captureComfortInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.comfort: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -55,8 +47,6 @@ export default class NewReview extends React.Component {
   }
 
   captureQualityInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.quality: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -66,8 +56,6 @@ export default class NewReview extends React.Component {
   }
 
   captureLengthInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.length: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -77,8 +65,6 @@ export default class NewReview extends React.Component {
   }
 
   captureFitInput(event) {
-    console.log('event.target.value: ', event.target.value);
-    // this.setState({characteristics.fit: event.target.value});
     this.setState(prevState => ({
       characteristics: {
         ...prevState.characteristics,
@@ -88,32 +74,24 @@ export default class NewReview extends React.Component {
   }
 
   handleReviewSummaryChange(event) {
-    console.log('event.target.value: ', event.target.value);
-    console.log('\nreviewSummary text length: ', event.target.value.length)
     if (event.target.value.length <= 59) {
       this.setState({reviewSummaryValue: event.target.value});
     }
   }
 
   handleReviewBodyChange(event) {
-    console.log('event.target.value: ', event.target.value);
-    console.log('\nreviewBody text length: ', event.target.value.length)
     if (event.target.value.length <= 999) {
       this.setState({reviewBodyValue: event.target.value});
     }
   }
 
   handleEmailChange(event) {
-    console.log('event.target.value: ', event.target.value);
-    console.log('\nemail text length: ', event.target.value.length)
     if (event.target.value.length <= 59) {
       this.setState({emailValue: event.target.value});
     }
   }
 
   handleNicknameChange(event) {
-    console.log('event.target.value: ', event.target.value);
-    console.log('\nnickname text length: ', event.target.value.length)
     if (event.target.value.length <= 59) {
       this.setState({nickname: event.target.value});
     }
@@ -121,7 +99,6 @@ export default class NewReview extends React.Component {
 
   savePhotos(photoList) {
     this.setState({'photos': photoList});
-    console.log('this.state.photos: ', this.state.photos);
   }
 
   closeModal() {
@@ -225,21 +202,18 @@ export default class NewReview extends React.Component {
       var errorString = 'Nickname is blank';
       errorMessages.push(errorString);
     }
-    console.log('errorMessages');
     return errorMessages;
   }
 
   handleAddReviewSubmitClick() {
     //call validation function to see if all fields were correctly filled out
     var errorMessages = this.validateInputFields();
-    console.log('errorMessages2: ', errorMessages);
     if (errorMessages.length > 0) {
       var errorString = '';
       errorMessages.forEach((errorMessage) => {
         errorString += errorMessage + '\n';
         return;
       })
-      console.log('errorString: ', errorString);
       alert(`You must enter the following: \n${errorString}`);
       return;
     }

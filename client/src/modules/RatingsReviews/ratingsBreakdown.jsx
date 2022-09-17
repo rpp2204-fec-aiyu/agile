@@ -85,28 +85,8 @@ export default class RatingsBreakdown extends React.Component {
     } else {
       average = this.calculateNearestTenth(average);
     }
-    // console.log('count: ', count);
-    // console.log('sum: ', sum);
-    // console.log('average: ', average);
     return average;
   }
-
-  // <div id='averageStarRating'>
-  //       {[...Array(5)].map((star, index) => {
-  //         index += 1;
-  //         return (
-  //           <button
-  //             key={index}
-  //             className={`starButton ${index <= average ? 'on' : 'off'}`}
-  //             type="button"
-  //             key={index}
-  //             >
-  //             &#9733;
-  //           </button>
-  //         );
-  //       })}
-  //     </div>
-
 
   generateStarWidths() {
     var average = this.calculateAvgRating(true);
@@ -127,7 +107,6 @@ export default class RatingsBreakdown extends React.Component {
 
   generateStarsFromRating() {
     var arrayOfWidths = this.generateStarWidths();
-    console.log('arrayOfWidths: ', arrayOfWidths);
     return (
     <div id='reviewsQuarterStars'>
       {arrayOfWidths.map((width, index) => {
@@ -146,14 +125,10 @@ export default class RatingsBreakdown extends React.Component {
   handleRatingFilterClick(e) {
     var filterBy = this.props.filterBy;
     var ratingNum = e.currentTarget.className[0];
-    console.log('e.currentTarget.className: ', e.currentTarget.className);
-    console.log('e.currentTarget: ',  e.currentTarget);
 
     if (filterBy[ratingNum]) {
-      // console.log(`turn filterBy ${ratingNum} off`);
       this.props.removeFilters(parseInt(ratingNum), false);
     } else {
-      // console.log(`turn filterBy ${ratingNum} on`);
       this.props.applyFilters(parseInt(ratingNum));
     }
   }
@@ -219,7 +194,6 @@ export default class RatingsBreakdown extends React.Component {
     var percentRecommends = doesRecommend / (doesRecommend + doesNotRecommend) * 100;
 
     var filtersObj = this.state.filterBy;
-    console.log('this.props.filterBy: ', this.props.filterBy);
     var removeFiltersButton;
     var filtersApplied = this.generateFiltersMessage();
     var filtersMessage = <div id='ratings-filters'>{filtersApplied}</div>
