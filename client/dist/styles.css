@@ -16,6 +16,14 @@
   justify-content: space-around;
 }
 
+#light #RatingsAndReviews {
+  color: #25383C;
+}
+
+#dark #RatingsAndReviews{
+  color:#f5f5f5;
+}
+
 #RatingsAndReviews {
     display: flex;
     justify-content: center;
@@ -84,6 +92,14 @@
   color: #ccc;
 }
 
+#light .reviewHelpful{
+  color: #25383C;
+}
+
+#dark .reviewHelpful{
+  color: #f5f5f5;
+}
+
 .reviewHelpful {
   cursor: pointer;
   border: none;
@@ -100,6 +116,22 @@
 .characteristic-title {
  clear: both;
  padding-top: 10px;
+}
+
+#light .bottomLeft{
+  color: #25383C;
+}
+
+#dark .bottomLeft{
+  color: #f5f5f5;
+}
+
+#light .bottomRight{
+  color: #25383C;
+}
+
+#dark .bottomRight{
+  color: #f5f5f5;
 }
 
 .bottomLeft {
@@ -160,11 +192,17 @@
 }
 
 /* Individual bars */
-.bar-5 {height: 18px; background-color: #04AA6D;}
-.bar-4 {height: 18px; background-color: #04AA6D;}
-.bar-3 {height: 18px; background-color: #04AA6D;}
-.bar-2 {height: 18px; background-color: #04AA6D;}
-.bar-1 {height: 18px; background-color: #04AA6D;}
+#dark .bar-5 {height: 18px; background-color: #4eaaf3;}
+#dark .bar-4 {height: 18px; background-color: #4eaaf3;}
+#dark .bar-3 {height: 18px; background-color: #4eaaf3;}
+#dark .bar-2 {height: 18px; background-color: #4eaaf3;}
+#dark .bar-1 {height: 18px; background-color: #4eaaf3;}
+
+.bar-5 {height: 18px; background-color: #ff7c7c;}
+.bar-4 {height: 18px; background-color: #ff7c7c;}
+.bar-3 {height: 18px; background-color: #ff7c7c;}
+.bar-2 {height: 18px; background-color: #ff7c7c;}
+.bar-1 {height: 18px; background-color: #ff7c7c;}
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
@@ -221,16 +259,25 @@
 /**************************************/
 
 /* Q&A add answer and question forms styling */
+#light .qaBackground{
+  color: #25383C;
+}
+
+#dark .qaBackground{
+  color: #f5f5f5;
+}
+
 .qaBackground {
-  /* display: grid;
-  flex-direction: column;
-  justify-items: start;
-  justify-content: center; */
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-items: start;
   flex-wrap: wrap;
   align-items: center;
+}
+
+#dark .qaModalContainer{
+  background-color: #396875;
 }
 
 .qaModalContainer {
@@ -255,6 +302,14 @@
   align-items: flex-start;
 }
 
+#light .addAnsButton{
+  color: #25383C;
+}
+
+#dark .addAnsButton{
+  color: #f5f5f5;
+}
+
 .addAnsButton {
   cursor: pointer;
   border: none;
@@ -262,20 +317,19 @@
 }
 
 #light .qaButton {
-  background-color: #EEEEEE;
+  background-color:#ffffffc7;
   color: rgb(37, 56,60);
 }
 
-#dark .qaButton {
+/* #dark .qaButton {
   background-color:#333333;
   color: white;
-}
+} */
 
 .qaButton {
   padding: 15px;
-  margin: 3px;
+  margin: 3px 3px 15px;
   font-size: 15px;
-  /* background: white; */
   font-weight: 550;
 }
 
@@ -287,26 +341,51 @@
   height: 75px;
 }
 
+#light .errorWarning {
+  color: red;
+}
+
+#dark .errorWarning {
+  color: yellow;
+}
+
 /* QA Question View */
+.qaBottomButtons {
+  margin-right: 190px;
+}
+
 .qatitle {
   margin-right: 455px;
   font-size: larger;
   padding: 20px;
+  /* color: #25383C; */
+  font-weight: bold;
+}
+#dark .searchBox {
+  color: #e2e2e2;
 }
 
 .searchBox {
   width: 530px;
   padding: 15px;
+  border-width: medium;
+}
+
+#light .searchButton {
+  color: rgb(37, 56,60);
+  background: #ffffffc7;
 }
 
 .searchButton {
   padding: 15px;
   margin: 3px;
   font-size: 15px;
-  color: rgb;
-  color: rgb(37, 56,60);
-  background: white;
   font-weight: 550;
+}
+
+.questions {
+  height: 750px;
+  overflow-y: scroll;
 }
 
 .question {
@@ -320,7 +399,7 @@
 /* QA Answer View */
 .answerview {
   margin-left: 25px;
-  margin-top: -39px;
+  margin-top: -37.5px;
 }
 
 .ansviewPhotos {
@@ -338,11 +417,18 @@
 .a-answer {
   display: block;
   padding: 18px 0px 0px;
+  font-weight: bold;
+  font-size: larger;
+}
+
+#dark .loadAnsButton {
+  color: #4eaaf3;
 }
 
 .loadAnsButton {
   margin-left: 25px;
   font-weight: bold;
+  color: #ff7c7c;
 }
 
 .ansImage {
@@ -350,6 +436,12 @@
   height: 100px;
   padding-right: 10px;
   padding-bottom: 10px;
+}
+
+.ansImage:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5);
 }
 /**************************************/
 
@@ -366,6 +458,11 @@
   display: flex;
   flex-direction: column;
   padding: 25px;
+}
+
+#dark .newReviewModal{
+  color:#f5f5f5;
+  background-color: #a36b6b;
 }
 
 .newReviewModal {
@@ -550,7 +647,17 @@
 
 #productTitle {
   font-size: 33px;
-  color: #25383C;
+}
+
+#light .reviewRight {
+  color: rgb(37, 56, 60);
+}
+
+#dark .reviewRight{
+  /* margin-left: '60px';
+  color: '#25383C'; */
+  color: #f5f5f5;
+
 }
 
 #stylesThumbnailContainer {
@@ -567,17 +674,28 @@
   overflow: hidden;
 }
 
+#dark #galleryLeft {
+  color:rgba(0, 140, 186, 0.9);
+}
+
 #galleryLeft {
   position: absolute;
-  color:rgba(0, 140, 186, 0.9);
+  color: #ff7c7c;
   top: 290px;
   left: 90px;
   font-size: 40px;
 }
 
+#light #galleryRight {
+  color: #ff7c7c;
+}
+
+#dark #galleryRight {
+  color: #4eaaf3;
+}
+
 #galleryRight {
   position: absolute;
-  color:rgba(0, 140, 186, 0.9);
   /* border-color: rgb(14, 184, 226); */
   /* border-radius: 50%; */
   top: 290px;
@@ -603,6 +721,14 @@
   top: 10px;
   left: 12px;
   gap: 10px;
+}
+
+#light #lower {
+  color: #25383C;
+}
+
+#dark #lower {
+  color: #f5f5f5;
 }
 
 /* .galleryThumbnail {
@@ -659,18 +785,53 @@
 
 /**************App*******************/
 #light {
-  background-color: #ddd;
+  background-color: white;
 }
 
 #dark {
-  background-color: #424242ba;
+  /* background-color: #424242ba; */
+  /* background-color: #333333c9; */
+  background-color: #070707c9;
 }
 
 body {
   margin: 0;
 }
 
-.appTitle {
-  margin: 0;
+#dark .appTitle {
+  background-color: #161515;
+  color: #4eaaf3;
 }
+
+#light .appTitle {
+  background-color: #CFCFCF;
+  color: #ff7c7c;
+
+}
+
+.appTitle {
+  margin: 0px;
+  padding: 25px 100px;
+  font-size: 30px;
+}
+
+.themeSwitch {
+  float: right;
+  margin-top: -60px;
+  margin-right: 40px;
+}
+
+#light .appBottom {
+  background-color: #CFCFCF;
+}
+
+#dark .appBottom {
+  background-color: #161515;
+}
+
+.appBottom {
+  margin: 0px;
+  padding: 30px;
+}
+
 

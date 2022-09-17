@@ -145,9 +145,11 @@ const QuesAns = ({product, productId}) => {
         )}
       {/* <br />
       <br /> */}
-      {questionList.length > 2 ? <button className="qaButton" onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
-      <button className="qaButton" onClick={handleShowQuesForm}>ADD A QUESTION +</button>
-      {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm} addQuestion={addQuestion}/>}
+      </div>
+      <div className="qaBottomButtons">
+        {questionList.length > 2 ? <button className="qaButton" onClick={() => {showMoreQuestion()}}>MORE ANSWERED QUESTIONS</button> : null}
+        <button className="qaButton" onClick={handleShowQuesForm}>ADD A QUESTION +</button>
+        {showQuesForm && <AddQuesForm product={product} onHide={handleCloseQuesForm} addQuestion={addQuestion}/>}
       </div>
     </div>
   )
