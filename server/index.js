@@ -34,7 +34,7 @@ app.post('/interactions', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-  axios.get(`${BASEURL}/products/`, {headers: {'Authorization': APIKEY}})
+  axios.get(`http://localhost:8000/products/`, {headers: {'Authorization': APIKEY}})
     .then(results => {
       res.status(200).send(results.data)
     })
@@ -47,8 +47,8 @@ app.get('/productOverview/:product_id', (req, res) => {
   let id = req.params.product_id
   const productInfo = {};
 
-  idRequest = axios.get(`${BASEURL}/products/${id}`, {headers: {'Authorization': APIKEY}});
-  stylesRequest = axios.get(`${BASEURL}/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
+  idRequest = axios.get(`http://localhost:8000/products/${id}`, {headers: {'Authorization': APIKEY}});
+  stylesRequest = axios.get(`http://localhost:8000/products/${id}/styles`, {headers: {'Authorization': APIKEY}})
   reviewsRequest = axios.get(`${BASEURL}/reviews/meta`, {headers: {'Authorization': APIKEY}, params: {product_id: id}})
 
   Promise.all([idRequest, stylesRequest, reviewsRequest])
@@ -147,8 +147,8 @@ app.get('/questions/:product_id', (req , res) => {
 
 app.post('/qa/questions/:question_id/answers', (req, res, next) => {
   let questionId = req.params.question_id;
-  console.log('HERE IS THE QUESTION_ID: ', questionId);
-  console.log('HERE ARE THE INFO FOR POST ANS:', req.body);
+  // console.log('HERE IS THE QUESTION_ID: ', questionId);
+  // console.log('HERE ARE THE INFO FOR POST ANS:', req.body);
   createPhotoURL(req, res, next)
     .then(() => {
       //console.log('AFter formarteed', req.body.data);
